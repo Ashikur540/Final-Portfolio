@@ -1,13 +1,16 @@
 import React from 'react';
 import { Typewriter } from 'react-simple-typewriter';
 import resume from "../Asset/Ashikur Rahman resume.pdf";
-const Hero = () => {
+const Hero = ({ textEnter, textLeave }) => {
 
     return (
         <section id="HERO" className="min-h-fit md:min-h-screen bg-radialBg bg-cover ">
             <div className="pt-28 md:pt-64 px-10 mx-auto container max-w-3xl pb-12 md:pb-20">
                 <div className="flex flex-col justify-center items-center">
-                    <h1 className="text-6xl font-bold text-center my-2">Ashikur Rahman</h1>
+                    <h1 className="text-6xl font-bold text-center my-2"
+                        onMouseEnter={textEnter}
+                        onMouseLeave={textLeave}
+                    >Ashikur Rahman</h1>
                     <h2 className="text-4xl font-bold text-center">
                         <Typewriter
                             words={['Front end developer', 'MERN Web Developer', 'UI designer', 'Learner🤍']}
