@@ -30,7 +30,7 @@ module.exports = {
         primary: '0px 4px 40px rgba(0, 0, 0, 0.03)',
       },
       backgroundImage: {
-        radialBg: "url('/src/Asset/bg.png')",
+        project: "url('/src/Asset/p1.png')",
         videoBg: "url('/src/assets/img/video-bg.png')",
         circle: "url('/src/assets/img/circle.png')",
         explore: "url('/src/assets/img/explore.png')",

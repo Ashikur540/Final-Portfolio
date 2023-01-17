@@ -3,7 +3,7 @@ import { HiOutlineBars3BottomRight, HiXMark } from "react-icons/hi2";
 const Navbar = ({ setSelectedPage, selectedPage }) => {
     const [isClicked, setIsclicked] = useState(false);
     const LINKS = [
-        { name: "Home" }, { name: "About" }, { name: "Skills" }, { name: "Projects" }, { name: "contact" },
+        { name: "Home_" }, { name: "About_" }, { name: "Skills_" }, { name: "Projects_" }, { name: "contact_" },
     ]
     return (
         <nav className={`bg-transparent z-[999]  py-1 w-full fixed top-0 right-0 left-0 flex items-center justify-between pl-10 md:px-14 `}>
