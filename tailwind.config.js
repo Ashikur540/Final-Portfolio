@@ -31,7 +31,7 @@ module.exports = {
       },
       backgroundImage: {
         project: "url('/src/Asset/p1.png')",
-        videoBg: "url('/src/assets/img/video-bg.png')",
+        radialBg: "url('/src/Asset/bg.png')",
         circle: "url('/src/assets/img/circle.png')",
         explore: "url('/src/assets/img/explore.png')",
       },

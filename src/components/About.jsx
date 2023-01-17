@@ -3,7 +3,7 @@ import aboutImg from "../Asset/IMG.jpg"
 
 export const About = () => {
     return (
-        <section id="about" className="container  mt-10 px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
+        <section id="ABOUT" className="container  mt-10 px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
             <h1 className="text-3xl md:pl-10  md:text-[52px] font-semibold text-center my-8 text-white md:text-left">Introducing my self_
                 <img src="https://cdn-icons-png.flaticon.com/512/924/924915.png" alt="" className="inline-block w-10 animate-pulse" />
             </h1>

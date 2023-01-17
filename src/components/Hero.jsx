@@ -4,7 +4,7 @@ import resume from "../Asset/Ashikur Rahman resume.pdf";
 const Hero = () => {
 
     return (
-        <div className="min-h-fit md:min-h-screen bg-radialBg bg-cover ">
+        <section id="HERO" className="min-h-fit md:min-h-screen bg-radialBg bg-cover ">
             <div className="pt-28 md:pt-64 px-10 mx-auto container max-w-3xl pb-12 md:pb-20">
                 <div className="flex flex-col justify-center items-center">
                     <h1 className="text-6xl font-bold text-center my-2">Ashikur Rahman</h1>
@@ -32,7 +32,7 @@ const Hero = () => {
 
                 </div>
             </div>
-        </div>
+        </section>
     )
 }
 
