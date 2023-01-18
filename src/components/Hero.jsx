@@ -23,7 +23,7 @@ const Hero = ({ textEnter, textLeave }) => {
 
                         />
                     </h2>
-                    <h5 className="text-center font-medium text-xl py-4">From Bangladesh </h5>
+                    <h5 className="text-center font-medium text-xl py-4">From Bangladesh &#127463;&#127465; </h5>
                     <p className="text-para text-center mb-8 text-xl">I help turing your imagination into real life solutions.Enhancing your digital experience.&#x1F680;
                     </p>
 

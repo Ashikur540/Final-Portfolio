@@ -1,6 +1,5 @@
-import React from 'react'
-import aboutImg from "../Asset/IMG.jpg"
-
+import React from 'react';
+import aboutImg from "../Asset/IMG.jpg";
 export const About = () => {
     return (
         <section id="ABOUT" className="container  mt-10 px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
@@ -16,7 +15,8 @@ export const About = () => {
                             </p>
                         </div>
                         <p className="text-base text-para md:text-lg ">
-                            Assalamu alikum,&#128512;
+                            Assalamu alikum,<span className="inline-block animate-wiggle text-xl">&#128075;</span>
+
                             <br />
                             <span className="text-sky-400 font-semibold text-xl ">I'm Ashikur Rahman.</span> <br />
                             Bogura is where I was born and raised.

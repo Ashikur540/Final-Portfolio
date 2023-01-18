@@ -10,7 +10,10 @@
   }
   body {
     @apply font-primary bg-body text-white relative leading-relaxed font-extralight;
-    transition: all 2000ms ease;
+    transition: all 900ms ease;
+  }
+  body::-webkit-scrollbar {
+    display: none;
   }
   h1,
   h2,

@@ -5,6 +5,7 @@ module.exports = {
       primary: 'Inter, sans-serif',
     },
     container: {
+      center: true,
       padding: {
         DEFAULT: '1.5rem',
         lg: '3rem',
@@ -20,6 +21,7 @@ module.exports = {
     extend: {
       colors: {
         body: '#060212',
+        black: "#00031a",
         white: '#fff',
         para: '#D2E2EE',
         pink: 'pink',
@@ -30,11 +32,25 @@ module.exports = {
         primary: '0px 4px 40px rgba(0, 0, 0, 0.03)',
       },
       backgroundImage: {
-        project: "url('/src/Asset/p1.png')",
+        projectOne: "url('/src/Asset/p1.png')",
         radialBg: "url('/src/Asset/bg.png')",
-        circle: "url('/src/assets/img/circle.png')",
-        explore: "url('/src/assets/img/explore.png')",
+        projectTwo: "url('/src/Asset/review.png')",
+        projectThree: "url('/src/Asset/ecommers.png')",
+        projectFour: "url('/src/Asset/p2.png')",
+
       },
+      animation: {
+        spin: 'spin 5s linear infinite',
+        wiggle: 'wiggle 500ms ease-in-out infinite',
+      },
+
+      keyframes: {
+        wiggle: {
+          '0%, 100%': { transform: 'rotate(-3deg)' },
+          '50%': { transform: 'rotate(3deg)' },
+        }
+      },
+
     },
   },
   plugins: [],
