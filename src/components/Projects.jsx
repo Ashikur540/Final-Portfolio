@@ -1,6 +1,7 @@
 import React from 'react';
 import { FaExternalLinkAlt, FaGithub } from "react-icons/fa";
 import { FcBriefcase } from "react-icons/fc";
+import arrow from "../Asset/Developer logo/ARROW.png";
 import BOOTSTRAP from "../Asset/Developer logo/bootstrap-5-1.svg";
 import CSS from "../Asset/Developer logo/css-3-svgrepo-com.svg";
 import Express from "../Asset/Developer logo/express-js-icon.svg";
@@ -20,11 +21,12 @@ const Projects = () => {
     ]
 
     return (
-        <section id="PROJECTS" className='container  my-10  md:mt-36 last'>
+        <section id="PROJECTS" className='container relative my-10  md:mt-36 last'>
             <SectionHeader
                 title="I work Hard_  " FcBriefcase={FcBriefcase}
                 subtitle="Showcasing some of my awesome projects."
             />
+            <img src={arrow} alt="" className="hidden md:block absolute lg:-top-[10%] lg:-right-[10%] lg:w-[13%] xl:-right-[12%] xl:w-[13%]" />
 
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-center justify-center">
