@@ -16,7 +16,7 @@ const Navbar = ({ setSelectedPage, selectedPage }) => {
     ]
     return (
         <nav className={`${isScrolled ? 'bg-white/20 backdrop-blur-md duration-500 ease-linear' : 'bg-transparent'} z-[999]  py-1 w-full fixed top-0 right-0 left-0 flex items-center justify-between pl-10 md:px-14 `}>
-            {/* <h4 className="text-3xl">AR</h4> */}
+
             <img src={mylogo} alt="" className="w-[8%] animate-spin " />
 
             <div className='md:hidden fixed right-5 cursor-pointer z-20 top-2 text-3xl font-bold transform transition duration-300 ease-linear'>
@@ -28,7 +28,7 @@ const Navbar = ({ setSelectedPage, selectedPage }) => {
             </div>
 
 
-            <ul className={`bg-transparent  md:pl-10 pr-28 md:static fixed duration-500 ease-linear top-0 md:h-auto h-screen z-10 ${!isClicked ? 'right-[-100%] ' : 'right-0 backdrop-blur-md bg-[#ffffff14]'}`}>
+            <ul className={`${isClicked ? "backdrop-blur-md bg-white/20" : ""}  md:pl-10 pr-28 md:static fixed duration-500 ease-linear top-0 md:h-auto h-screen z-10 ${!isClicked ? 'right-[-100%] ' : 'right-0 ]'}`}>
 
                 {
                     LINKS?.map((link, i) =>
