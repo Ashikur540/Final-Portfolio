@@ -17,7 +17,7 @@ const Navbar = ({ setSelectedPage, selectedPage }) => {
     return (
         <nav className={`${isScrolled ? 'bg-white/20 backdrop-blur-md duration-500 ease-linear' : 'bg-transparent'} z-[999]  py-1 w-full fixed top-0 right-0 left-0 flex items-center justify-between pl-10 md:px-14 `}>
 
-            <img src={mylogo} alt="" className="w-[8%] animate-spin " />
+            <img src={mylogo} alt="" className="w-[14%] md:w-[8%] animate-spin " />
 
             <div className='md:hidden fixed right-5 cursor-pointer z-20 top-2 text-3xl font-bold transform transition duration-300 ease-linear'>
                 {
@@ -28,12 +28,12 @@ const Navbar = ({ setSelectedPage, selectedPage }) => {
             </div>
 
 
-            <ul className={`${isClicked ? "backdrop-blur-md bg-white/20" : ""}  md:pl-10 pr-28 md:static fixed duration-500 ease-linear top-0 md:h-auto h-screen z-10 ${!isClicked ? 'right-[-100%] ' : 'right-0 ]'}`}>
+            <ul className={`${isClicked ? "bg-slate-200 " : ""}  md:pl-10 pr-28 md:static fixed duration-500 ease-linear top-0 md:h-auto h-screen z-10 ${!isClicked ? 'right-[-100%] ' : 'right-0 ]'}`}>
 
                 {
                     LINKS?.map((link, i) =>
                         <li className=' md:inline-block py-6 ' key={i}>
-                            <a href={link.ref} className="text-center mx-10 md:mx-6 py-10 hover:text-sky-400 duration-500 active:text-sky-400">{link.name} </a>
+                            <a href={link.ref} className={`${isClicked && "text-body"} text-center mx-10 md:mx-5 py-10 hover:text-sky-400 duration-500 active:text-sky-400`}>{link.name} </a>
                         </li>)
                 }
 
