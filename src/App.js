@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { useEffect, useState } from "react";
+import { Toaster } from 'react-hot-toast';
 import './App.css';
 import { About } from './components/About';
 import Footer from "./components/Footer";
@@ -7,6 +8,7 @@ import Hero from './components/Hero';
 import Navbar from './components/Navbar';
 import Projects from "./components/Projects.jsx";
 import Skills from './components/Skills';
+import BottomFooter from './components/Small/BottomFooter';
 function App() {
   const [mousePosition, setMousePosition] = useState({
     x: 0,
@@ -53,7 +55,7 @@ function App() {
 
   return (
     <motion.div className="">
-
+      <Toaster />
       <motion.div
         className="z-[999] h-8 w-8 rounded-full bg-white/10 backdrop-blur-sm fixed top-0 left-0 pointer-events-none"
         variants={variants}
@@ -65,7 +67,7 @@ function App() {
       <Skills />
       <Projects />
       <Footer />
-
+      <BottomFooter />
     </motion.div>
   );
 }
