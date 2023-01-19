@@ -37,6 +37,7 @@ module.exports = {
         projectTwo: "url('/src/Asset/review.png')",
         projectThree: "url('/src/Asset/ecommers.png')",
         projectFour: "url('/src/Asset/p2.png')",
+        me: "url('/src/Asset/me.jpg')",
 
       },
       animation: {

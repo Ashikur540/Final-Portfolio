@@ -1,11 +1,12 @@
+import { motion } from 'framer-motion';
+import { useEffect, useState } from "react";
 import './App.css';
-import { useState, useEffect } from "react"
 import { About } from './components/About';
+import Footer from "./components/Footer";
 import Hero from './components/Hero';
 import Navbar from './components/Navbar';
+import Projects from "./components/Projects.jsx";
 import Skills from './components/Skills';
-import Projects from "./components/Projects.jsx"
-import { motion } from 'framer-motion';
 function App() {
   const [mousePosition, setMousePosition] = useState({
     x: 0,
@@ -63,6 +64,7 @@ function App() {
       <About />
       <Skills />
       <Projects />
+      <Footer />
 
     </motion.div>
   );
