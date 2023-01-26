@@ -6,7 +6,7 @@
 @layer base {
   html {
     scroll-behavior: smooth;
-    cursor: none;
+    /* cursor: none; */
   }
   body {
     @apply font-primary bg-body text-white relative leading-relaxed font-extralight;
@@ -31,5 +31,14 @@
   }
   .btn {
     @apply font-medium h-12 px-8 bg-gradient-to-r from-[#b936f5] to-[#f1006c] rounded text-[15px] hover:bg-gradient-to-l hover:from-[#b936f5] hover:to-[#f1006c] outline-none flex items-center justify-center cursor-pointer;
+  }
+  .active {
+    @apply bg-gradient-to-br from-purple-500 via-indigo-500 to-indigo-500 rounded-full;
+  }
+}
+
+@layer utilities {
+  .my-clip-path {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
   }
 }

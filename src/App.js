@@ -5,7 +5,7 @@ import './App.css';
 import { About } from './components/About';
 import Footer from "./components/Footer";
 import Hero from './components/Hero';
-import Navbar from './components/Navbar';
+import Nav from './components/Nav';
 import Projects from "./components/Projects.jsx";
 import Skills from './components/Skills';
 import BottomFooter from './components/Small/BottomFooter';
@@ -34,8 +34,8 @@ function App() {
 
   const variants = {
     default: {
-      x: mousePosition.x - 16,
-      y: mousePosition.y - 16,
+      x: mousePosition.x - 5,
+      y: mousePosition.y - 5,
     },
     text: {
       height: 150,
@@ -61,7 +61,8 @@ function App() {
         variants={variants}
         animate={cursorVariant}
       />
-      <Navbar />
+      {/* <Navbar /> */}
+      <Nav />
       <Hero textEnter={textEnter} textLeave={textLeave} />
       <About />
       <Skills />
