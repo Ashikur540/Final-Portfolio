@@ -28,16 +28,6 @@ const Navbar = ({ setSelectedPage, selectedPage }) => {
             </div>
 
 
-            {/* <ul className={`${isClicked ? "bg-slate-200 " : ""}  md:pl-10 pr-28 md:static fixed duration-500 ease-linear top-0 md:h-auto h-screen z-10 ${!isClicked ? 'right-[-100%] ' : 'right-0 ]'}`}>
-
-                {
-                    LINKS?.map((link, i) =>
-                        <li className=' md:inline-block py-6 ' key={i}>
-                            <a href={link.ref} className={`${isClicked && "text-body"} text-center mx-10 md:mx-5 py-10 hover:text-sky-400 duration-500 active:text-sky-400`}>{link.name} </a>
-                        </li>)
-                }
-
-            </ul> */}
             <ul className={`${isClicked ? "bg-slate-200 " : ""}  md:pl-10 md:pr-14 lg:pr-28 md:static fixed duration-500 ease-linear top-0 md:h-auto  z-10 ${!isClicked ? 'right-[-100%]  ' : 'right-0 '}`}>
 
                 {
