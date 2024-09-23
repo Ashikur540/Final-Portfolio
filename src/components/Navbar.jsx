@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { HiOutlineBars3BottomRight, HiXMark } from "react-icons/hi2";
-import mylogo from "../Asset/Developer logo/ashik-low-resolution-logo-color-on-transparent-background.png";
+import mylogo from "../assets/Developer logo/ashik-low-resolution-logo-color-on-transparent-background.png";
 const Navbar = ({ setSelectedPage, selectedPage }) => {
     const [isClicked, setIsclicked] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);

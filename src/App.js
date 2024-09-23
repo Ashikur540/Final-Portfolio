@@ -56,11 +56,11 @@ function App() {
   return (
     <motion.div className="overflow-x-hidden">
       <Toaster />
-      <motion.div
+      {/* <motion.div
         className="z-[999] h-8 w-8 rounded-full bg-white/10 backdrop-blur-sm fixed top-0 left-0 pointer-events-none"
         variants={variants}
         animate={cursorVariant}
-      />
+      /> */}
       {/* <Navbar /> */}
       <Nav />
       <Hero textEnter={textEnter} textLeave={textLeave} />

@@ -27,12 +27,12 @@ module.exports = {
         primary: '0px 4px 40px rgba(0, 0, 0, 0.03)',
       },
       backgroundImage: {
-        projectOne: "url('/src/Asset/p1.png')",
-        radialBg: "url('/src/Asset/bg.png')",
-        projectTwo: "url('/src/Asset/review.png')",
-        projectThree: "url('/src/Asset/ecommers.png')",
-        projectFour: "url('/src/Asset/p2.png')",
-        me: "url('/src/Asset/me.jpg')",
+        projectOne: "url('/src/assets/p1.png')",
+        radialBg: "url('/src/assets/hero-bg.webp')",
+        projectTwo: "url('/src/assets/review.png')",
+        projectThree: "url('/src/assets/ecommers.png')",
+        projectFour: "url('/src/assets/p2.png')",
+        me: "url('/src/assets/me.jpg')",
 
       },
       animation: {

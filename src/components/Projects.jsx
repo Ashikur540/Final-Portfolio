@@ -1,23 +1,23 @@
 import React from 'react';
 import { FaExternalLinkAlt, FaGithub } from "react-icons/fa";
 import { FcBriefcase } from "react-icons/fc";
-import arrow from "../Asset/Developer logo/ARROW.png";
-import BOOTSTRAP from "../Asset/Developer logo/bootstrap-5-1.svg";
-import CSS from "../Asset/Developer logo/css-3-svgrepo-com.svg";
-import Express from "../Asset/Developer logo/express-js-icon.svg";
-import Firebase from "../Asset/Developer logo/firebase-svgrepo-com.svg";
-import HTML from "../Asset/Developer logo/html-svgrepo-com.svg";
-import Mongo from "../Asset/Developer logo/mongodb-svgrepo-com.svg";
-import Node from "../Asset/Developer logo/node-svgrepo-com.svg";
-import REACT from "../Asset/Developer logo/react-2.svg";
-import Tail from "../Asset/Developer logo/tailwind-css-2.svg";
+
+// import arrow from "../assets/Developer logo/ARROW.png";
+// import BOOTSTRAP from "../assets/Developer logo/bootstrap-5-1.svg";
+// import CSS from "../assets/Developer logo/css-3-svgrepo-com.svg";
+// import Express from "../assets/Developer logo/express-js-icon.svg";
+// import Firebase from "../assets/Developer logo/firebase-svgrepo-com.svg";
+// import HTML from "../assets/Developer logo/html-svgrepo-com.svg";
+// import Mongo from "../assets/Developer logo/mongodb-svgrepo-com.svg";
+// import Node from "../assets/Developer logo/node-svgrepo-com.svg";
+// import REACT from "../assets/Developer logo/react-2.svg";
+// import Tail from "../assets/Developer logo/tailwind-css-2.svg";
+import { arrow, ExpressJS, Firebase, MongoDB, NodeJS, ReactJS_TWO, TailwindCSS } from '../assets';
 import SectionHeader from './Small/SectionHeader';
+
 const Projects = () => {
     const images = [
-        REACT, Tail, Node, Express, Mongo, Firebase
-    ]
-    const fashion = [
-        HTML, CSS, BOOTSTRAP
+        ReactJS_TWO, TailwindCSS, NodeJS, ExpressJS, MongoDB, Firebase
     ]
 
     return (
@@ -113,7 +113,7 @@ const Projects = () => {
                 </div>
                 {/* 4 */}
                 {/* 3 */}
-                <div className={`w-[100%] border-[#ffffff2c] border-[1px] h-[460px] rounded-md  relative bg-top bg-no-repeat bg-cover hover:bg-bottom ease-linear duration-[5000ms] bg-projectThree text-white shadow-black shadow-lg mx-auto`}
+                {/* <div className={`w-[100%] border-[#ffffff2c] border-[1px] h-[460px] rounded-md  relative bg-top bg-no-repeat bg-cover hover:bg-bottom ease-linear duration-[5000ms] bg-projectThree text-white shadow-black shadow-lg mx-auto`}
                     data-aos="zoom-in-up"
                     data-aos-delay="250"
                     data-aos-duration="600"
@@ -135,7 +135,7 @@ const Projects = () => {
 
                         </div>
                     </div>
-                </div>
+                </div> */}
                 {/* 3 */}
 
 

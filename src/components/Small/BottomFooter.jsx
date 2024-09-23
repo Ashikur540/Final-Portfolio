@@ -1,6 +1,8 @@
 import React from 'react';
 import { AiFillLinkedin } from "react-icons/ai";
-import logo from "../../Asset/Developer logo/ashik-low-resolution-logo-color-on-transparent-background.png";
+
+import { siteLogo } from '../../assets';
+
 const BottomFooter = () => {
     return (
         <div id="footer" className="w-full mt-8" data-aos="fade-up"
@@ -10,7 +12,7 @@ const BottomFooter = () => {
             <hr className="w-full mb-2 opacity-30 h-[.6px]" />
             <footer className="" >
                 <div className="container flex flex-col items-center justify-between p-6 mx-auto space-y-4 sm:space-y-0 sm:flex-row">
-                    <a href="/" className="text-2xl font-bold text-gray-800 transition-colors duration-300 dark:text-white hover:text-blue-500 dark:hover:text-blue-400"><img src={logo} alt="" className="animate-spin w-12" /></a>
+                    <a href="/" className="text-2xl font-bold text-gray-800 transition-colors duration-300 dark:text-white hover:text-blue-500 dark:hover:text-blue-400"><img src={siteLogo} alt="" className="animate-spin w-12" /></a>
 
                     <p className="text-sm text-para text-center">© Copyright 2023. All Rights Reserved by Ashikur Rahman<br />
                         meashik1000@gmail.com</p>

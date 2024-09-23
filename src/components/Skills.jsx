@@ -1,54 +1,70 @@
 import React from 'react';
 import { FcEngineering } from "react-icons/fc";
 import "react-tooltip/dist/react-tooltip.css";
-import Bootstrap from "../Asset/Developer logo/bootstrap-5-1.svg";
-import CSS from "../Asset/Developer logo/css-3-svgrepo-com.svg";
-import Express from "../Asset/Developer logo/express-js-icon.svg";
-import Figma from "../Asset/Developer logo/figma-svgrepo-com.svg";
-import Firebase from "../Asset/Developer logo/firebase-svgrepo-com.svg";
-import Github from "../Asset/Developer logo/github-svgrepo-com.svg";
-import html from "../Asset/Developer logo/html-svgrepo-com.svg";
-import JS from "../Asset/Developer logo/js-svgrepo-com.svg";
-import Mongo from "../Asset/Developer logo/mongodb-svgrepo-com.svg";
-import Netlify from "../Asset/Developer logo/netlify.svg";
-import Node from "../Asset/Developer logo/node-svgrepo-com.svg";
-import SASS from "../Asset/Developer logo/sass-svgrepo-com.svg";
-import Tailwind from "../Asset/Developer logo/tailwind-css-2.svg";
-import Vercel from "../Asset/Developer logo/vercel.svg";
-import SkillBlob from './Small/SkillBlob';
+
+import { ExpressJS, Figma, Github, Javascript, MongoDB, NodeJS, ReactJS, TailwindCSS, Typescript } from '../assets';
+import SkillCardWithIcon from './Small/SkillBlob';
+
+
+
 const Skills = () => {
 
     const skills = [
-        {
-            name: "HTML",
-            img: html,
-            level: "Advance"
-        },
-        {
-            name: "CSS",
-            img: CSS,
-            level: "Advance"
-        },
+        // {
+        //     name: "HTML",
+        //     img: html,
+        //     level: "Advance"
+        // },
+        // {
+        //     name: "CSS",
+        //     img: CSS,
+        //     level: "Advance"
+        // },
         {
             name: "Javascript",
-            img: JS,
+            img: Javascript,
             level: "Advance"
         },
         {
-            name: "Bootstrap",
-            img: Bootstrap,
-            level: "Advance"
-        },
-        {
-            name: "Tailwind CSS",
-            img: Tailwind,
-            level: "Advance"
-        },
-        {
-            name: "SASS",
-            img: SASS,
+            name: "Typescript",
+            img: Typescript,
             level: "Moderate"
         },
+        {
+            name: "React JS",
+            img: ReactJS,
+            level: "Advance"
+        },
+        // {
+        //     name: "Bootstrap",
+        //     img: Bootstrap,
+        //     level: "Advance"
+        // },
+        {
+            name: "Tailwind CSS",
+            img: TailwindCSS,
+            level: "Advance"
+        },
+        {
+            name: "Node js",
+            img: NodeJS,
+            level: "Moderate"
+        },
+        {
+            name: "Express js",
+            img: ExpressJS,
+            level: "Beginner"
+        },
+        {
+            name: "Mongo DB",
+            img: MongoDB,
+            level: "Moderate"
+        },
+        // {
+        //     name: "SASS",
+        //     img: SASS,
+        //     level: "Moderate"
+        // },
         {
             name: "Github",
             img: Github,
@@ -60,39 +76,7 @@ const Skills = () => {
             level: "Advance"
         },
     ]
-    const familier = [
-        {
-            name: "Node js",
-            img: Node,
-            level: "Beginner"
-        },
-        {
-            name: "Express js",
-            img: Express,
-            level: "Beginner"
-        },
-        {
-            name: "Firebase",
-            img: Firebase,
-            level: "Moderate"
-        },
-        {
-            name: "Mongo DB",
-            img: Mongo,
-            level: "Beginner"
-        },
-        {
-            name: "Netlify",
-            img: Netlify,
-            level: "Moderate"
-        },
-        {
-            name: "Vercel",
-            img: Vercel,
-            level: "Moderate"
-        },
 
-    ]
 
     return (
         <section id="SKILLS" className='container mx-auto mt-8 md:mt-20'>
@@ -108,23 +92,23 @@ const Skills = () => {
             <div className="mt-4 flex flex-wrap items-center justify-center gap-10 mx-auto expertise sm:gap-14  cursor-pointer">
                 {
                     skills.map((skill, i) =>
-                        <SkillBlob skill={skill} key={i} />
+                        <SkillCardWithIcon skill={skill} key={i} />
                     )
                 }
 
             </div>
-            <div className="mb-[50px] sm:mb-[50px] flex flex-col items-start md:pl-10 mx-auto">
+            {/* <div className="mb-[50px] sm:mb-[50px] flex flex-col items-start md:pl-10 mx-auto">
                 <h1 className="text-xl md:text-[52px] font-semibold text-center my-8 text-white md:text-left md:leading-[4.25rem] w-full"> <br className="hidden md:block" />Others technologies_  <FcEngineering className="inline-block text-4xl animate-spin" /></h1>
                 <p className="text-center md:text-left text-para text-lg  ">Tools, but I have less experience in following</p>
-            </div>
-            <div className="mt-4 flex flex-wrap items-center justify-center gap-10 mx-auto expertise sm:gap-14  cursor-pointer">
+            </div> */}
+            {/* <div className="mt-4 flex flex-wrap items-center justify-center gap-10 mx-auto expertise sm:gap-14  cursor-pointer">
                 {
                     familier.map((skill, i) =>
                         <SkillBlob skill={skill} key={i} />
                     )
                 }
 
-            </div>
+            </div> */}
         </section>
     )
 }

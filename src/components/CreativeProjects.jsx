@@ -1,16 +1,16 @@
 import React from 'react';
 import { FaExternalLinkAlt, FaGithub } from "react-icons/fa";
 import { FcBriefcase } from "react-icons/fc";
-import arrow from "../Asset/Developer logo/ARROW.png";
-import BOOTSTRAP from "../Asset/Developer logo/bootstrap-5-1.svg";
-import CSS from "../Asset/Developer logo/css-3-svgrepo-com.svg";
-import Express from "../Asset/Developer logo/express-js-icon.svg";
-import Firebase from "../Asset/Developer logo/firebase-svgrepo-com.svg";
-import HTML from "../Asset/Developer logo/html-svgrepo-com.svg";
-import Mongo from "../Asset/Developer logo/mongodb-svgrepo-com.svg";
-import Node from "../Asset/Developer logo/node-svgrepo-com.svg";
-import REACT from "../Asset/Developer logo/react-2.svg";
-import Tail from "../Asset/Developer logo/tailwind-css-2.svg";
+import arrow from "../assets/Developer logo/ARROW.png";
+import BOOTSTRAP from "../assets/Developer logo/bootstrap-5-1.svg";
+import CSS from "../assets/Developer logo/css-3-svgrepo-com.svg";
+import Express from "../assets/Developer logo/express-js-icon.svg";
+import Firebase from "../assets/Developer logo/firebase-svgrepo-com.svg";
+import HTML from "../assets/Developer logo/html-svgrepo-com.svg";
+import Mongo from "../assets/Developer logo/mongodb-svgrepo-com.svg";
+import Node from "../assets/Developer logo/node-svgrepo-com.svg";
+import REACT from "../assets/Developer logo/react-2.svg";
+import Tail from "../assets/Developer logo/tailwind-css-2.svg";
 import SectionHeader from './Small/SectionHeader';
 const CreativeProjects = () => {
     const images = [

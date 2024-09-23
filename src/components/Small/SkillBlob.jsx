@@ -1,7 +1,7 @@
 import React from 'react';
 import { Tooltip as ReactTooltip } from "react-tooltip";
 import "react-tooltip/dist/react-tooltip.css";
-const SkillBlob = ({ skill, }) => {
+const SkillCardWithIcon = ({ skill, }) => {
     return (
         <>
             <div data-aos="zoom-in-up" data-aos-duration="800"
@@ -19,4 +19,4 @@ const SkillBlob = ({ skill, }) => {
     )
 }
 
-export default SkillBlob
+export default SkillCardWithIcon
