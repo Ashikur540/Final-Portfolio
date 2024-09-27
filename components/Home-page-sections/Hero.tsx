@@ -41,12 +41,6 @@ export const Hero = () => {
           <p className="text-center md:tracking-wider mb-4 text-md md:text-lg lg:text-xl">
             Hi! I&apos;m Ashikur Rahman
           </p>
-
-          {/**
-           *  Link: https://ui.aceternity.com/components/text-generate-effect
-           *
-           *  change md:text-6xl, add more responsive code
-           */}
           <FlipWords
             className="text-center font-bold text-[40px] md:text-5xl lg:text-6xl"
             words={[

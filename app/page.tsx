@@ -2,10 +2,14 @@
 import { useEffect, useState } from "react";
 
 import { AboutMe } from "@/components/Home-page-sections/About";
+import Contact from "@/components/Home-page-sections/Contact";
 import { Hero } from "@/components/Home-page-sections/Hero";
 import Projects from "@/components/Home-page-sections/Projects";
 import { FloatingNav } from "@/components/ui/FloatingNav";
 import Preloader from "@/components/ui/Preloader";
+import { Timeline } from "@/components/ui/TimeLine";
+import { workHistories } from "@/data";
+import { ReactLenis } from "lenis/react";
 
 export default function Home() {
   const [loading, setLoading] = useState(true);
@@ -18,23 +22,35 @@ export default function Home() {
     return () => clearTimeout(timer);
   }, []);
 
-  if (loading) return <Preloader />;
-
   return (
-    <main className="relative bg-black-100 flex justify-center items-center flex-col overflow-hidden mx-auto sm:px-10 px-5">
-      <div className="max-w-7xl w-full">
-        <FloatingNav
-          navItems={[
-            { name: "Home", link: "#" },
-            { name: "Projects", link: "#projects" },
-            { name: "About", link: "#about" },
-            { name: "Contact", link: "#contact" },
-          ]}
-        />
-        <Hero />
-        <AboutMe />
-        <Projects />
-      </div>
-    </main>
+    <ReactLenis root>
+      {/* Keep the content hidden while loading */}
+      {loading ? (
+        <Preloader />
+      ) : (
+        <main
+          className={`relative bg-black-100 flex justify-center items-center flex-col overflow-hidden mx-auto sm:px-10 px-5 transition-opacity duration-500 ${
+            loading ? "opacity-0" : "opacity-100"
+          }`}
+        >
+          <div className="max-w-7xl w-full">
+            <FloatingNav
+              navItems={[
+                { name: "Home", link: "#" },
+                { name: "Projects", link: "#projects" },
+                { name: "About", link: "#about" },
+                { name: "Contact", link: "#contact" },
+              ]}
+            />
+            <Hero />
+            <AboutMe />
+
+            <Timeline data={workHistories} />
+            <Projects />
+            <Contact />
+          </div>
+        </main>
+      )}
+    </ReactLenis>
   );
 }

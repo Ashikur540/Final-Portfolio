@@ -104,39 +104,6 @@ export const projects = [
   },
 ];
 
-export const testimonials = [
-  {
-    quote:
-      "Collaborating with Adrian was an absolute pleasure. His professionalism, promptness, and dedication to delivering exceptional results were evident throughout our project. Adrian's enthusiasm for every facet of development truly stands out. If you're seeking to elevate your website and elevate your brand, Adrian is the ideal partner.",
-    name: "Michael Johnson",
-    title: "Director of AlphaStream Technologies",
-  },
-  {
-    quote:
-      "Collaborating with Adrian was an absolute pleasure. His professionalism, promptness, and dedication to delivering exceptional results were evident throughout our project. Adrian's enthusiasm for every facet of development truly stands out. If you're seeking to elevate your website and elevate your brand, Adrian is the ideal partner.",
-    name: "Michael Johnson",
-    title: "Director of AlphaStream Technologies",
-  },
-  {
-    quote:
-      "Collaborating with Adrian was an absolute pleasure. His professionalism, promptness, and dedication to delivering exceptional results were evident throughout our project. Adrian's enthusiasm for every facet of development truly stands out. If you're seeking to elevate your website and elevate your brand, Adrian is the ideal partner.",
-    name: "Michael Johnson",
-    title: "Director of AlphaStream Technologies",
-  },
-  {
-    quote:
-      "Collaborating with Adrian was an absolute pleasure. His professionalism, promptness, and dedication to delivering exceptional results were evident throughout our project. Adrian's enthusiasm for every facet of development truly stands out. If you're seeking to elevate your website and elevate your brand, Adrian is the ideal partner.",
-    name: "Michael Johnson",
-    title: "Director of AlphaStream Technologies",
-  },
-  {
-    quote:
-      "Collaborating with Adrian was an absolute pleasure. His professionalism, promptness, and dedication to delivering exceptional results were evident throughout our project. Adrian's enthusiasm for every facet of development truly stands out. If you're seeking to elevate your website and elevate your brand, Adrian is the ideal partner.",
-    name: "Michael Johnson",
-    title: "Director of AlphaStream Technologies",
-  },
-];
-
 export const companies = [
   {
     id: 1,
@@ -170,34 +137,48 @@ export const companies = [
   },
 ];
 
-export const workExperience = [
+export const workHistories = [
   {
-    id: 1,
-    title: "Frontend Engineer Intern",
-    desc: "Assisted in the development of a web-based platform using React.js, enhancing interactivity.",
-    className: "md:col-span-2",
-    thumbnail: "/exp1.svg",
+    company: "InnoSoft IT",
+    url: "https://innosoftit.com/",
+    title: "Frontend Developer",
+    date: "4 May 24 - 22 Sep 24",
+    description:
+      "Building the future of search.Building the future of searchBuilding the future of searchBuilding the future of searchBuilding the future of searchBuilding the future of searchBuilding the future of searchBuilding the future of search",
+    responsibilities: [
+      "Improved the search algorithm to provide more relevant results",
+      "Developed a new feature that personalizes search results",
+      "Enhanced the search functionality making it more intuitive and user-friendly",
+      "Implemented a feature for tracking search history",
+    ],
   },
   {
-    id: 2,
-    title: "Mobile App Dev - JSM Tech",
-    desc: "Designed and developed mobile app for both iOS & Android platforms using React Native.",
-    className: "md:col-span-2", // change to md:col-span-2
-    thumbnail: "/exp2.svg",
+    company: "Hastech IT",
+    url: "https://hasthemes.com/",
+    title: "Webflow Template Developer.",
+    date: "1 jan 24 - 30 April 24",
+    description:
+      "Building the future of social networking.Building the future of searchBuilding the future of searchBuilding the future of search",
+    responsibilities: [
+      "Developed a new feature that improves the user experience",
+      "Implemented a recommendation algorithm to suggest friends",
+      "Enhanced the news feed algorithm to show more relevant posts",
+      "Built a feature for tracking user activity",
+    ],
   },
   {
-    id: 3,
-    title: "Freelance App Dev Project",
-    desc: "Led the dev of a mobile app for a client, from initial concept to deployment on app stores.",
-    className: "md:col-span-2", // change to md:col-span-2
-    thumbnail: "/exp3.svg",
-  },
-  {
-    id: 4,
-    title: "Lead Frontend Developer",
-    desc: "Developed and maintained user-facing features using modern frontend technologies.",
-    className: "md:col-span-2",
-    thumbnail: "/exp4.svg",
+    company: "Hastech IT",
+    url: "https://hasthemes.com/",
+    title: "Junior Shopify App Developer",
+    date: "8 june 23 - 31 December 23",
+    description:
+      "Building the future of social networking.Building the future of searchBuilding the future of searchBuilding the future of searchBuilding the future of searchBuilding the future of searchBuilding the future of searchBuilding the future of searchBuilding the future of searchBuilding the future of searchBuilding the future of search",
+    responsibilities: [
+      "Developed a new feature that improves the user experience",
+      "Implemented a recommendation algorithm to suggest friends",
+      "Enhanced the news feed algorithm to show more relevant posts",
+      "Built a feature for tracking user activity",
+    ],
   },
 ];
 
@@ -205,13 +186,11 @@ export const socialMedia = [
   {
     id: 1,
     img: "/git.svg",
+    url: "https://github.com/Ashikur540",
   },
   {
     id: 2,
-    img: "/twit.svg",
-  },
-  {
-    id: 3,
     img: "/link.svg",
+    url: "https://www.linkedin.com/in/md-ashikurrahman/",
   },
 ];

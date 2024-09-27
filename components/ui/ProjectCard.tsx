@@ -1,6 +1,8 @@
 "use client";
 
+import IconExternal from "@/assets/icons/IconExternal";
 import Image from "next/image";
+import Link from "next/link";
 import { useRef, useState } from "react";
 
 export const ProjectCard = ({
@@ -110,22 +112,13 @@ export const ProjectCard = ({
         <p className="text-base leading-[120%]">
           Form a legal entity, issue stock, and start accepting payments.
         </p>
-        <a
+        <Link
           href="#"
           className=" text-base dark:text-white text-blue-600 font-normal  group-hover:opacity-100 opacity-0 translate-y-2 group-hover:translate-y-0 pt-2 flex gap-1  transition-all duration-300  "
         >
           Learn about Atlas
-          <span>
-            <svg
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              height="1em"
-              width="1em"
-            >
-              <path d="M19 6.41L8.7 16.71a1 1 0 11-1.4-1.42L17.58 5H14a1 1 0 010-2h6a1 1 0 011 1v6a1 1 0 01-2 0V6.41zM17 14a1 1 0 012 0v5a2 2 0 01-2 2H5a2 2 0 01-2-2V7c0-1.1.9-2 2-2h5a1 1 0 010 2H5v12h12v-5z" />
-            </svg>
-          </span>
-        </a>
+          <IconExternal />
+        </Link>
       </article>
     </div>
   );
