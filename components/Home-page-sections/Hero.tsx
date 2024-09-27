@@ -31,7 +31,12 @@ export const Hero = () => {
         />
       </div>
 
-      <div className="flex justify-center relative my-20 z-10">
+      <img
+        className="relative size-[62px] rounded-full mx-auto object-cover"
+        src="/me.jpg"
+        alt="Avatar"
+      ></img>
+      <div className="flex justify-center relative mt-8 mb-20 z-10">
         <div className="max-w-[89vw] md:max-w-2xl lg:max-w-[60vw] flex flex-col items-center justify-center">
           <p className="text-center md:tracking-wider mb-4 text-md md:text-lg lg:text-xl">
             Hi! I&apos;m Ashikur Rahman
