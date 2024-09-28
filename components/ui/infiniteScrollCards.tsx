@@ -1,7 +1,5 @@
-"use client";
-
 import { cn } from "@/lib/utils";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 
 export const InfiniteMovingCards = ({
   items,
@@ -11,7 +9,7 @@ export const InfiniteMovingCards = ({
   className,
 }: {
   items: {
-    icon: React.ReactNode | string;
+    icon: string;
     name: string;
   }[];
   direction?: "left" | "right";
@@ -21,11 +19,21 @@ export const InfiniteMovingCards = ({
 }) => {
   const containerRef = React.useRef<HTMLDivElement>(null);
   const scrollerRef = React.useRef<HTMLUListElement>(null);
+  const [start, setStart] = useState(false);
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+
+  const handleMouseEnter = useCallback((index: number) => {
+    setHoveredIndex(index);
+  }, []);
+
+  const handleMouseLeave = useCallback(() => {
+    setHoveredIndex(null);
+  }, []);
 
   useEffect(() => {
     addAnimation();
   }, []);
-  const [start, setStart] = useState(false);
+
   function addAnimation() {
     if (containerRef.current && scrollerRef.current) {
       const scrollerContent = Array.from(scrollerRef.current.children);
@@ -42,6 +50,7 @@ export const InfiniteMovingCards = ({
       setStart(true);
     }
   }
+
   const getDirection = () => {
     if (containerRef.current) {
       if (direction === "left") {
@@ -57,6 +66,7 @@ export const InfiniteMovingCards = ({
       }
     }
   };
+
   const getSpeed = () => {
     if (containerRef.current) {
       if (speed === "fast") {
@@ -68,6 +78,7 @@ export const InfiniteMovingCards = ({
       }
     }
   };
+
   return (
     <div
       ref={containerRef}
@@ -86,27 +97,32 @@ export const InfiniteMovingCards = ({
       >
         {items.map((item, idx) => (
           <li
-            className=" max-w-full relative  border border-b-0 flex-shrink-0 border-slate-700  rounded-full"
+            className="max-w-full relative border border-b-0 flex-shrink-0 border-slate-700 rounded-full"
             style={{
               background:
                 "linear-gradient(180deg, var(--slate-800), var(--slate-900)",
             }}
             key={idx}
+            onMouseEnter={() => handleMouseEnter(idx)}
+            onMouseLeave={handleMouseLeave}
           >
             <div
               className={cn(
                 `h-16 w-16 rounded-full flex items-center justify-center bg-[rgba(248,248,248,0.01)]
-    shadow-[0px_0px_8px_0px_rgba(248,248,248,0.25)_inset,0px_32px_24px_-16px_rgba(0,0,0,0.40)]
-    `,
+                  shadow-[0px_0px_8px_0px_rgba(248,248,248,0.25)_inset,0px_32px_24px_-16px_rgba(0,0,0,0.40)]
+                  `,
                 className
               )}
             >
-              {/* <AnimatedTooltip>{item.icon}</AnimatedTooltip> */}
-              {typeof item.icon === "string" ? (
-                <img src={item.icon} alt={item.name} className="w-10 h-10" />
-              ) : (
-                item.icon
-              )}
+              <img
+                src={item.icon}
+                alt={item.name}
+                className="w-10 h-10"
+                style={{
+                  filter:
+                    "invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(80%) contrast(100%)",
+                }}
+              />
             </div>
           </li>
         ))}

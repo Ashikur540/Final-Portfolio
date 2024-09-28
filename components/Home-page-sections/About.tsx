@@ -1,26 +1,36 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
-import { motion } from "framer-motion";
-import Image from "next/image";
-import { ReactNode } from "react";
+import { motion, useAnimation, useInView } from "framer-motion";
+import { ReactNode, useEffect, useRef } from "react";
 import { twMerge } from "tailwind-merge";
 
-import IconContentCopy from "@/assets/icons/IconCopy";
-import CodeSnippetImage from "@/public/code-snippet.png";
+// import CodeSnippetImage from "";
 import { AnimatedGradientBG } from "../ui/AnimatedGradientBG";
 import { CTAButton } from "../ui/CTAButton";
 import { InfiniteMovingCards } from "../ui/infiniteScrollCards";
 import { TextGenerateEffect } from "../ui/TextGenerateEffect";
+import GitStats from "./GithubStats";
 
 // import { FiArrowRight, FiMail, FiMapPin } from "react-icons/fi";
 // import { SiGithub, SiTiktok, SiTwitter, SiYoutube } from "react-icons/si";
 
 export const AboutMe = () => {
+  const controls = useAnimation();
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
+
+  useEffect(() => {
+    if (isInView) {
+      controls.start("animate");
+    }
+  }, [isInView, controls]);
+
   return (
-    <div className="  py-12 text-zinc-50">
+    <div className="  py-12 text-zinc-50" ref={ref}>
       <motion.div
         initial="initial"
-        animate="animate"
+        animate={controls}
         transition={{
           staggerChildren: 0.05,
         }}
@@ -29,6 +39,8 @@ export const AboutMe = () => {
         <HeaderBlock />
         <SocialsBlock />
         <AboutBlock />
+        <GitStats />
+        {/* <HobbyBlock /> */}
         {/* <LocationBlock />
         <EmailListBlock /> */}
       </motion.div>
@@ -211,8 +223,8 @@ const AboutBlock = () => (
         }}
       >
         <div className="absolute inset-0 h-full w-full bg-gradient-to-r from-blue-500 to-teal-500 transform scale-[0.70] bg-red-500 rounded-full blur-3xl opacity-95" />
-        <Image
-          src={CodeSnippetImage}
+        <img
+          src={`/code-snippet.png`}
           alt="code snippet"
           className="max-w-full sm:max-w-[95%] md:max-w-[80%] ml-auto scale-[1.4]"
         />
@@ -222,43 +234,13 @@ const AboutBlock = () => (
         {/* <div className="flex flex-col gap-3 md:gap-3 lg:gap-8"> */}
         <InfiniteMovingCards
           items={[
-            { icon: "/netlify.svg", name: "Moderate" },
-            {
-              icon: "/public/js-svgrepo-com.svg",
-              name: "Javascript",
-            },
-            {
-              icon: "/public/react-svgrepo-com.svg",
-              name: "React",
-            },
-            { icon: "/public/typescript-svgrepo-com.svg", name: "Typescript" },
-            { icon: "", name: "copy" },
-            {
-              icon: (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className=""
-                  width="44"
-                  height="44"
-                  viewBox="0 0 24 24"
-                  stroke-width="1.5"
-                  stroke="cyan"
-                  fill="none"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                  <path d="M6.306 8.711c-2.602 .723 -4.306 1.926 -4.306 3.289c0 2.21 4.477 4 10 4c.773 0 1.526 -.035 2.248 -.102" />
-                  <path d="M17.692 15.289c2.603 -.722 4.308 -1.926 4.308 -3.289c0 -2.21 -4.477 -4 -10 -4c-.773 0 -1.526 .035 -2.25 .102" />
-                  <path d="M6.305 15.287c-.676 2.615 -.485 4.693 .695 5.373c1.913 1.105 5.703 -1.877 8.464 -6.66c.387 -.67 .733 -1.339 1.036 -2" />
-                  <path d="M17.694 8.716c.677 -2.616 .487 -4.696 -.694 -5.376c-1.913 -1.105 -5.703 1.877 -8.464 6.66c-.387 .67 -.733 1.34 -1.037 2" />
-                  <path d="M12 5.424c-1.925 -1.892 -3.82 -2.766 -5 -2.084c-1.913 1.104 -1.226 5.877 1.536 10.66c.386 .67 .793 1.304 1.212 1.896" />
-                  <path d="M12 18.574c1.926 1.893 3.821 2.768 5 2.086c1.913 -1.104 1.226 -5.877 -1.536 -10.66c-.375 -.65 -.78 -1.283 -1.212 -1.897" />
-                  <path d="M11.5 12.866a1 1 0 1 0 1 -1.732a1 1 0 0 0 -1 1.732z" />
-                </svg>
-              ),
-              name: "React",
-            },
+            { icon: "/logos/brand-html5.svg", name: "HTML" },
+            { icon: "/logos/brand-css3.svg", name: "CSS" },
+            { icon: "/logos/brand-javascript.svg", name: "Javascript" },
+            { icon: "/logos/brand-tailwind.svg", name: "Tailwind" },
+            { icon: "/logos/brand-react.svg", name: "React JS" },
+            { icon: "/logos/brand-typescript.svg", name: "Typescript" },
+            { icon: "/logos/chart-arcs.svg", name: "ApexChart" },
           ]}
           direction="left"
         />
@@ -266,12 +248,12 @@ const AboutBlock = () => (
         {/* <div className="flex flex-col gap-3 md:gap-3 lg:gap-8"> */}
         <InfiniteMovingCards
           items={[
-            { icon: <IconContentCopy />, name: "copy" },
-            { icon: <IconContentCopy />, name: "copy" },
-            { icon: <IconContentCopy />, name: "copy" },
-            { icon: <IconContentCopy />, name: "copy" },
-            { icon: <IconContentCopy />, name: "copy" },
-            { icon: <IconContentCopy />, name: "copy" },
+            { icon: "/logos/brand-nextjs.svg", name: "Next JS" },
+            { icon: "/logos/brand-nodejs.svg", name: "Node JS" },
+            { icon: "/logos/brand-mongodb.svg", name: "Mongo DB" },
+            { icon: "/logos/icons8-express-js.svg", name: "Express JS" },
+            { icon: "/logos/brand-wordpress.svg", name: "Wordpress" },
+            { icon: "/logos/icons8-shopify.svg", name: "Shopify" },
           ]}
           direction="right"
         />
@@ -280,3 +262,88 @@ const AboutBlock = () => (
     </div>
   </Block>
 );
+
+// import React, { useState } from "react";
+
+// const hobbies = [
+//   { id: 1, name: "Photography", icon: "📷" },
+//   { id: 2, name: "Trekking", icon: "🥾" },
+//   { id: 3, name: "Reading", icon: "📚" },
+//   { id: 4, name: "Praying", icon: "🙏" },
+//   { id: 5, name: "Music", icon: "🎵" },
+//   { id: 6, name: "Drawing", icon: "🎨" },
+// ];
+
+// const HobbyBadge = ({ hobby, position }) => {
+//   return (
+//     <motion.div
+//       initial={{ y: -300, opacity: 0 }}
+//       animate={{ y: position.y, x: position.x, opacity: 1 }}
+//       transition={{
+//         type: "spring",
+//         damping: 12,
+//         stiffness: 100,
+//         mass: 0.5,
+//       }}
+//       className="absolute bg-white text-black rounded-full p-2 shadow-lg"
+//       style={{ width: "fit-content" }}
+//     >
+//       <span className="text-2xl mr-2">{hobby.icon}</span>
+//       {hobby.name}
+//     </motion.div>
+//   );
+// };
+
+// const HobbyBlock = () => {
+//   const [positions, setPositions] = useState([]);
+//   const controls = useAnimation();
+//   const ref = React.useRef(null);
+//   const isInView = useInView(ref, { once: true, threshold: 0.2 });
+
+//   useEffect(() => {
+//     if (isInView) {
+//       controls.start("visible");
+//     }
+//   }, [isInView, controls]);
+
+//   useEffect(() => {
+//     const generatePositions = () => {
+//       const containerWidth = 800; // Adjust based on your layout
+//       const containerHeight = 400; // Adjust based on your layout
+//       return hobbies.map(() => ({
+//         x: Math.random() * (containerWidth - 100), // Subtracting badge width
+//         y: Math.random() * (containerHeight - 40), // Subtracting badge height
+//       }));
+//     };
+
+//     setPositions(generatePositions());
+//   }, []);
+
+//   return (
+//     <motion.div
+//       ref={ref}
+//       initial="hidden"
+//       animate={controls}
+//       variants={{
+//         visible: {
+//           transition: {
+//             staggerChildren: 0.1,
+//           },
+//         },
+//         hidden: {},
+//       }}
+//       className="col-span-9 row-span-1 bg-gradient-to-br from-purple-500 to-indigo-600 rounded-lg p-6 relative h-[400px] overflow-hidden"
+//     >
+//       <h2 className="text-2xl font-bold mb-4 text-white">My Hobbies</h2>
+//       {hobbies.map((hobby, index) => (
+//         <HobbyBadge
+//           key={hobby.id}
+//           hobby={hobby}
+//           position={positions[index] || { x: 0, y: 0 }}
+//         />
+//       ))}
+//     </motion.div>
+//   );
+// };
+
+// export default HobbyBlock;

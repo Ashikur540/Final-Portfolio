@@ -60,7 +60,7 @@ const Preloader = ({
           animate={{ opacity: 1, y: 0 }}
           // Smooth exit by moving it up and out
           exit={{
-            scale: 0,
+            // scale: 0,
             opacity: 0,
             y: "-100%",
             transition: {

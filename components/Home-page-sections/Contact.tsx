@@ -4,7 +4,10 @@ import { CTAButton } from "../ui/CTAButton";
 import { SectionTitle } from "../ui/SectionTitle";
 const Contact = () => {
   return (
-    <footer className="w-full pt-20 pb-10" id="contact">
+    <footer
+      className="w-full pt-20 pb-10 relative overflow-hidden"
+      id="contact"
+    >
       {/* background grid */}
       <div className="w-full absolute left-0 -bottom-10 min-h-96">
         <img
@@ -20,15 +23,15 @@ const Contact = () => {
           presence to the next level?
         </h1> */}
         <SectionTitle className="text-center lg:max-w-[55vw]">
-          Ready to take your{" "}
-          <span className="text-purple">digital presence</span> to the next
-          level?
+          Ready to Take Your{" "}
+          <span className="text-purple">Digital Presence</span> to the Next
+          Level?
         </SectionTitle>
-        <p className="text-white-200 md:mt-10 my-5 text-center">
+        <p className="text-white-200 my-5 text-center">
           Reach out to me today and let&apos;s discuss how I can help you
           achieve your goals.
         </p>
-        <a href="mailto:contact@jsmastery.pro">
+        <a href="mailto:meashik1000@gmail.com">
           <CTAButton icon={<IconContentCopy />} position="right">
             Let&apos;s get in touch
           </CTAButton>

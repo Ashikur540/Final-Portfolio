@@ -1,49 +1,96 @@
-"use client";
 import {
   AnimatePresence,
   motion,
+  MotionValue,
   useMotionValue,
   useSpring,
   useTransform,
 } from "framer-motion";
+import React, { ReactNode, useState } from "react";
 
-export const AnimatedTooltip = ({
+type TooltipPosition = "top" | "bottom" | "left" | "right";
+
+interface AnimatedTooltipProps {
+  children: ReactNode;
+  content: ReactNode;
+  position?: TooltipPosition;
+  className?: string;
+}
+
+export const AnimatedTooltip: React.FC<AnimatedTooltipProps> = ({
   children,
-}: {
-  children: React.ReactNode;
+  content,
+  position = "top",
+  className = "",
 }) => {
-  //   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [isHovered, setIsHovered] = useState<boolean>(false);
   const springConfig = { stiffness: 100, damping: 5 };
-  const x = useMotionValue(0); // going to set this value on mouse move
-  // rotate the tooltip
-  const rotate = useSpring(
+  const x = useMotionValue<number>(0);
+
+  const rotate: MotionValue<number> = useSpring(
     useTransform(x, [-100, 100], [-45, 45]),
     springConfig
   );
-  // translate the tooltip
-  const translateX = useSpring(
+
+  const translateX: MotionValue<number> = useSpring(
     useTransform(x, [-100, 100], [-50, 50]),
     springConfig
   );
-  //   const handleMouseMove = (event: any) => {
-  //     const halfWidth = event.target.offsetWidth / 2;
-  //     x.set(event.nativeEvent.offsetX - halfWidth); // set the x value, which is then used in transform and rotate
-  //   };
+
+  const handleMouseMove = (event: React.MouseEvent<HTMLDivElement>) => {
+    const halfWidth = event.currentTarget.offsetWidth / 2;
+    x.set(event.nativeEvent.offsetX - halfWidth);
+  };
+
+  const getTooltipStyles = (position: TooltipPosition): React.CSSProperties => {
+    switch (position) {
+      case "top":
+        return {
+          bottom: "100%",
+          left: "50%",
+          transform: "translateX(-50%)",
+          marginBottom: "0.5rem",
+        };
+      case "bottom":
+        return {
+          top: "100%",
+          left: "50%",
+          transform: "translateX(-50%)",
+          marginTop: "0.5rem",
+        };
+      case "left":
+        return {
+          top: "50%",
+          right: "100%",
+          transform: "translateY(-50%)",
+          marginRight: "0.5rem",
+        };
+      case "right":
+        return {
+          top: "50%",
+          left: "100%",
+          transform: "translateY(-50%)",
+          marginLeft: "0.5rem",
+        };
+      default:
+        return {};
+    }
+  };
 
   return (
-    <>
-      <div
-        className="-mr-4  relative group"
-        // onMouseEnter={() => setHoveredIndex(item.id)}
-        // onMouseLeave={() => setHoveredIndex(null)}
-      >
-        <AnimatePresence mode="popLayout">
-          {/* {hoveredIndex === item.id && ( */}
+    <div
+      className={`relative inline-block z-50 ${className}`}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      onMouseMove={handleMouseMove}
+    >
+      {children}
+      <AnimatePresence>
+        {isHovered && (
           <motion.div
-            initial={{ opacity: 0, y: 20, scale: 0.6 }}
+            initial={{ opacity: 0, scale: 0.6 }}
             animate={{
               opacity: 1,
-              y: 0,
               scale: 1,
               transition: {
                 type: "spring",
@@ -51,32 +98,24 @@ export const AnimatedTooltip = ({
                 damping: 10,
               },
             }}
-            exit={{ opacity: 0, y: 20, scale: 0.6 }}
+            exit={{ opacity: 0, scale: 0.6 }}
             style={{
+              ...getTooltipStyles(position),
               translateX: translateX,
               rotate: rotate,
               whiteSpace: "nowrap",
+              pointerEvents: "none",
             }}
-            className="absolute -top-16 -left-1/2 translate-x-1/2 flex text-xs  flex-col items-center justify-center rounded-md bg-black z-50 shadow-xl px-4 py-2"
+            className="absolute z-50 flex text-xs flex-col items-center justify-center rounded-md bg-black shadow-xl px-4 py-2"
           >
-            <div className="absolute inset-x-10 z-30 w-[20%] -bottom-px bg-gradient-to-r from-transparent via-emerald-500 to-transparent h-px " />
-            <div className="absolute left-10 w-[40%] z-30 -bottom-px bg-gradient-to-r from-transparent via-sky-500 to-transparent h-px " />
-            <div className="font-bold text-white relative z-30 text-base">
-              {children}
-            </div>
+            <div className="absolute inset-x-10 z-30 w-[20%] -bottom-px bg-gradient-to-r from-transparent via-emerald-500 to-transparent h-px" />
+            <div className="absolute left-10 w-[40%] z-30 -bottom-px bg-gradient-to-r from-transparent via-sky-500 to-transparent h-px" />
+            {content}
           </motion.div>
-          {/* )} */}
-        </AnimatePresence>
-        {/* <Image
-          onMouseMove={handleMouseMove}
-          height={100}
-          width={100}
-          src={item.image}
-          alt={item.name}
-          className="object-cover !m-0 !p-0 object-top rounded-full h-14 w-14 border-2 group-hover:scale-105 group-hover:z-30 border-white  relative transition duration-500"
-        /> */}
-      </div>
-      {/* ))} */}
-    </>
+        )}
+      </AnimatePresence>
+    </div>
   );
 };
+
+export default AnimatedTooltip;
