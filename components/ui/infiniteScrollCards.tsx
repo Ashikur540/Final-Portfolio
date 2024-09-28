@@ -11,7 +11,7 @@ export const InfiniteMovingCards = ({
   className,
 }: {
   items: {
-    icon: React.ReactNode;
+    icon: React.ReactNode | string;
     name: string;
   }[];
   direction?: "left" | "right";
@@ -91,7 +91,7 @@ export const InfiniteMovingCards = ({
               background:
                 "linear-gradient(180deg, var(--slate-800), var(--slate-900)",
             }}
-            key={item.name}
+            key={idx}
           >
             <div
               className={cn(
@@ -102,7 +102,11 @@ export const InfiniteMovingCards = ({
               )}
             >
               {/* <AnimatedTooltip>{item.icon}</AnimatedTooltip> */}
-              {item.icon}
+              {typeof item.icon === "string" ? (
+                <img src={item.icon} alt={item.name} className="w-10 h-10" />
+              ) : (
+                item.icon
+              )}
             </div>
           </li>
         ))}

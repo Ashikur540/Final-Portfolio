@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import {
   WorkHistoryCard,
   WorkHistoryCardProps,
-} from "../Home-page-sections/WorkHistoryCard";
+} from "../common/WorkHistoryCard";
 import { SectionTitle } from "./SectionTitle";
 
 export const Timeline = ({ data }: { data: WorkHistoryCardProps[] }) => {
@@ -34,7 +34,9 @@ export const Timeline = ({ data }: { data: WorkHistoryCardProps[] }) => {
       ref={containerRef}
     >
       <div className="max-w-7xl mx-auto ">
-        <SectionTitle>My Experiences</SectionTitle>
+        <SectionTitle>
+          My <span className="text-purple">Journey</span> of Experiences
+        </SectionTitle>
         <p className="text-neutral-700 dark:text-neutral-300 text-base  max-w-sm">
           I&apos;ve been working on Aceternity for the past 2 years. Here&apos;s
           a timeline of my journey.

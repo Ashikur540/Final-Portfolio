@@ -83,7 +83,7 @@ export const ProjectCard = ({
             src={
               "https://res.cloudinary.com/dzl9yxixg/image/upload/v1715685361/distrokings_vihqpy.jpg"
             }
-            alt="shoes"
+            alt="project-card-img"
             width={600}
             height={600}
             className="absolute  top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2  group-hover:-bottom-5  h-64 w-[80%] lg:w-[90%] group-hover:border-4 border-4 group-hover:border-[#76aaf82d] rounded-lg object-cover transition-all duration-300 group-hover:scale-105"
@@ -101,7 +101,13 @@ export const ProjectCard = ({
                   transform: `translateX(-${5 * index + 2}px)`,
                 }}
               >
-                <img src={icon} alt="icon5" className="p-2" />
+                <Image
+                  src={icon}
+                  alt="icon"
+                  className="p-2"
+                  width={10}
+                  height={10}
+                />
               </div>
             ))}
           </div>

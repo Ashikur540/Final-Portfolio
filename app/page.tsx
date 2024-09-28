@@ -7,7 +7,7 @@ import { Hero } from "@/components/Home-page-sections/Hero";
 import Projects from "@/components/Home-page-sections/Projects";
 import { FloatingNav } from "@/components/ui/FloatingNav";
 import Preloader from "@/components/ui/Preloader";
-import { Timeline } from "@/components/ui/TimeLine";
+import { Timeline as WorkHistoryTimeLine } from "@/components/ui/TimeLine";
 import { workHistories } from "@/data";
 import { ReactLenis } from "lenis/react";
 
@@ -17,7 +17,7 @@ export default function Home() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 2000); // This should match the duration in Preloader.js
+    }, 3000); // This should match the duration in Preloader.js
 
     return () => clearTimeout(timer);
   }, []);
@@ -26,7 +26,7 @@ export default function Home() {
     <ReactLenis root>
       {/* Keep the content hidden while loading */}
       {loading ? (
-        <Preloader />
+        <Preloader onLoadingComplete={() => setLoading(false)} />
       ) : (
         <main
           className={`relative bg-black-100 flex justify-center items-center flex-col overflow-hidden mx-auto sm:px-10 px-5 transition-opacity duration-500 ${
@@ -44,8 +44,7 @@ export default function Home() {
             />
             <Hero />
             <AboutMe />
-
-            <Timeline data={workHistories} />
+            <WorkHistoryTimeLine data={workHistories} />
             <Projects />
             <Contact />
           </div>

@@ -17,6 +17,7 @@ function Projects() {
         >
           My Recent Projects
         </h2> */}
+
         <SectionTitle className="mb-4">
           My Recent <span className="text-purple">Projects</span>
         </SectionTitle>

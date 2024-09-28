@@ -1,5 +1,5 @@
-import { BulletText } from "../common/BulletText";
-import { LinkTextWithIcon } from "../common/LinkTextWithIcon";
+import { BulletText } from "./BulletText";
+import { LinkTextWithIcon } from "./LinkTextWithIcon";
 
 export type WorkHistoryCardProps = {
   company: string;
