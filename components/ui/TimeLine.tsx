@@ -32,14 +32,17 @@ export const Timeline = ({ data }: { data: WorkHistoryCardProps[] }) => {
     <div
       className="w-full bg-white dark:bg-black-100 font-sans "
       ref={containerRef}
+      id="experience"
     >
       <div className="max-w-7xl mx-auto ">
         <SectionTitle>
           My <span className="text-purple">Journey</span> of Experiences
         </SectionTitle>
         <p className="text-neutral-700 dark:text-neutral-300 text-base  max-w-sm">
-          I&apos;ve been working on Aceternity for the past 2 years. Here&apos;s
-          a timeline of my journey.
+          Throughout my career, I've had the privilege of contributing to
+          impactful projects that solve real-world problems. From sleek web
+          interfaces to powerful applications, my focus has always been on
+          combining functionality with user-centric design
         </p>
       </div>
 

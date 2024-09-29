@@ -1,4 +1,5 @@
 "use client";
+import { ReactLenis } from "lenis/react";
 import { useEffect, useState } from "react";
 
 import { AboutMe } from "@/components/Home-page-sections/About";
@@ -8,8 +9,7 @@ import Projects from "@/components/Home-page-sections/Projects";
 import { FloatingNav } from "@/components/ui/FloatingNav";
 import Preloader from "@/components/ui/Preloader";
 import { Timeline as WorkHistoryTimeLine } from "@/components/ui/TimeLine";
-import { workHistories } from "@/data";
-import { ReactLenis } from "lenis/react";
+import { navItems, workHistories } from "@/data";
 
 export default function Home() {
   const [loading, setLoading] = useState(true);
@@ -34,14 +34,7 @@ export default function Home() {
           }`}
         >
           <div className="max-w-7xl w-full">
-            <FloatingNav
-              navItems={[
-                { name: "Home", link: "#" },
-                { name: "Projects", link: "#projects" },
-                { name: "About", link: "#about" },
-                { name: "Contact", link: "#contact" },
-              ]}
-            />
+            <FloatingNav navItems={navItems} />
             <Hero />
             <AboutMe />
             <WorkHistoryTimeLine data={workHistories} />

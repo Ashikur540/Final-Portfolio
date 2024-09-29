@@ -4,30 +4,28 @@ import { CardMovingBorder } from "../ui/BorderShineCard";
 
 function GitStats() {
   return (
-    <div className="  col-span-1 md:col-span-8 gap-5">
-      <div className="md:col-span-6">
+    <>
+      <div className="col-span-12 md:col-span-8">
         <CardMovingBorder duration={10000} borderClassName="w-12 sm:w-[200px]">
-          <div className="bg-primary-bg">
-            <img
-              src={`http://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=ashikur540&theme=algolia`}
-              width={1080}
-              height={520}
-              alt="github profile-details"
-              className="rounded-lg "
-            />
-          </div>
+          <img
+            src={`http://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=ashikur540&theme=algolia`}
+            width={1080}
+            height={520}
+            alt="github profile-details"
+            className="rounded-lg "
+          />
         </CardMovingBorder>
       </div>
 
-      <div className="md:col-span-6">
-        <CardMovingBorder duration={10000} borderClassName="w-12 sm:w-[200px]">
+      <div className="col-span-12 md:col-span-4">
+        {/* <CardMovingBorder duration={10000} borderClassName="w-12 sm:w-[200px]">
           <img
             src={`https://github-readme-stats.vercel.app/api?username=ashikur540&show_icons=true&include_all_commits=true&theme=algolia&hide_border=true`}
             width={1080}
             height={520}
             alt="github stats"
           />
-        </CardMovingBorder>
+        </CardMovingBorder> */}
 
         {/* <div>
           <img
@@ -42,13 +40,13 @@ function GitStats() {
           <img
             src={`http://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=ashikur540&theme=algolia`}
             width={1080}
-            height={560}
+            height={400}
             alt="github repos-per-language"
-            className="rounded-lg lg:h-64 w-full bg-primary-bg"
+            className="rounded-lg  w-full"
           />
         </CardMovingBorder>
       </div>
-    </div>
+    </>
   );
 }
 

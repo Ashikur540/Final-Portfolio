@@ -20,12 +20,12 @@ export const WorkHistoryCard = ({
     <>
       <div className="flex  flex-col space-y-1 relative">
         <LinkTextWithIcon url={url ?? ""}>
-          <h5 className="text-lg md:text-xl lg:text-lg font-semibold inline-flex animate-shimmer bg-gradient-to-r from-[#b2a8fd] via-[#8678f9] to-[#c7d2fe] bg-[200%_auto] bg-clip-text  text-transparent">
+          <h4 className="text-lg md:text-xl lg:text-xl font-semibold inline-flex animate-shimmer bg-gradient-to-r from-[#b2a8fd] via-[#8678f9] to-[#c7d2fe] bg-[200%_auto] bg-clip-text  text-transparent">
             {company}
-          </h5>
+          </h4>
         </LinkTextWithIcon>
         <p
-          className="text-sm md:text-base text-zinc-300"
+          className="text-sm md:text-base text-slate-900 dark:text-zinc-50"
           style={{ marginBottom: "16px" }}
         >
           {description}

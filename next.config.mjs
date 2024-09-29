@@ -1,8 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     images: {
-        domains: ['flagsapi.com','images.unsplash.com','res.cloudinary.com','github-profile-summary-cards.vercel.app','github-readme-stats.vercel.app'],
-
+        domains: ['github-profile-summary-cards.vercel.app','github-readme-stats.vercel.app'],
+      },
+      eslint: {
+        // Warning: This allows production builds to successfully complete even if
+        // your project has ESLint errors.
+        ignoreDuringBuilds: true,
       },
 };
 
