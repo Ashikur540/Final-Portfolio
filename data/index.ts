@@ -1,7 +1,8 @@
 export const navItems = [
+  { name: "Home", link: "#hero" },
   { name: "About", link: "#about" },
+  { name: "Experience", link: "#experience" },
   { name: "Projects", link: "#projects" },
-  { name: "Testimonials", link: "#testimonials" },
   { name: "Contact", link: "#contact" },
 ];
 
@@ -72,36 +73,56 @@ export const gridItems = [
 export const projects = [
   {
     id: 1,
-    title: "3D Solar System Planets to Explore",
-    des: "Explore the wonders of our solar system with this captivating 3D simulation of the planets using Three.js.",
-    img: "/p1.svg",
-    iconLists: ["/re.svg", "/tail.svg", "/ts.svg", "/three.svg", "/fm.svg"],
-    link: "https://github.com/adrianhajdin?tab=repositories",
+    title: "SpeedXpress Logistic system",
+    des: "A full-stack web application that helps logistics manage their shipments and deliveries",
+    img: "/projects/project-1.webp",
+    iconLists: [
+      { name: "React", image: "/react-2.svg" },
+      { name: "Tailwind CSS", image: "/tailwind-css-2.svg" },
+      { name: "React Query", image: "/react-query-seeklogo.svg" },
+      { name: "Node.js", image: "/node-svgrepo-com.svg" },
+      { name: "Firebase", image: "/firebase-svgrepo-com.svg" },
+      { name: "MongoDB", image: "/mongodb-svgrepo-com.svg" },
+      { name: "Express js", image: "/logos/icons8-express-js.svg" },
+      { name: "Chart js", image: "/chartjs_icon_132506.svg" },
+    ],
+    link: "https://speed-xpress-cb80b.web.app/",
+    githubLink: "https://github.com/Team-Code-Artisans/speedXpress-client",
   },
   {
     id: 2,
-    title: "Yoom - Video Conferencing App",
-    des: "Simplify your video conferencing experience with Yoom. Seamlessly connect with colleagues and friends.",
-    img: "/p2.svg",
-    iconLists: ["/next.svg", "/tail.svg", "/ts.svg", "/stream.svg", "/c.svg"],
-    link: "https://github.com/adrianhajdin/zoom-clone",
+    title: "AutoHunt car Resell Market",
+    des: "A full-stack e-commerce site where users can buy, sell, and advertise their used cars.",
+    img: "/projects/project-2.webp",
+    iconLists: [
+      { name: "React", image: "/react-2.svg" },
+      { name: "Tailwind CSS", image: "/tailwind-css-2.svg" },
+      { name: "React Query", image: "/react-query-seeklogo.svg" },
+      { name: "Node js", image: "/node-svgrepo-com.svg" },
+      { name: "Firebase", image: "/firebase-svgrepo-com.svg" },
+      { name: "MongoDB", image: "/mongodb-svgrepo-com.svg" },
+      { name: "Express js", image: "/logos/icons8-express-js.svg" },
+    ],
+    link: "https://autohunt-f5b1c.web.app/",
+    githubLink:
+      "https://github.com/Ashikur540/AutoHunt-Resell-MarketPlace-Client-",
   },
   {
     id: 3,
-    title: "AI Image SaaS - Canva Application",
-    des: "A REAL Software-as-a-Service app with AI features and a payments and credits system using the latest tech stack.",
-    img: "/p3.svg",
-    iconLists: ["/re.svg", "/tail.svg", "/ts.svg", "/three.svg", "/c.svg"],
-    link: "https://github.com/adrianhajdin/ai_saas_app",
+    title: "Learners Hut",
+    des: "A full-stack e-learning platform offering a variety of courses on different categories.",
+    img: "/projects/project-3.webp",
+    iconLists: [
+      { name: "React", image: "/react-2.svg" },
+      { name: "Tailwind CSS", image: "/tailwind-css-2.svg" },
+      { name: "Node js", image: "/node-svgrepo-com.svg" },
+      { name: "Firebase", image: "/firebase-svgrepo-com.svg" },
+      { name: "MongoDB", image: "/mongodb-svgrepo-com.svg" },
+      { name: "Express js", image: "/logos/icons8-express-js.svg" },
+    ],
+    link: "https://learners-hut.web.app/",
+    githubLink: "https://github.com/Ashikur540/Learners-Hut-Client",
   },
-  // {
-  //   id: 4,
-  //   title: "Animated Apple Iphone 3D Website",
-  //   des: "Recreated the Apple iPhone 15 Pro website, combining GSAP animations and Three.js 3D effects..",
-  //   img: "/p4.svg",
-  //   iconLists: ["/next.svg", "/tail.svg", "/ts.svg", "/three.svg", "/gsap.svg"],
-  //   link: "https://github.com/adrianhajdin/iphone",
-  // },
 ];
 
 export const companies = [
@@ -144,12 +165,12 @@ export const workHistories = [
     title: "Frontend Developer",
     date: "4 May 24 - 22 Sep 24",
     description:
-      "Building the future of search.Building the future of searchBuilding the future of searchBuilding the future of searchBuilding the future of searchBuilding the future of searchBuilding the future of searchBuilding the future of search",
+      "Designed and developed the UI for Shopify apps with a focus on creating intuitive and user-friendly admin panels. Improved code management and collaborated closely with cross-functional teams.",
     responsibilities: [
-      "Improved the search algorithm to provide more relevant results",
-      "Developed a new feature that personalizes search results",
-      "Enhanced the search functionality making it more intuitive and user-friendly",
-      "Implemented a feature for tracking search history",
+      "Developed responsive UI for Shopify admin panels using TypeScript and React.",
+      "Integrated tRPC for efficient communication between frontend and backend.",
+      "Contributed 3 of their shopify apps that enhances the conversions of e-commerce stores.",
+      "Learned about wordpress and developed their website.",
     ],
   },
   {
@@ -158,12 +179,12 @@ export const workHistories = [
     title: "Webflow Template Developer.",
     date: "1 jan 24 - 30 April 24",
     description:
-      "Building the future of social networking.Building the future of searchBuilding the future of searchBuilding the future of search",
+      "Gained hands-on experience with the Webflow platform, developing live templates for the Webflow marketplace.",
     responsibilities: [
-      "Developed a new feature that improves the user experience",
-      "Implemented a recommendation algorithm to suggest friends",
-      "Enhanced the news feed algorithm to show more relevant posts",
-      "Built a feature for tracking user activity",
+      "Developed three Webflow templates, now live in the Webflow marketplace.",
+      "Mastered advanced Webflow animations to create visually appealing designs.",
+      "Collaborated with the design team to ensure seamless user experiences.",
+      "Learned the intricacies of the Webflow platform and streamlined template development for scalability.",
     ],
   },
   {
@@ -172,12 +193,12 @@ export const workHistories = [
     title: "Junior Shopify App Developer",
     date: "8 june 23 - 31 December 23",
     description:
-      "Building the future of social networking.Building the future of searchBuilding the future of searchBuilding the future of searchBuilding the future of searchBuilding the future of searchBuilding the future of searchBuilding the future of searchBuilding the future of searchBuilding the future of searchBuilding the future of search",
+      "I pursued my first internship here and gained hands-on experience with the Shopify platform, developing apps and exploring its technical aspects.",
     responsibilities: [
-      "Developed a new feature that improves the user experience",
-      "Implemented a recommendation algorithm to suggest friends",
-      "Enhanced the news feed algorithm to show more relevant posts",
-      "Built a feature for tracking user activity",
+      "Developed two Shopify apps now live on the Shopify store, both receiving positive reviews.",
+      "Gained practical technical understanding of the Shopify ecosystem, from storefronts to backend integration.",
+      "Collaborated with the support team to ensure seamless customer experiences.",
+      "Wrote app documentations for their shopify apps by collaborating with seniors.",
     ],
   },
 ];
@@ -193,4 +214,21 @@ export const socialMedia = [
     img: "/link.svg",
     url: "https://www.linkedin.com/in/md-ashikurrahman/",
   },
+  {
+    id: 3,
+    img: "/facebook-01-stroke-rounded.svg",
+    url: "https://www.facebook.com/ashik.201.35.540",
+  },
+  {
+    id: 4,
+    img: "/brand-leetcode.svg",
+    url: "https://leetcode.com/u/ashikur35-540/",
+  },
 ];
+
+export const personalInfo = {
+  name: "Md Ashikur Rahman",
+  title: "Frontend Developer",
+  location: "Dhaka, Bangladesh",
+  email: "meashik1000@gmail.com",
+};
