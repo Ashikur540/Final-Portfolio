@@ -73,7 +73,7 @@ export const gridItems = [
 export const projects = [
   {
     id: 1,
-    title: "SpeedXpress Logistic system",
+    title: "SpeedXpress Logistics",
     des: "A full-stack web application that helps logistics manage their shipments and deliveries",
     img: "/projects/project-1.webp",
     iconLists: [

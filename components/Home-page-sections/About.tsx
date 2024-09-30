@@ -10,7 +10,8 @@ import { socialMedia } from "@/data";
 import { AnimatedGradientBG } from "../ui/AnimatedGradientBG";
 import { CTAButton } from "../ui/CTAButton";
 import { InfiniteMovingCards } from "../ui/infiniteScrollCards";
-import GitStats from "./GithubStats";
+import IconDownload from "@/assets/icons/IconDownload";
+// import GitStats from "./GithubStats";
 
 export const AboutMe = () => {
   return (
@@ -42,7 +43,7 @@ const Block = ({ className, children, ...rest }: BlockProps) => {
   return (
     <motion.div
       className={twMerge(
-        "col-span-4 rounded-lg  border border-white/[0.1] p-6 md:p-12 my-auto",
+        "col-span-4 rounded-lg h-full  border border-white/[0.1] p-6 md:p-12 my-auto",
         className
       )}
       style={{
@@ -76,7 +77,13 @@ const HeaderBlock = () => (
         className="relative inline-flex items-center justify-center w-fit overflow-hidden font-bold text-white rounded-md shadow-2xl group z-10"
         download="Ashikur_Rahman_resume_Frontend_Developer.pdf"
       >
-        <CTAButton className="bg-white-100">Download Resume</CTAButton>
+        <CTAButton
+          className="bg-white-100"
+          icon={<IconDownload className="text-base" />}
+          position="right"
+        >
+          Download Resume
+        </CTAButton>
       </a>
     </AnimatedGradientBG>
   </Block>
@@ -88,7 +95,7 @@ const SocialsBlock = () => (
       return (
         <Block
           key={data.id}
-          className="col-span-6 md:col-span-2"
+          className="col-span-6 md:col-span-4 lg:col-span-2 h-full flex items-center justify-center p-4 md:p-6 lg:p-12"
           style={{
             background: "rgb(4,7,29)",
             backgroundColor:
@@ -136,16 +143,14 @@ const AboutBlock = () => (
             "linear-gradient(90deg, rgba(4,7,29,1) 0%, rgba(12,14,35,1) 100%)",
         }}
       >
-        <div className="absolute inset-0 h-full w-full bg-gradient-to-r from-blue-500 to-teal-500 transform scale-[0.70] bg-red-500 rounded-full blur-3xl opacity-95" />
+        <div className="absolute inset-0 h-full w-full bg-gradient-to-r from-blue-500 to-purple transform scale-[0.60] bg-purple rounded-full blur-3xl opacity-95 -translate-y-10" />
         <img
-          src={`/code-snippet.png`}
+          src={`/code-snap.webp`}
           alt="code snippet"
-          className="max-w-full sm:max-w-[95%] md:max-w-[80%] ml-auto scale-[1.4]"
+          className="max-w-full sm:max-w-[95%] md:max-w-[80%] ml-auto scale-[1.4] -translate-y-6"
         />
       </div>
       <div className="flex flex-col justify-start gap-1 mt-12 sm:mt-10 md:mt-5 lg:gap-5  overflow-hidden w-full md:w-1/2">
-        {/* tech stack lists */}
-        {/* <div className="flex flex-col gap-3 md:gap-3 lg:gap-8"> */}
         <InfiniteMovingCards
           items={[
             { icon: "/logos/brand-html5.svg", name: "HTML" },
@@ -158,8 +163,6 @@ const AboutBlock = () => (
           ]}
           direction="left"
         />
-        {/* </div> */}
-        {/* <div className="flex flex-col gap-3 md:gap-3 lg:gap-8"> */}
         <InfiniteMovingCards
           items={[
             { icon: "/logos/brand-nextjs.svg", name: "Next JS" },
@@ -171,13 +174,58 @@ const AboutBlock = () => (
           ]}
           direction="right"
         />
-        {/* </div> */}
       </div>
     </div>
   </Block>
 );
 
-// import React, { useState } from "react";
+function GitStats() {
+  return (
+    <>
+      <div className="col-span-12 md:col-span-8">
+        <Block className="p-0 md:p-0">
+          <img
+            src={`http://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=ashikur540&theme=algolia`}
+            width={1080}
+            height={520}
+            alt="github profile-details"
+            className="rounded-lg "
+          />
+        </Block>
+      </div>
+
+      <div className="col-span-12 md:col-span-4">
+        {/* <CardMovingBorder duration={10000} borderClassName="w-12 sm:w-[200px]">
+          <img
+            src={`https://github-readme-stats.vercel.app/api?username=ashikur540&show_icons=true&include_all_commits=true&theme=algolia&hide_border=true`}
+            width={1080}
+            height={520}
+            alt="github stats"
+          />
+        </CardMovingBorder> */}
+
+        {/* <div>
+          <img
+            src={`https://github-readme-stats.vercel.app/api?username=ashikur540&show_icons=true&include_all_commits=true&theme=algolia&hide_border=true&show=reviews,discussions_started,discussions_answered,prs_merged,prs_merged_percentage&hide=stars,commits,prs,issues,contribs`}
+            width={1080}
+            height={520}
+            alt="github stats"
+            className="rounded-lg"
+          />
+        </div> */}
+        <Block className="p-0 md:p-0">
+          <img
+            src={`http://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=ashikur540&theme=algolia`}
+            width={1080}
+            height={400}
+            alt="github repos-per-language"
+            className="rounded-lg h-full w-full object-center"
+          />
+        </Block>
+      </div>
+    </>
+  );
+}
 
 // const hobbies = [
 //   { id: 1, name: "Photography", icon: "📷" },

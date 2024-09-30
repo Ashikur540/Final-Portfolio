@@ -11,7 +11,7 @@ function Projects() {
     <section className="py-20" id="projects">
       <div className=" mb-8 md:mb-10  relative ">
         <div className="flex flex-col md:flex-row justify-between items-center">
-          <SectionTitle className="mb-4">
+          <SectionTitle className="">
             My Recent <span className="text-purple">Projects</span>
           </SectionTitle>
 
@@ -19,6 +19,7 @@ function Projects() {
             href={
               socialMedia?.find((data) => data.url.includes("git"))?.url || ""
             }
+            target="_blank"
             className="flex items-center gap-2"
           >
             <div className="text-base md:text-xl cursor-pointer relative before:absolute before:bg-purple before:bottom-0 before:left-0 before:h-full before:w-full before:origin-bottom before:scale-y-[0.35] hover:before:scale-y-100 before:transition-transform before:ease-in-out before:duration-500">

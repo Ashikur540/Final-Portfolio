@@ -1,20 +1,19 @@
 "use client";
-import { cn } from "@/lib/utils";
 import {
   AnimatePresence,
   motion,
   useMotionValueEvent,
   useScroll,
 } from "framer-motion";
-import { useLenis } from "lenis/react";
 import Link from "next/link";
-
 import { useState } from "react";
+
+import { useSmoothScrollToSection } from "@/hooks/useSmoothScrollToSection";
+import { cn } from "@/lib/utils";
 
 type NavItem = {
   name: string;
   link: string;
-  icon?: JSX.Element;
 };
 
 export const FloatingNav = ({
@@ -25,8 +24,8 @@ export const FloatingNav = ({
   className?: string;
 }) => {
   const { scrollYProgress } = useScroll();
-  const lenis = useLenis(); // Get Lenis instance
   const [visible, setVisible] = useState(false);
+  const { handleSmoothScroll } = useSmoothScrollToSection();
 
   useMotionValueEvent(scrollYProgress, "change", (current) => {
     if (typeof current === "number") {
@@ -43,16 +42,6 @@ export const FloatingNav = ({
       }
     }
   });
-
-  // Smooth scroll handler
-  const handleSmoothScroll = (event: React.MouseEvent, target: string) => {
-    event.preventDefault();
-    const section = document.querySelector(target) as HTMLElement;
-
-    if (section) {
-      lenis && lenis.scrollTo(section);
-    }
-  };
 
   return (
     <AnimatePresence mode="wait">
@@ -74,8 +63,8 @@ export const FloatingNav = ({
               "relative dark:text-neutral-50 items-center flex space-x-1 text-neutral-600 dark:hover:text-neutral-300 hover:text-neutral-500"
             )}
           >
-            <span className="block sm:hidden">{navItem.icon}</span>
-            <span className="hidden sm:block text-sm">{navItem.name}</span>
+            {/* <span className="block sm:hidden">{navItem.icon}</span> */}
+            <span className="text-xs sm:text-sm">{navItem.name}</span>
           </Link>
         ))}
       </motion.div>

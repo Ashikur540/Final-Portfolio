@@ -38,8 +38,8 @@ export const Timeline = ({ data }: { data: WorkHistoryCardProps[] }) => {
         <SectionTitle>
           My <span className="text-purple">Journey</span> of Experiences
         </SectionTitle>
-        <p className="text-neutral-700 dark:text-neutral-300 text-base  max-w-sm">
-          Throughout my career, I've had the privilege of contributing to
+        <p className="text-neutral-700 dark:text-neutral-300 text-base  max-w-sm md:max-w-screen-md">
+          Throughout my career, I&apos;ve had the privilege of contributing to
           impactful projects that solve real-world problems. From sleek web
           interfaces to powerful applications, my focus has always been on
           combining functionality with user-centric design
@@ -61,7 +61,7 @@ export const Timeline = ({ data }: { data: WorkHistoryCardProps[] }) => {
               </h3>
             </div>
 
-            <div className="relative pl-20 pr-4 md:pl-4 w-full">
+            <div className="relative pl-14  md:pl-4 w-full">
               <h3 className="md:hidden block text-2xl mb-4 text-left font-bold text-neutral-500 dark:text-neutral-500">
                 {item.title}
               </h3>

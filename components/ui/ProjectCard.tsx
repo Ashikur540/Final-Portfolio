@@ -56,6 +56,7 @@ export const ProjectCard = ({
   };
   return (
     <Link
+      key={id}
       href={link}
       className="w-[95%] max-h-[520px] group mx-auto  p-2 bg-white dark:border-0 border overflow-hidden rounded-xl dark:text-white text-black "
       style={{
@@ -73,7 +74,7 @@ export const ProjectCard = ({
           onBlur={handleBlur}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
-          className="relative flex h-80 w-full items-center justify-center overflow-hidden rounded-xl border border-gray-800 bg-gradient-to-r from-black to-gray-950 px-8 py-16 shadow-2xl "
+          className="relative flex h-80 w-full items-center justify-center overflow-hidden rounded-xl border border-gray-800 bg-gradient-to-r from-black to-gray-950  p-4  lg:px-8 lg:py-16 shadow-2xl "
         >
           <div
             className="pointer-events-none absolute -inset-px opacity-0 transition duration-300"
@@ -88,12 +89,12 @@ export const ProjectCard = ({
             alt={`${title}-project-image`}
             width={600}
             height={600}
-            className="absolute  top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2  group-hover:-bottom-5  h-64 w-[80%] lg:w-[90%] group-hover:border-4 border-4 group-hover:border-[#76aaf82d] rounded-lg object-cover transition-all duration-300 group-hover:scale-105"
+            className="absolute  top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2  group-hover:-bottom-5  h-64 w-[86%] lg:w-[90%] group-hover:border-4 border-4 group-hover:border-[#76aaf82d] rounded-lg object-cover transition-all duration-300 group-hover:scale-105"
           />
         </div>
       </figure>
       <article className="p-4 ">
-        <div className="flex items-center justify-between mt-4 mb-3">
+        <div className="flex items-center justify-between mb-3">
           <div className="flex items-center">
             {iconLists.map((icon, index) => (
               <AnimatedToolTip tooltipText={icon.name} key={index}>

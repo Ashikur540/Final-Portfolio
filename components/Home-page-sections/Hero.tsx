@@ -6,8 +6,12 @@ import { AnimatedToolTip } from "../ui/AnimatedTooltip";
 import { CTAButton } from "../ui/CTAButton";
 import { FlipWords } from "../ui/Flipwords";
 import { Spotlight } from "../ui/Spotlight";
+import { useSmoothScrollToSection } from "@/hooks/useSmoothScrollToSection";
+import IconScrollDown from "@/assets/icons/IconDoubleArrowDown";
 
 export const Hero = () => {
+  const { handleSmoothScroll } = useSmoothScrollToSection();
+
   return (
     <section className="pb-20 pt-36" id="hero">
       {/* Spotlight effect */}
@@ -39,7 +43,7 @@ export const Hero = () => {
         />
       </div>
 
-      <AnimatedToolTip tooltipText="New year goal: Contribute to open source">
+      <AnimatedToolTip tooltipText="🎯New Goal: Contribute to open source">
         <Image
           className="relative rounded-full mx-auto object-cover aspect-square z-10 ring-2 ring-offset-purple ring-offset-2 ring-blue-200"
           src="/my-image-2.webp"
@@ -72,10 +76,16 @@ export const Hero = () => {
           </div>
 
           <AnimatedToolTip
-            tooltipText={`hey, Thanks for viewing. Hope my works will keen your interest`}
+            tooltipText={`hey, Thanks for viewing 🫶. Hope my works will keen your interest`}
+            position="bottom"
           >
-            <Link href="#projects">
-              <CTAButton>Explore my work</CTAButton>
+            <Link
+              href="#projects"
+              onClick={(e) => handleSmoothScroll(e, "#projects")}
+            >
+              <CTAButton icon={<IconScrollDown />} position="right">
+                Explore my work
+              </CTAButton>
             </Link>
           </AnimatedToolTip>
         </div>

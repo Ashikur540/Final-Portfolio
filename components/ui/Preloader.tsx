@@ -80,7 +80,7 @@ const Preloader = ({
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.3 }}
-              className="text-6xl text-white "
+              className="text-3xl md:text-5xl lg:text-6xl text-white "
             >
               {greetings[currentGreeting].text}
             </motion.h1>
