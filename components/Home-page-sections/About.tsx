@@ -73,7 +73,7 @@ const HeaderBlock = () => (
         <span className="text-zinc-50 font-medium">business objectives</span>
       </h1>
       <a
-        href="/Ashikur-Rahman-Resume-Frontend-Developer.pdf"
+        href="/my-resume.pdf"
         className="relative inline-flex items-center justify-center w-fit overflow-hidden font-bold text-white rounded-md shadow-2xl group z-10"
         download="Ashikur_Rahman_resume_Frontend_Developer.pdf"
       >
