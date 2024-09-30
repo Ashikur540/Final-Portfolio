@@ -122,6 +122,7 @@ export const ProjectCard = ({
         <p className="text-sm leading-[120%] text-zinc-300 mb-4">{des}</p>
         <Link
           href={githubLink}
+          target="_blank"
           className=" text-base dark:text-white text-blue-600 font-normal  group-hover:opacity-100 opacity-0 translate-y-2 group-hover:translate-y-0 pt-2 flex gap-1  transition-all duration-300  "
         >
           <GradientBorderBtn text="View on Github" />

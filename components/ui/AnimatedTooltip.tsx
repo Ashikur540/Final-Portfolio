@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { MouseEvent, ReactNode, useState } from "react";
+import { ReactNode, useState } from "react";
 
 type TooltipPosition = "top" | "bottom" | "left" | "right";
 
@@ -13,20 +13,20 @@ export const AnimatedToolTip = ({
   position?: TooltipPosition; // Optional prop for position control
 }) => {
   const [isHovered, setIsHovered] = useState(false);
-  const [tooltipX, setTooltipX] = useState(0);
+  // const [tooltipX, setTooltipX] = useState(0);
 
-  const handleMouseMove = (event: MouseEvent) => {
-    const rect = event.currentTarget.getBoundingClientRect();
-    const mouseX = event.clientX - rect.left;
+  // const handleMouseMove = (event: MouseEvent) => {
+  //   const rect = event.currentTarget.getBoundingClientRect();
+  //   const mouseX = event.clientX - rect.left;
 
-    if (mouseX < rect.width / 3) {
-      setTooltipX(-30);
-    } else if (mouseX > (2 * rect.width) / 3) {
-      setTooltipX(30);
-    } else {
-      setTooltipX(0);
-    }
-  };
+  //   if (mouseX < rect.width / 3) {
+  //     setTooltipX(-30);
+  //   } else if (mouseX > (2 * rect.width) / 3) {
+  //     setTooltipX(30);
+  //   } else {
+  //     setTooltipX(0);
+  //   }
+  // };
 
   const getTooltipPositionStyle = () => {
     switch (position) {
@@ -69,7 +69,7 @@ export const AnimatedToolTip = ({
         className="relative"
         onHoverStart={() => setIsHovered(true)}
         onHoverEnd={() => setIsHovered(false)}
-        onMouseMove={handleMouseMove}
+        // onMouseMove={handleMouseMove}
       >
         {children}
         <AnimatePresence>
