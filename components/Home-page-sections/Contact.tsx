@@ -11,6 +11,7 @@ import IconContentCopy from "../../assets/icons/IconCopy";
 import { personalInfo, socialMedia } from "../../data/index";
 import { CTAButton } from "../ui/CTAButton";
 import { SectionTitle } from "../ui/SectionTitle";
+import { BlurFadeEffectWrapper } from "../ui/BlurFadeEffectWarpper";
 
 const Contact = () => {
   const [copied, setCopied] = useState(false);
@@ -68,33 +69,39 @@ const Contact = () => {
             top: "0px",
           }}
         />
-        <SectionTitle className="text-center lg:max-w-[55vw]">
-          Ready to Take Your{" "}
-          <span className="text-purple">Digital Presence</span> to the Next
-          Level?
-        </SectionTitle>
-        <p className="text-white-200 mb-5 text-center">
-          Reach out to me today and let&apos;s discuss how I can help you
-          achieve your goals.
-        </p>
-        <a href="mailto:meashik1000@gmail.com">
-          <CTAButton
-            icon={
-              copied ? (
-                <IconCheckAll className="text-xl" />
-              ) : (
-                <IconContentCopy />
-              )
-            }
-            position="right"
-            onClick={handleCopy}
-          >
-            {copied ? "Email Copied" : <span>Let&apos;s get in touch</span>}
-          </CTAButton>
-        </a>
+        <BlurFadeEffectWrapper delay={0.1} inView>
+          <SectionTitle className="text-center lg:max-w-[55vw]">
+            Ready to Take Your{" "}
+            <span className="text-purple">Digital Presence</span> to the Next
+            Level?
+          </SectionTitle>
+        </BlurFadeEffectWrapper>
+        <BlurFadeEffectWrapper delay={0.2} inView>
+          <p className="text-white-200 mb-5 text-center">
+            Reach out to me today and let&apos;s discuss how I can help you
+            achieve your goals.
+          </p>
+        </BlurFadeEffectWrapper>
+        <BlurFadeEffectWrapper delay={0.3} inView>
+          <a href="mailto:meashik1000@gmail.com">
+            <CTAButton
+              icon={
+                copied ? (
+                  <IconCheckAll className="text-xl" />
+                ) : (
+                  <IconContentCopy />
+                )
+              }
+              position="right"
+              onClick={handleCopy}
+            >
+              {copied ? "Email Copied" : <span>Let&apos;s get in touch</span>}
+            </CTAButton>
+          </a>
+        </BlurFadeEffectWrapper>
       </div>
-      <div className="flex mt-16 md:flex-row flex-col justify-between items-center">
-        <p className="md:text-base text-sm md:font-normal font-light">
+      <div className="flex mt-12 md:flex-row flex-col gap-6 md:gap-10 justify-between items-center">
+        <p className="text-center md:text-left md:text-base text-sm md:font-normal font-light">
           Made with huge ❤️ © Ashikur Rahman {new Date().getFullYear()}
         </p>
         <div className="flex items-center md:gap-3 gap-6">

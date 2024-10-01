@@ -1,9 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import Link from "next/link";
-import { ReactNode } from "react";
+import { ReactNode, useRef } from "react";
 import { twMerge } from "tailwind-merge";
 
 import { socialMedia } from "@/data";
@@ -11,23 +11,17 @@ import { AnimatedGradientBG } from "../ui/AnimatedGradientBG";
 import { CTAButton } from "../ui/CTAButton";
 import { InfiniteMovingCards } from "../ui/infiniteScrollCards";
 import IconDownload from "@/assets/icons/IconDownload";
-// import GitStats from "./GithubStats";
 
 export const AboutMe = () => {
   return (
-    <section className="  py-12 md:py-20 lg:py-24 text-zinc-50" id="about">
-      <motion.div
-        initial="initial"
-        transition={{
-          staggerChildren: 0.05,
-        }}
-        className="mx-auto grid  grid-flow-dense w-full grid-cols-12 gap-4"
-      >
+    <section className="py-12 md:py-20 lg:py-24 text-zinc-50" id="about">
+      <div className="mx-auto grid grid-flow-dense w-full grid-cols-12 gap-4">
         <HeaderBlock />
         <SocialsBlock />
         <AboutBlock />
         <GitStats />
-      </motion.div>
+        <GitTopLanguages />
+      </div>
     </section>
   );
 };
@@ -40,10 +34,21 @@ interface BlockProps {
 }
 
 const Block = ({ className, children, ...rest }: BlockProps) => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-10%" });
+
   return (
     <motion.div
+      ref={ref}
+      initial={{ scale: 0.5, y: 50, opacity: 0 }}
+      animate={
+        isInView
+          ? { scale: 1, y: 0, opacity: 1 }
+          : { scale: 0.5, y: 50, opacity: 0 }
+      }
+      transition={{ type: "spring", mass: 3, stiffness: 400, damping: 50 }}
       className={twMerge(
-        "col-span-4 rounded-lg h-full  border border-white/[0.1] p-6 md:p-12 my-auto",
+        "col-span-4 rounded-lg h-full border border-white/[0.1] p-6 md:p-12 my-auto",
         className
       )}
       style={{
@@ -95,6 +100,11 @@ const SocialsBlock = () => (
       return (
         <Block
           key={data.id}
+          whileHover={{
+            rotate: "2.5deg",
+            scale: 1.1,
+            transition: { duration: 0.3 },
+          }}
           className="col-span-6 md:col-span-4 lg:col-span-2 h-full flex items-center justify-center p-4 md:p-6 lg:p-12"
           style={{
             background: "rgb(4,7,29)",
@@ -182,47 +192,34 @@ const AboutBlock = () => (
 function GitStats() {
   return (
     <>
-      <div className="col-span-12 md:col-span-8">
-        <Block className="p-0 md:p-0">
-          <img
-            src={`http://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=ashikur540&theme=algolia`}
-            width={1080}
-            height={520}
-            alt="github profile-details"
-            className="rounded-lg "
-          />
-        </Block>
-      </div>
-
-      <div className="col-span-12 md:col-span-4">
-        {/* <CardMovingBorder duration={10000} borderClassName="w-12 sm:w-[200px]">
-          <img
-            src={`https://github-readme-stats.vercel.app/api?username=ashikur540&show_icons=true&include_all_commits=true&theme=algolia&hide_border=true`}
-            width={1080}
-            height={520}
-            alt="github stats"
-          />
-        </CardMovingBorder> */}
-
-        {/* <div>
-          <img
-            src={`https://github-readme-stats.vercel.app/api?username=ashikur540&show_icons=true&include_all_commits=true&theme=algolia&hide_border=true&show=reviews,discussions_started,discussions_answered,prs_merged,prs_merged_percentage&hide=stars,commits,prs,issues,contribs`}
-            width={1080}
-            height={520}
-            alt="github stats"
-            className="rounded-lg"
-          />
-        </div> */}
-        <Block className="p-0 md:p-0">
-          <img
-            src={`http://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=ashikur540&theme=algolia`}
-            width={1080}
-            height={400}
-            alt="github repos-per-language"
-            className="rounded-lg h-full w-full object-center"
-          />
-        </Block>
-      </div>
+      <Block className="p-0 md:p-0 col-span-12 md:col-span-8">
+        <img
+          src={`http://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=ashikur540&theme=algolia`}
+          width={1080}
+          height={520}
+          alt="github profile-details"
+          className="rounded-lg "
+        />
+      </Block>
+    </>
+  );
+}
+function GitTopLanguages() {
+  return (
+    <>
+      <Block
+        className="p-0 md:p-0"
+        initial={{ opacity: 0, scale: 0.5 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+      >
+        <img
+          src={`http://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=ashikur540&theme=algolia`}
+          width={1080}
+          height={400}
+          alt="github repos-per-language"
+          className="rounded-lg h-full w-full object-center"
+        />
+      </Block>{" "}
     </>
   );
 }

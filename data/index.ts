@@ -91,7 +91,7 @@ export const projects = [
   },
   {
     id: 2,
-    title: "AutoHunt car Resell Market",
+    title: "AutoHunt Resell Market",
     des: "A full-stack e-commerce site where users can buy, sell, and advertise their used cars.",
     img: "/projects/project-2.webp",
     iconLists: [

@@ -60,7 +60,7 @@ export const FloatingNav = ({
             href={navItem.link}
             onClick={(e) => handleSmoothScroll(e, navItem.link)}
             className={cn(
-              "relative dark:text-neutral-50 items-center flex space-x-1 text-neutral-600 dark:hover:text-neutral-300 hover:text-neutral-500"
+              "relative dark:text-neutral-50 items-center flex space-x-1 text-neutral-600 dark:hover:text-purple hover:text-purple"
             )}
           >
             {/* <span className="block sm:hidden">{navItem.icon}</span> */}

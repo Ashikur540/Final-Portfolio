@@ -2,7 +2,9 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { motion, Variant, Variants } from "framer-motion";
 import { useRef, useState } from "react";
+
 import { AnimatedToolTip } from "./AnimatedTooltip";
 import { GradientBorderBtn } from "./GradientBorderBtn";
 
@@ -14,6 +16,7 @@ export const ProjectCard = ({
   iconLists,
   link,
   githubLink,
+  variants,
 }: {
   id: number;
   title: string;
@@ -22,6 +25,7 @@ export const ProjectCard = ({
   iconLists: { name: string; image: string }[];
   link: string;
   githubLink: string;
+  variants: Variants;
 }) => {
   const divRef = useRef<HTMLDivElement>(null);
   const [isFocused, setIsFocused] = useState(false);
@@ -55,7 +59,8 @@ export const ProjectCard = ({
     setOpacity(0);
   };
   return (
-    <Link
+    <motion.a
+      variants={variants}
       key={id}
       href={link}
       className="w-[95%] max-h-[520px] group mx-auto  p-2 bg-white dark:border-0 border overflow-hidden rounded-xl dark:text-white text-black "
@@ -128,6 +133,6 @@ export const ProjectCard = ({
           <GradientBorderBtn text="View on Github" />
         </Link>
       </article>
-    </Link>
+    </motion.a>
   );
 };

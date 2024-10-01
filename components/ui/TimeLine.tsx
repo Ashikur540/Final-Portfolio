@@ -7,6 +7,7 @@ import {
   WorkHistoryCardProps,
 } from "../common/WorkHistoryCard";
 import { SectionTitle } from "./SectionTitle";
+import { BlurFadeEffectWrapper } from "./BlurFadeEffectWarpper";
 
 export const Timeline = ({ data }: { data: WorkHistoryCardProps[] }) => {
   const ref = useRef<HTMLDivElement>(null);
@@ -35,15 +36,19 @@ export const Timeline = ({ data }: { data: WorkHistoryCardProps[] }) => {
       id="experience"
     >
       <div className="max-w-7xl mx-auto ">
-        <SectionTitle>
-          My <span className="text-purple">Journey</span> of Experiences
-        </SectionTitle>
-        <p className="text-neutral-700 dark:text-neutral-300 text-base  max-w-sm md:max-w-screen-md">
-          Throughout my career, I&apos;ve had the privilege of contributing to
-          impactful projects that solve real-world problems. From sleek web
-          interfaces to powerful applications, my focus has always been on
-          combining functionality with user-centric design
-        </p>
+        <BlurFadeEffectWrapper inView inViewMargin="2%">
+          <SectionTitle>
+            My <span className="text-purple">Journey</span> of Experiences
+          </SectionTitle>
+        </BlurFadeEffectWrapper>
+        <BlurFadeEffectWrapper inView inViewMargin="2%">
+          <p className="text-neutral-700 dark:text-neutral-300 text-base  max-w-sm md:max-w-screen-md">
+            Throughout my career, I&apos;ve had the privilege of contributing to
+            impactful projects that solve real-world problems. From sleek web
+            interfaces to powerful applications, my focus has always been on
+            combining functionality with user-centric design
+          </p>
+        </BlurFadeEffectWrapper>
       </div>
 
       <div ref={ref} className="relative max-w-7xl mx-auto pb-20">

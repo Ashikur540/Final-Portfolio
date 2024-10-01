@@ -4,16 +4,45 @@ import Image from "next/image";
 import Link from "next/link";
 import { ProjectCard } from "../ui/ProjectCard";
 import { SectionTitle } from "../ui/SectionTitle";
+import { BlurFadeEffectWrapper } from "../ui/BlurFadeEffectWarpper";
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
 
 function Projects() {
-  // 2C2C39
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-10%" });
+
+  // Define animation variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
+  };
+
+  const cardVariants = {
+    hidden: { opacity: 0, scale: 0.8 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: {
+        duration: 0.5,
+      },
+    },
+  };
+
   return (
-    <section className="py-20" id="projects">
+    <section className="py-10 md:py-20" id="projects" ref={ref}>
       <div className=" mb-8 md:mb-10  relative ">
-        <div className="flex flex-col md:flex-row justify-between items-center">
-          <SectionTitle className="">
-            My Recent <span className="text-purple">Projects</span>
-          </SectionTitle>
+        <div className="flex flex-col md:flex-row justify-between items-center text-center md:text-left">
+          <BlurFadeEffectWrapper inView inViewMargin="1%" delay={0.2}>
+            <SectionTitle className="">
+              My Recent <span className="text-purple">Projects</span>
+            </SectionTitle>
+          </BlurFadeEffectWrapper>
 
           <Link
             href={
@@ -36,11 +65,16 @@ function Projects() {
         </div>
         {/* <div className="bg-black-100 h-4 max-h-10  absolute bottom-2 left-0 right-0"></div> */}
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
+      <motion.div
+        className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5"
+        variants={containerVariants}
+        initial="hidden"
+        animate={isInView ? "visible" : "hidden"}
+      >
         {projects.map((project, i) => (
-          <ProjectCard {...project} key={i} />
+          <ProjectCard {...project} key={i} variants={cardVariants} />
         ))}
-      </div>
+      </motion.div>
     </section>
   );
 }
