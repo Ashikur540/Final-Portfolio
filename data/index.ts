@@ -231,4 +231,7 @@ export const personalInfo = {
   title: "Frontend Developer",
   location: "Dhaka, Bangladesh",
   email: "meashik1000@gmail.com",
+  websiteDomain: "https://ashikur-on-web.vercel.app/",
+  briefInfo:
+    "Experienced frontend developer specializing in React, Next.js, TypeScript,Tailwind Css, Tanstack Query, React Hook Form, Framer Motion, Node JS, Express JS, Mongo DB, Mongoose. View my projects and skills.",
 };

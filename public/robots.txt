@@ -1,3 +1,9 @@
-# https://www.robotstxt.org/robotstxt.html
+# *
 User-agent: *
-Disallow:
+Allow: /
+
+# Host
+Host: https://ashikur-on-web.vercel.app/
+
+# Sitemaps
+Sitemap: https://ashikur-on-web.vercel.app/sitemap.xml
