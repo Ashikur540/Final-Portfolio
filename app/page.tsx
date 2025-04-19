@@ -10,40 +10,42 @@ import { FloatingNav } from "@/components/ui/FloatingNav";
 import Preloader from "@/components/ui/Preloader";
 import { Timeline as WorkHistoryTimeLine } from "@/components/ui/TimeLine";
 import { navItems, workHistories } from "@/data";
+import Banner from "@/components/Home-page-sections/Banner";
 
 export default function Home() {
-  const [loading, setLoading] = useState(true);
+	const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 3000);
+	useEffect(() => {
+		const timer = setTimeout(() => {
+			setLoading(false);
+		}, 3000);
 
-    return () => clearTimeout(timer);
-  }, []);
+		return () => clearTimeout(timer);
+	}, []);
 
-  return (
-    <>
-      {loading ? (
-        <Preloader onLoadingComplete={() => setLoading(false)} />
-      ) : (
-        <ReactLenis root>
-          <main
-            className={`relative bg-black-100 flex justify-center items-center flex-col overflow-hidden mx-auto sm:px-10 px-5 transition-opacity duration-500 ${
-              loading ? "opacity-0" : "opacity-100"
-            }`}
-          >
-            <div className="max-w-7xl w-full">
-              <FloatingNav navItems={navItems} />
-              <Hero />
-              <AboutMe />
-              <WorkHistoryTimeLine data={workHistories} />
-              <Projects />
-              <Contact />
-            </div>
-          </main>
-        </ReactLenis>
-      )}
-    </>
-  );
+	return (
+		<>
+			{loading ? (
+				<Preloader onLoadingComplete={() => setLoading(false)} />
+			) : (
+				<ReactLenis root>
+					<Banner />
+					<main
+						className={`relative bg-black-100 flex justify-center items-center flex-col overflow-hidden mx-auto sm:px-10 px-5 transition-opacity duration-500 ${
+							loading ? "opacity-0" : "opacity-100"
+						}`}
+					>
+						<div className="max-w-7xl w-full">
+							<FloatingNav navItems={navItems} />
+							<Hero />
+							<AboutMe />
+							<WorkHistoryTimeLine data={workHistories} />
+							<Projects />
+							<Contact />
+						</div>
+					</main>
+				</ReactLenis>
+			)}
+		</>
+	);
 }
