@@ -66,21 +66,25 @@ const Block = ({ className, children, ...rest }: BlockProps) => {
 const HeaderBlock = () => (
   <Block className="col-span-12 row-span-2 md:col-span-8 p-0 md:p-0">
     <AnimatedGradientBG className="p-5 md:p-8 ">
-      <div className="inline-flex h-full animate-shimmer cursor-pointer items-center justify-center rounded-full border border-gray-800 bg-[linear-gradient(110deg,#000,45%,#4D4B4B,55%,#000)] bg-[length:250%_100%] px-3 py-1 text-xs font-medium text-gray-300 mb-4 z-20">
-        <div className="h-2 w-2 bg-green-500 rounded-full mr-1"></div>
-        <p>Available for Work</p>
+      <div className="flex flex-wrap gap-2 mb-4">
+        <div className="inline-flex h-full animate-shimmer cursor-pointer items-center justify-center rounded-full border border-gray-800 bg-[linear-gradient(110deg,#000,45%,#4D4B4B,55%,#000)] bg-[length:250%_100%] px-3 py-1 text-xs font-medium text-gray-300 z-20">
+          <div className="h-2 w-2 bg-green-500 rounded-full mr-1"></div>
+          <p>Available from Jan 2027 · remote first, on-site welcome</p>
+        </div>
+        <p className="inline-flex items-center rounded-full border border-gray-800 px-3 py-1 text-xs font-medium text-gray-300 z-20">
+          Dhaka, Bangladesh (GMT+6)
+        </p>
       </div>
       <h1 className="mb-6 md:mb-8 text-2xl sm:text-3xl  leading-tight text-white-100">
-        I&apos;m committed to continuous{" "}
-        <span className="text-zinc-50 font-medium">improvement</span> and
-        detail-oriented work, I strive to build solutions that bridge{" "}
-        <span className="text-zinc-50 font-medium">user needs</span> and{" "}
-        <span className="text-zinc-50 font-medium">business objectives</span>
+        I care about what users never see but always feel:{" "}
+        <span className="text-zinc-50 font-medium">bookings that cannot double-book</span>,{" "}
+        <span className="text-zinc-50 font-medium">prices that cannot be tampered with</span>, and{" "}
+        <span className="text-zinc-50 font-medium">components teams can build on</span>.
       </h1>
       <a
-        href="/Ashikur_Rahman_resume_Frontend_Developer.pdf"
+        href="/Ashikur_Rahman_Resume_2026.pdf"
         className="relative inline-flex items-center justify-center w-fit overflow-hidden font-bold text-white rounded-md shadow-2xl group z-10"
-        download="Ashikur_Rahman_resume_Frontend_Developer.pdf"
+        download="Ashikur_Rahman_Resume_2026.pdf"
       >
         <CTAButton
           className="bg-white-100"
@@ -96,7 +100,10 @@ const HeaderBlock = () => (
 
 const SocialsBlock = () => (
   <>
-    {socialMedia.map((data) => {
+    {socialMedia.map((data, index) => {
+      /* Socials sit two per row next to the header; an odd last one fills its row. */
+      const fillsRow =
+        socialMedia.length % 2 === 1 && index === socialMedia.length - 1;
       return (
         <Block
           key={data.id}
@@ -105,7 +112,10 @@ const SocialsBlock = () => (
             scale: 1.1,
             transition: { duration: 0.3 },
           }}
-          className="col-span-6 md:col-span-4 lg:col-span-2 h-full flex items-center justify-center p-4 md:p-6 lg:p-12"
+          className={twMerge(
+            "col-span-6 md:col-span-4 lg:col-span-2 h-full flex items-center justify-center p-4 md:p-6 lg:p-12",
+            fillsRow && "col-span-12 lg:col-span-4"
+          )}
           style={{
             background: "rgb(4,7,29)",
             backgroundColor:
@@ -124,7 +134,7 @@ const SocialsBlock = () => (
           >
             <img
               src={data.img}
-              alt="icons"
+              alt={data.name}
               width={20}
               height={20}
               className="w-6 h-6 md:w-8 md:h-8"
@@ -140,9 +150,8 @@ const AboutBlock = () => (
   <Block className="col-span-12 text-xl sm:text-2xl md:text-2xl lg:text-3xl leading-snug overflow-hidden ">
     <h3 className="font-semibold">My Technical Skills ✨</h3>
     <p className="mt-4 mb-6 max-w-screen-sm text-base text-slate-900 dark:text-neutral-300">
-      With a love for exploring new development tools and applying them in
-      real-world projects, I’m a huge fan of JavaScript and its frameworks. Here
-      are the tech stacks I’m currently working with.
+      React and TypeScript on the front; Node.js, Laravel and PHP behind it;
+      PostgreSQL, Docker and AI APIs around it.
     </p>
 
     <div className="flex flex-col md:flex-row justify-between items-center flex-wrap relative mt-20">
@@ -163,24 +172,26 @@ const AboutBlock = () => (
       <div className="flex flex-col justify-start gap-1 mt-12 sm:mt-10 md:mt-5 lg:gap-5  overflow-hidden w-full md:w-1/2">
         <InfiniteMovingCards
           items={[
-            { icon: "/logos/brand-html5.svg", name: "HTML" },
-            { icon: "/logos/brand-css3.svg", name: "CSS" },
-            { icon: "/logos/brand-javascript.svg", name: "Javascript" },
-            { icon: "/logos/brand-tailwind.svg", name: "Tailwind" },
-            { icon: "/logos/brand-react.svg", name: "React JS" },
-            { icon: "/logos/brand-typescript.svg", name: "Typescript" },
-            { icon: "/logos/chart-arcs.svg", name: "ApexChart" },
+            { icon: "/logos/brand-react.svg", name: "React" },
+            { icon: "/logos/brand-nextjs.svg", name: "Next.js" },
+            { icon: "/logos/brand-typescript.svg", name: "TypeScript" },
+            { icon: "/logos/brand-javascript.svg", name: "JavaScript" },
+            { icon: "/logos/brand-tailwind.svg", name: "Tailwind CSS" },
+            { icon: "/logos/brand-redux.svg", name: "Redux" },
+            { icon: "/logos/brand-vite.svg", name: "Vite" },
           ]}
           direction="left"
         />
         <InfiniteMovingCards
           items={[
-            { icon: "/logos/brand-nextjs.svg", name: "Next JS" },
-            { icon: "/logos/brand-nodejs.svg", name: "Node JS" },
-            { icon: "/logos/brand-mongodb.svg", name: "Mongo DB" },
-            { icon: "/logos/icons8-express-js.svg", name: "Express JS" },
-            { icon: "/logos/brand-wordpress.svg", name: "Wordpress" },
-            { icon: "/logos/icons8-shopify.svg", name: "Shopify" },
+            { icon: "/logos/brand-nodejs.svg", name: "Node.js" },
+            { icon: "/logos/icons8-express-js.svg", name: "Express" },
+            { icon: "/logos/brand-laravel.svg", name: "Laravel" },
+            { icon: "/logos/brand-php.svg", name: "PHP" },
+            { icon: "/logos/brand-wordpress.svg", name: "WordPress" },
+            { icon: "/logos/database.svg", name: "PostgreSQL" },
+            { icon: "/logos/brand-mongodb.svg", name: "MongoDB" },
+            { icon: "/logos/brand-docker.svg", name: "Docker" },
           ]}
           direction="right"
         />

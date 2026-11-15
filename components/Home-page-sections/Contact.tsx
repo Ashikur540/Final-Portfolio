@@ -1,8 +1,11 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import Lottie from "react-lottie";
+
+/* lottie-web reads `document` as soon as it loads, so it can only run in the browser. */
+const Lottie = dynamic(() => import("react-lottie"), { ssr: false });
 
 import IconCheckAll from "@/assets/icons/IconCheckAll";
 import animationData from "@/data/confetti.json";
@@ -64,6 +67,7 @@ const Contact = () => {
           height={200}
           width={400}
           isStopped={!playAnimation} // Control animation based on state
+          eventListeners={[]}
           style={{
             position: "absolute",
             top: "0px",
@@ -71,15 +75,13 @@ const Contact = () => {
         />
         <BlurFadeEffectWrapper delay={0.1} inView>
           <SectionTitle className="text-center lg:max-w-[55vw]">
-            Ready to Take Your{" "}
-            <span className="text-purple">Digital Presence</span> to the Next
-            Level?
+            Building something? <span className="text-purple">Let&apos;s talk.</span>
           </SectionTitle>
         </BlurFadeEffectWrapper>
         <BlurFadeEffectWrapper delay={0.2} inView>
           <p className="text-white-200 mb-5 text-center">
-            Reach out to me today and let&apos;s discuss how I can help you
-            achieve your goals.
+            I&apos;m available for full-time roles from January 2027. Remote
+            first, and on-site works too for the right team.
           </p>
         </BlurFadeEffectWrapper>
         <BlurFadeEffectWrapper delay={0.3} inView>
@@ -112,7 +114,7 @@ const Contact = () => {
               target="_blank"
               className="w-10 h-10 cursor-pointer flex justify-center items-center backdrop-filter backdrop-blur-lg saturate-180 bg-opacity-75 bg-black-200 rounded-lg border border-black-300"
             >
-              <img src={info.img} alt="social-icon" width={20} height={20} />
+              <img src={info.img} alt={info.name} width={20} height={20} />
             </Link>
           ))}
         </div>

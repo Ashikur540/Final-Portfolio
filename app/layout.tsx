@@ -6,35 +6,33 @@ import "./globals.css";
 import { personalInfo } from "@/data";
 const inter = Inter({ subsets: ["latin"] });
 
-const { name, location, websiteDomain, briefInfo } = personalInfo;
+const { name, title, location, websiteDomain, briefInfo } = personalInfo;
 
 export const metadata: Metadata = {
-  title: `${name} - Frontend Web Developer Portfolio`,
+  metadataBase: new URL(websiteDomain),
+  title: `${name} - ${title}`,
   description: briefInfo,
-  keywords: `web developer, frontend, React, Next.js, TypeScript, Javascript, Tailwind Css, Framer Motion, ${location}, ${name}, MERN Stack, Tanstack Query, React Hook Form, Node JS, Express JS, Mongo DB, Mongoose, Webflow, Shopify, UI-UX Designer, vite`,
+  keywords: `full-stack developer, software engineer, frontend developer, React, Next.js, TypeScript, JavaScript, Node.js, Laravel, PHP, PostgreSQL, Docker, AI integration, Tailwind CSS, ${location}, ${name}`,
   authors: [{ name: name, url: websiteDomain }],
   openGraph: {
-    title: `${name} - Frontend Web Developer Portfolio`,
+    title: `${name} - ${title}`,
     description: briefInfo,
+    url: websiteDomain,
+    type: "website",
     images: [
       {
         url: "/opengraph-image.jpg",
         width: 1200,
         height: 630,
-        alt: `${name} - Frontend Web Developer`,
+        alt: `${name} - ${title}`,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: `${name} - Frontend Web Developer`,
+    title: `${name} - ${title}`,
     description: briefInfo,
-    images: [
-      "/twitter-image.png",
-      "/twitter-image-2.png",
-      "/twitter-image-3.png",
-      "/twitter-image-4.png",
-    ],
+    images: ["/opengraph-image.jpg"],
   },
 };
 
