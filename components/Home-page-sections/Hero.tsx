@@ -81,8 +81,7 @@ export const Hero = () => {
 						<BlurFadeEffectWrapper delay={0.38}>
 							<p className="text-center md:tracking-wider  text-base md:text-md text-zinc-200">
 								I build products end to end, from design to production: a SaaS
-								from scratch, Shopify apps, and plugins used on 8,000+ sites. Based in{" "}
-								<span className="text-purple font-semibold">Dhaka, Bangladesh</span>.
+								from scratch, Shopify apps, and plugins used on 8,000+ sites.
 							</p>
 						</BlurFadeEffectWrapper>
 					</div>

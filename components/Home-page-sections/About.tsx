@@ -66,9 +66,14 @@ const Block = ({ className, children, ...rest }: BlockProps) => {
 const HeaderBlock = () => (
   <Block className="col-span-12 row-span-2 md:col-span-8 p-0 md:p-0">
     <AnimatedGradientBG className="p-5 md:p-8 ">
-      <div className="inline-flex h-full animate-shimmer cursor-pointer items-center justify-center rounded-full border border-gray-800 bg-[linear-gradient(110deg,#000,45%,#4D4B4B,55%,#000)] bg-[length:250%_100%] px-3 py-1 text-xs font-medium text-gray-300 mb-4 z-20">
-        <div className="h-2 w-2 bg-green-500 rounded-full mr-1"></div>
-        <p>Available from Jan 2027 · remote first, on-site welcome</p>
+      <div className="flex flex-wrap gap-2 mb-4">
+        <div className="inline-flex h-full animate-shimmer cursor-pointer items-center justify-center rounded-full border border-gray-800 bg-[linear-gradient(110deg,#000,45%,#4D4B4B,55%,#000)] bg-[length:250%_100%] px-3 py-1 text-xs font-medium text-gray-300 z-20">
+          <div className="h-2 w-2 bg-green-500 rounded-full mr-1"></div>
+          <p>Available from Jan 2027 · remote first, on-site welcome</p>
+        </div>
+        <p className="inline-flex items-center rounded-full border border-gray-800 px-3 py-1 text-xs font-medium text-gray-300 z-20">
+          Dhaka, Bangladesh (GMT+6)
+        </p>
       </div>
       <h1 className="mb-6 md:mb-8 text-2xl sm:text-3xl  leading-tight text-white-100">
         I care about what users never see but always feel:{" "}
