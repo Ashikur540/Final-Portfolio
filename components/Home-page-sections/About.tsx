@@ -77,9 +77,9 @@ const HeaderBlock = () => (
         <span className="text-zinc-50 font-medium">components teams can build on</span>.
       </h1>
       <a
-        href="/Ashikur_Rahman_resume_Frontend_Developer.pdf"
+        href="/Ashikur_Rahman_Resume_2026.pdf"
         className="relative inline-flex items-center justify-center w-fit overflow-hidden font-bold text-white rounded-md shadow-2xl group z-10"
-        download="Ashikur_Rahman_resume_Frontend_Developer.pdf"
+        download="Ashikur_Rahman_Resume_2026.pdf"
       >
         <CTAButton
           className="bg-white-100"
