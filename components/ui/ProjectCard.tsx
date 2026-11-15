@@ -24,7 +24,7 @@ export const ProjectCard = ({
   img: string;
   iconLists: { name: string; image: string }[];
   link: string;
-  githubLink: string;
+  githubLink?: string;
   variants: Variants;
 }) => {
   const divRef = useRef<HTMLDivElement>(null);
@@ -63,6 +63,8 @@ export const ProjectCard = ({
       variants={variants}
       key={id}
       href={link}
+      target="_blank"
+      rel="noopener noreferrer"
       className="w-[95%] max-h-[520px] group mx-auto  p-2 bg-white dark:border-0 border overflow-hidden rounded-xl dark:text-white text-black "
       style={{
         backgroundColor: "rgb(4,7,29)",
@@ -112,7 +114,7 @@ export const ProjectCard = ({
                   <Image
                     src={icon.image}
                     alt={`${icon.name}-icon}`}
-                    className="w-[60%]"
+                    className="w-[60%] invert opacity-80"
                     width={10}
                     height={10}
                   />
@@ -125,13 +127,15 @@ export const ProjectCard = ({
           {title}
         </h4>
         <p className="text-sm leading-[120%] text-zinc-300 mb-4">{des}</p>
-        <Link
-          href={githubLink}
-          target="_blank"
-          className=" text-base dark:text-white text-blue-600 font-normal  group-hover:opacity-100 opacity-0 translate-y-2 group-hover:translate-y-0 pt-2 flex gap-1  transition-all duration-300  "
-        >
-          <GradientBorderBtn text="View on Github" />
-        </Link>
+        {githubLink && (
+          <Link
+            href={githubLink}
+            target="_blank"
+            className=" text-base dark:text-white text-blue-600 font-normal  group-hover:opacity-100 opacity-0 translate-y-2 group-hover:translate-y-0 pt-2 flex gap-1  transition-all duration-300  "
+          >
+            <GradientBorderBtn text="View on Github" />
+          </Link>
+        )}
       </article>
     </motion.a>
   );

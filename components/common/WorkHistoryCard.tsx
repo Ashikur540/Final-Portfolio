@@ -15,7 +15,7 @@ export const WorkHistoryCard = ({
 }: {
   history: WorkHistoryCardProps;
 }) => {
-  const { company, description, responsibilities, url } = history;
+  const { company, date, description, responsibilities, url } = history;
   return (
     <>
       <div className="flex  flex-col space-y-1 relative">
@@ -24,6 +24,7 @@ export const WorkHistoryCard = ({
             {company}
           </h4>
         </LinkTextWithIcon>
+        <p className="text-sm text-zinc-400">{date}</p>
         <p
           className="text-sm md:text-base text-slate-900 dark:text-zinc-50"
           style={{ marginBottom: "16px" }}

@@ -2,7 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 
-import { getCurrentAge } from "@/lib/utils";
 import { AnimatedToolTip } from "../ui/AnimatedTooltip";
 import { CTAButton } from "../ui/CTAButton";
 import { FlipWords } from "../ui/Flipwords";
@@ -45,7 +44,7 @@ export const Hero = () => {
 				/>
 			</div>
 
-			<AnimatedToolTip tooltipText="🎯New Goal: Contribute to open source">
+			<AnimatedToolTip tooltipText="Open to remote roles from January 2027">
 				<motion.div
 					initial={{ opacity: 0, scale: 0.5 }}
 					animate={{ opacity: 1, scale: 1 }}
@@ -72,26 +71,25 @@ export const Hero = () => {
 						<FlipWords
 							className="text-center font-bold text-[40px] md:text-5xl lg:text-6xl"
 							words={[
-								"Frontend Web Developer",
-								"MERN Stack Developer",
-								"UI-UX Designer",
-								"Enthusiastic Learner ",
+								"Frontend-focused Full-stack Developer",
+								"React · TypeScript · Next.js",
+								"Laravel · Node.js · WordPress",
 							]}
 						/>
 					</BlurFadeEffectWrapper>
 					<div className="flex gap-1 justify-center items-center my-4 max-w-screen-md">
 						<BlurFadeEffectWrapper delay={0.38}>
 							<p className="text-center md:tracking-wider  text-base md:text-md text-zinc-200">
-								A {getCurrentAge()} years old Software Engineering graduate from{" "}
-								<span className="text-purple font-semibold">Bangladesh</span>,
-								driven by a creative mindset and a passion for frontend
-								development.
+								I build React and TypeScript products end to end, from
+								WordPress plugins on 8,000+ sites to a live SaaS. Based in{" "}
+								<span className="text-purple font-semibold">Dhaka, Bangladesh</span>,
+								open to remote roles.
 							</p>
 						</BlurFadeEffectWrapper>
 					</div>
 
 					<AnimatedToolTip
-						tooltipText={`hey, Thanks for viewing 🫶. Hope my works will keen your interest`}
+						tooltipText="Thanks for stopping by"
 						position="bottom"
 					>
 						<BlurFadeEffectWrapper>

@@ -43,10 +43,9 @@ export const Timeline = ({ data }: { data: WorkHistoryCardProps[] }) => {
         </BlurFadeEffectWrapper>
         <BlurFadeEffectWrapper inView inViewMargin="2%">
           <p className="text-neutral-700 dark:text-neutral-300 text-base  max-w-sm md:max-w-screen-md">
-            Throughout my career, I&apos;ve had the privilege of contributing to
-            impactful projects that solve real-world problems. From sleek web
-            interfaces to powerful applications, my focus has always been on
-            combining functionality with user-centric design
+            From Shopify apps to WordPress plugins used on 8,000+ sites and a
+            live SaaS: React and TypeScript on the front, PHP, Laravel and
+            Node.js behind it.
           </p>
         </BlurFadeEffectWrapper>
       </div>

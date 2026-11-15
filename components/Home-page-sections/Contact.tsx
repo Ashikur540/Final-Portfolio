@@ -74,15 +74,13 @@ const Contact = () => {
         />
         <BlurFadeEffectWrapper delay={0.1} inView>
           <SectionTitle className="text-center lg:max-w-[55vw]">
-            Ready to Take Your{" "}
-            <span className="text-purple">Digital Presence</span> to the Next
-            Level?
+            Hiring for a <span className="text-purple">remote</span> role?
           </SectionTitle>
         </BlurFadeEffectWrapper>
         <BlurFadeEffectWrapper delay={0.2} inView>
           <p className="text-white-200 mb-5 text-center">
-            Reach out to me today and let&apos;s discuss how I can help you
-            achieve your goals.
+            I&apos;m open to full-time remote roles from January 2027. Email me
+            and let&apos;s talk.
           </p>
         </BlurFadeEffectWrapper>
         <BlurFadeEffectWrapper delay={0.3} inView>
