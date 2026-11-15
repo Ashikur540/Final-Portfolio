@@ -59,12 +59,9 @@ export const ProjectCard = ({
     setOpacity(0);
   };
   return (
-    <motion.a
+    <motion.div
       variants={variants}
       key={id}
-      href={link}
-      target="_blank"
-      rel="noopener noreferrer"
       className="w-[95%] max-h-[520px] group mx-auto  p-2 bg-white dark:border-0 border overflow-hidden rounded-xl dark:text-white text-black "
       style={{
         backgroundColor: "rgb(4,7,29)",
@@ -73,6 +70,7 @@ export const ProjectCard = ({
         border: "0.2px solid rgb(77 76 90 / 0.5)",
       }}
     >
+      <a href={link} target="_blank" rel="noopener noreferrer" aria-label={`Open ${title}`}>
       <figure className="w-full h-80 group-hover:h-72 transition-all duration-300 dark:bg-[#131e29] bg-[#f0f5fa]  rounded-xl relative overflow-hidden">
         <div
           ref={divRef}
@@ -100,6 +98,7 @@ export const ProjectCard = ({
           />
         </div>
       </figure>
+      </a>
       <article className="p-4 ">
         <div className="flex items-center justify-between mb-3">
           <div className="flex items-center">
@@ -124,7 +123,9 @@ export const ProjectCard = ({
           </div>
         </div>
         <h4 className="text-lg sm:text-xl font-semibold capitalize mb-3.5 sm:mb-4">
-          {title}
+          <a href={link} target="_blank" rel="noopener noreferrer" className="hover:underline">
+            {title}
+          </a>
         </h4>
         <p className="text-sm leading-[120%] text-zinc-300 mb-4">{des}</p>
         {githubLink && (
@@ -137,6 +138,6 @@ export const ProjectCard = ({
           </Link>
         )}
       </article>
-    </motion.a>
+    </motion.div>
   );
 };

@@ -67,6 +67,7 @@ const Contact = () => {
           height={200}
           width={400}
           isStopped={!playAnimation} // Control animation based on state
+          eventListeners={[]}
           style={{
             position: "absolute",
             top: "0px",
