@@ -69,7 +69,7 @@ export const Hero = () => {
 					</BlurFadeEffectWrapper>
 					<BlurFadeEffectWrapper delay={0.3}>
 						<FlipWords
-							className="text-center font-bold text-[40px] md:text-5xl lg:text-6xl"
+							className="text-center font-bold text-[30px] sm:text-[40px] md:text-5xl lg:text-6xl"
 							words={[
 								"Frontend-focused Full-stack Developer",
 								"React · TypeScript · Next.js",

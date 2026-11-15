@@ -16,14 +16,19 @@ export const WorkHistoryCard = ({
   history: WorkHistoryCardProps;
 }) => {
   const { company, date, description, responsibilities, url } = history;
+  const companyName = (
+    <h4 className="text-lg md:text-xl lg:text-xl font-semibold inline-flex animate-shimmer bg-gradient-to-r from-[#b2a8fd] via-[#8678f9] to-[#c7d2fe] bg-[200%_auto] bg-clip-text  text-transparent">
+      {company}
+    </h4>
+  );
   return (
     <>
       <div className="flex  flex-col space-y-1 relative">
-        <LinkTextWithIcon url={url ?? ""}>
-          <h4 className="text-lg md:text-xl lg:text-xl font-semibold inline-flex animate-shimmer bg-gradient-to-r from-[#b2a8fd] via-[#8678f9] to-[#c7d2fe] bg-[200%_auto] bg-clip-text  text-transparent">
-            {company}
-          </h4>
-        </LinkTextWithIcon>
+        {url ? (
+          <LinkTextWithIcon url={url}>{companyName}</LinkTextWithIcon>
+        ) : (
+          companyName
+        )}
         <p className="text-sm text-zinc-400">{date}</p>
         <p
           className="text-sm md:text-base text-slate-900 dark:text-zinc-50"

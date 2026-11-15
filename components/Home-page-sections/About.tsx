@@ -129,7 +129,7 @@ const SocialsBlock = () => (
           >
             <img
               src={data.img}
-              alt="icons"
+              alt={data.name}
               width={20}
               height={20}
               className="w-6 h-6 md:w-8 md:h-8"

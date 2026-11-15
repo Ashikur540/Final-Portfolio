@@ -112,7 +112,7 @@ export const ProjectCard = ({
                 >
                   <Image
                     src={icon.image}
-                    alt={`${icon.name}-icon}`}
+                    alt={icon.name}
                     className="w-[60%] invert opacity-80"
                     width={10}
                     height={10}

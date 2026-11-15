@@ -183,7 +183,7 @@ export const workHistories = [
     description:
       "WordPress plugins used on 8,000+ sites, built with React and TypeScript on top of PHP.",
     responsibilities: [
-      "Main developer of the Booktics and Timetics booking plugins (2,800+ active installs): recurring bookings, coupons, round-robin staff assignment, WooCommerce payments and WhatsApp reminders.",
+      "Main developer of the Booktics and Timetics booking plugins since Sep 2026 (2,800+ active installs): recurring bookings, coupons, round-robin staff assignment, WooCommerce payments and WhatsApp reminders.",
       "Made bookings and payments safe: fixed race conditions that let two customers take the same slot, and moved pricing to the server so it cannot be changed in the browser.",
       "WP Cafe v3 (5,000+ installs): one-page checkout, deposit payments, daily order limits and WPML support.",
       "Built the Aisentic AI chat widget (streaming replies, Shadow DOM) and shared SDKs used in 5 products, including a React Flow automation builder.",
@@ -191,7 +191,7 @@ export const workHistories = [
   },
   {
     company: "Innosoft IT (Remote)",
-    url: "https://innosoftit.com/",
+    url: "",
     title: "Frontend Developer",
     date: "May 2024 – Sep 2024",
     description:
@@ -217,16 +217,19 @@ export const workHistories = [
 export const socialMedia = [
   {
     id: 1,
+    name: "GitHub",
     img: "/git.svg",
     url: "https://github.com/Ashikur540",
   },
   {
     id: 2,
+    name: "LinkedIn",
     img: "/link.svg",
     url: "https://www.linkedin.com/in/md-ashikurrahman/",
   },
   {
     id: 3,
+    name: "Email",
     img: "/mail.svg",
     url: "mailto:meashik1000@gmail.com",
   },
