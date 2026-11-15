@@ -74,7 +74,7 @@ export const projects = [
   {
     id: 1,
     title: "Helpxon",
-    des: "A live customer-support SaaS. Each company gets its own workspace with a shared inbox, tickets, a knowledge base, live chat and AI replies. I built most of the React app, the chat widget sites add with one script, and Laravel APIs.",
+    des: "A live customer-support SaaS with AI replies, built from scratch to production. I did the product design, most of the React app, the chat widget sites add with one script, Laravel APIs, and the launch videos.",
     img: "/projects/helpxon.jpg",
     iconLists: [
       { name: "React", image: "/logos/brand-react.svg" },
@@ -181,7 +181,7 @@ export const workHistories = [
     title: "Frontend Developer",
     date: "Dec 2024 – Present",
     description:
-      "WordPress plugins used on 8,000+ sites, built with React and TypeScript on top of PHP.",
+      "Full-stack work on booking, restaurant-ordering and AI products used on 8,000+ sites (React, TypeScript, PHP).",
     responsibilities: [
       "Main developer of the Booktics and Timetics booking plugins since Sep 2026 (2,800+ active installs): recurring bookings, coupons, round-robin staff assignment, WooCommerce payments and WhatsApp reminders.",
       "Made bookings and payments safe: fixed race conditions that let two customers take the same slot, and moved pricing to the server so it cannot be changed in the browser.",
@@ -242,5 +242,5 @@ export const personalInfo = {
   email: "meashik1000@gmail.com",
   websiteDomain: "https://ashikur-on-web.vercel.app/",
   briefInfo:
-    "Frontend-focused full-stack developer with 3+ years shipping React and TypeScript products, from WordPress plugins on 8,000+ sites to a live SaaS. React, Next.js, TypeScript, Node.js, Laravel. Open to remote roles.",
+    "Frontend-focused full-stack developer with 3+ years shipping React and TypeScript products, from a SaaS built from scratch to plugins used on 8,000+ sites. React, Next.js, TypeScript, Node.js, Laravel, AI integration.",
 };

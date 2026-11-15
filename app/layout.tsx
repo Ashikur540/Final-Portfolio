@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(websiteDomain),
   title: `${name} - ${title}`,
   description: briefInfo,
-  keywords: `full-stack developer, frontend developer, remote, React, Next.js, TypeScript, JavaScript, Node.js, Laravel, PHP, WordPress, WooCommerce, PostgreSQL, Docker, Tailwind CSS, ${location}, ${name}`,
+  keywords: `full-stack developer, software engineer, frontend developer, React, Next.js, TypeScript, JavaScript, Node.js, Laravel, PHP, PostgreSQL, Docker, AI integration, Tailwind CSS, ${location}, ${name}`,
   authors: [{ name: name, url: websiteDomain }],
   openGraph: {
     title: `${name} - ${title}`,

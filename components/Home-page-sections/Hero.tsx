@@ -44,7 +44,7 @@ export const Hero = () => {
 				/>
 			</div>
 
-			<AnimatedToolTip tooltipText="Open to remote roles from January 2027">
+			<AnimatedToolTip tooltipText="Available from January 2027">
 				<motion.div
 					initial={{ opacity: 0, scale: 0.5 }}
 					animate={{ opacity: 1, scale: 1 }}
@@ -72,18 +72,17 @@ export const Hero = () => {
 							className="text-center font-bold text-[30px] sm:text-[40px] md:text-5xl lg:text-6xl"
 							words={[
 								"Frontend-focused Full-stack Developer",
-								"React · TypeScript · Next.js",
-								"Laravel · Node.js · WordPress",
+								"React · Next.js · Node.js · Laravel",
+								"From idea to production",
 							]}
 						/>
 					</BlurFadeEffectWrapper>
 					<div className="flex gap-1 justify-center items-center my-4 max-w-screen-md">
 						<BlurFadeEffectWrapper delay={0.38}>
 							<p className="text-center md:tracking-wider  text-base md:text-md text-zinc-200">
-								I build React and TypeScript products end to end, from
-								WordPress plugins on 8,000+ sites to a live SaaS. Based in{" "}
-								<span className="text-purple font-semibold">Dhaka, Bangladesh</span>,
-								open to remote roles.
+								I build products end to end, from design to production: a SaaS
+								from scratch, Shopify apps, and plugins used on 8,000+ sites. Based in{" "}
+								<span className="text-purple font-semibold">Dhaka, Bangladesh</span>.
 							</p>
 						</BlurFadeEffectWrapper>
 					</div>

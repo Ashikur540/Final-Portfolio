@@ -68,7 +68,7 @@ const HeaderBlock = () => (
     <AnimatedGradientBG className="p-5 md:p-8 ">
       <div className="inline-flex h-full animate-shimmer cursor-pointer items-center justify-center rounded-full border border-gray-800 bg-[linear-gradient(110deg,#000,45%,#4D4B4B,55%,#000)] bg-[length:250%_100%] px-3 py-1 text-xs font-medium text-gray-300 mb-4 z-20">
         <div className="h-2 w-2 bg-green-500 rounded-full mr-1"></div>
-        <p>Open to remote roles · from Jan 2027</p>
+        <p>Available from Jan 2027 · remote first, on-site welcome</p>
       </div>
       <h1 className="mb-6 md:mb-8 text-2xl sm:text-3xl  leading-tight text-white-100">
         I care about what users never see but always feel:{" "}
@@ -145,8 +145,8 @@ const AboutBlock = () => (
   <Block className="col-span-12 text-xl sm:text-2xl md:text-2xl lg:text-3xl leading-snug overflow-hidden ">
     <h3 className="font-semibold">My Technical Skills ✨</h3>
     <p className="mt-4 mb-6 max-w-screen-sm text-base text-slate-900 dark:text-neutral-300">
-      React and TypeScript on the front, PHP, Laravel and Node.js behind it,
-      and WordPress where most of my production code runs today.
+      React and TypeScript on the front; Node.js, Laravel and PHP behind it;
+      PostgreSQL, Docker and AI APIs around it.
     </p>
 
     <div className="flex flex-col md:flex-row justify-between items-center flex-wrap relative mt-20">
