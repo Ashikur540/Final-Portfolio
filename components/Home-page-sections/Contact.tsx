@@ -1,8 +1,11 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import Lottie from "react-lottie";
+
+/* lottie-web reads `document` as soon as it loads, so it can only run in the browser. */
+const Lottie = dynamic(() => import("react-lottie"), { ssr: false });
 
 import IconCheckAll from "@/assets/icons/IconCheckAll";
 import animationData from "@/data/confetti.json";
