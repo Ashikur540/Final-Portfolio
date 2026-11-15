@@ -76,10 +76,11 @@ const HeaderBlock = () => (
         </p>
       </div>
       <h1 className="mb-6 md:mb-8 text-2xl sm:text-3xl  leading-tight text-white-100">
-        I care about what users never see but always feel:{" "}
-        <span className="text-zinc-50 font-medium">bookings that cannot double-book</span>,{" "}
-        <span className="text-zinc-50 font-medium">prices that cannot be tampered with</span>, and{" "}
-        <span className="text-zinc-50 font-medium">components teams can build on</span>.
+        I turn ideas into{" "}
+        <span className="text-zinc-50 font-medium">working products</span>.
+        Design, front end, back end, launch: I&apos;ve done{" "}
+        <span className="text-zinc-50 font-medium">every step</span>, from a
+        SaaS built from scratch to plugins running on 8,000+ sites.
       </h1>
       <a
         href="/Ashikur_Rahman_Resume_2026.pdf"
