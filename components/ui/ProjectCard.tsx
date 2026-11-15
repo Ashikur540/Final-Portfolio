@@ -62,7 +62,7 @@ export const ProjectCard = ({
     <motion.div
       variants={variants}
       key={id}
-      className="w-[95%] max-h-[520px] group mx-auto  p-2 bg-white dark:border-0 border overflow-hidden rounded-xl dark:text-white text-black "
+      className="w-[95%] group mx-auto  p-2 bg-white dark:border-0 border overflow-hidden rounded-xl dark:text-white text-black "
       style={{
         backgroundColor: "rgb(4,7,29)",
         background:

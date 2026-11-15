@@ -95,7 +95,10 @@ const HeaderBlock = () => (
 
 const SocialsBlock = () => (
   <>
-    {socialMedia.map((data) => {
+    {socialMedia.map((data, index) => {
+      /* Socials sit two per row next to the header; an odd last one fills its row. */
+      const fillsRow =
+        socialMedia.length % 2 === 1 && index === socialMedia.length - 1;
       return (
         <Block
           key={data.id}
@@ -104,7 +107,10 @@ const SocialsBlock = () => (
             scale: 1.1,
             transition: { duration: 0.3 },
           }}
-          className="col-span-6 md:col-span-4 lg:col-span-2 h-full flex items-center justify-center p-4 md:p-6 lg:p-12"
+          className={twMerge(
+            "col-span-6 md:col-span-4 lg:col-span-2 h-full flex items-center justify-center p-4 md:p-6 lg:p-12",
+            fillsRow && "col-span-12 lg:col-span-4"
+          )}
           style={{
             background: "rgb(4,7,29)",
             backgroundColor:
