@@ -110,10 +110,12 @@ const checks = [
   {
     name: "menu fits on small phones",
     async run(b) {
-      for (const w of [360, 390]) {
+      for (const w of [320, 344, 360, 390]) {
         const p = await open(b, w, { isMobile: true, hasTouch: true });
         const r = await p.locator("[data-dock] > div").evaluate((e) => e.getBoundingClientRect());
         assert(r.left >= 4 && r.right <= w - 4, `menu ${Math.round(r.left)}..${Math.round(r.right)} at ${w}`);
+        const sw = await p.evaluate(() => document.documentElement.scrollWidth);
+        assert(sw <= w, `page is ${sw}px wide at ${w}`);
         await p.context().close();
       }
       return null;
@@ -480,7 +482,7 @@ const checks = [
     },
   },
   {
-    name: "experience: hovering a job shows its print, and several photos swap",
+    name: "experience: hovering a job shows its photo print",
     async run(b) {
       const p = await open(b);
       const row = p.locator("#experience [data-job]").nth(2);
@@ -490,10 +492,7 @@ const checks = [
       await row.hover({ position: { x: 40, y: 20 } });
       await p.waitForTimeout(600);
       assert((await print.evaluate((e) => getComputedStyle(e).opacity)) === "1", "print hidden on hover");
-      const cap = () => print.locator("[aria-hidden='false']").textContent();
-      const first = await cap();
-      await p.waitForTimeout(1700);
-      assert((await cap()) !== first, "photos did not swap");
+      assert((await print.locator("img").count()) === 1, "no photo in the print");
       return p;
     },
   },
@@ -502,7 +501,7 @@ const checks = [
     async run(b) {
       const p = await open(b, 390, { hasTouch: true, isMobile: true });
       const ops = await p.locator("#experience [data-print]").evaluateAll((els) => els.map((e) => getComputedStyle(e).opacity + getComputedStyle(e).position));
-      assert(ops.length === 4 && ops.every((o) => o === "1relative"), "prints: " + ops.join(","));
+      assert(ops.length === 3 && ops.every((o) => o === "1relative"), "prints: " + ops.join(","));
       const sw = await p.evaluate(() => document.documentElement.scrollWidth);
       assert(sw <= 390, "scrollWidth " + sw);
       return p;

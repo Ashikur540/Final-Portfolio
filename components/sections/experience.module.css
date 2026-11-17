@@ -157,11 +157,6 @@
 button.print {
   cursor: pointer;
 }
-/* the last row is short, so its print rises above it instead of hanging off the page */
-.next .print {
-  top: auto;
-  bottom: -6px;
-}
 .entry:hover .print,
 .entry:focus-within .print {
   opacity: 1;
@@ -220,13 +215,11 @@ button.print {
 /* touch screens and narrow layouts: no hover, so the print sits under the text */
 @media (hover: none), (max-width: 980px) {
   .print,
-  .next .print,
   .entry:hover .print,
   .entry:focus-within .print {
     position: relative;
     right: auto;
     top: auto;
-    bottom: auto;
     grid-column: 1 / -1;
     width: min(190px, 100%);
     margin: 14px 0 6px 4px;

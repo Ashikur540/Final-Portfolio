@@ -188,6 +188,11 @@
     margin-inline: auto;
   }
 }
+@media (max-width: 359px) {
+  .h1 {
+    font-size: 34px;
+  }
+}
 @media (max-width: 480px) {
   .lead {
     font-size: 17px;

@@ -111,7 +111,6 @@ export function Experience() {
                   </Marker>
                 </span>
               </div>
-              <JobPrint photos={[{ caption: "your team photo here?" }]} active={false} label="Your team" emptyText="you?" />
             </li>
           </ol>
         </div>

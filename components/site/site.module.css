@@ -131,6 +131,10 @@
 .armed:not(.done) .w {
   clip-path: inset(-30% 100% -40% -6%);
 }
+/* once the word is written the nib leaves the layout, so it can never widen the page */
+.done .nib {
+  display: none;
+}
 .nib {
   position: absolute;
   left: 0;

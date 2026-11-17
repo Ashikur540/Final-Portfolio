@@ -5,13 +5,12 @@ import assert from "node:assert/strict";
 import { deskBooks, deskPhotos, deskTracks, jobMoments } from "../data/index.ts";
 
 test("no placeholder content is left", () => {
-  const standInSrcs = new Set(deskPhotos.filter((p) => p.standIn).map((p) => p.src));
   const problems = [
     ...deskPhotos.filter((p) => p.standIn).map((p) => `stand-in photo: ${p.src} ("${p.caption}")`),
     ...deskBooks.filter((b) => b.placeholder).map((b) => `placeholder book: ${b.title}`),
     ...deskTracks
-      .filter((t) => standInSrcs.has(t.cover) || t.cover.includes("saintmartin.jpg"))
-      .map((t) => `track cover is a stand-in: ${t.title} (${t.cover})`),
+      .filter((t) => !t.cover.startsWith("/clicks/"))
+      .map((t) => `track cover is not one of my photos: ${t.title} (${t.cover})`),
     ...deskTracks.filter((t) => t.title.startsWith("Your nasheed") && !t.src).map((t) => `track without audio: ${t.title}`),
     ...Object.entries(jobMoments).flatMap(([job, ms]) =>
       ms.filter((m) => !m.src || !m.alt).map((m) => `job photo missing (src and alt): ${job} ("${m.caption}")`),

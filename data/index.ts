@@ -333,13 +333,18 @@ export type DeskPhoto = { src: string; caption: string; date?: string; position?
 
 /** Photos in the stack on the desk. standIn = placeholder, must be replaced before launch. */
 export const deskPhotos: DeskPhoto[] = [
-  { src: "/desk/me3.jpg", caption: "sea day", date: "'24 12 17", position: "50% 30%" },
-  { src: "/desk/saintmartin2.jpg", caption: "friends + coral", date: "'24 12 18", standIn: true },
-  { src: "/desk/coxsbazar.jpg", caption: "last light", date: "'24 12 16", standIn: true },
-  { src: "/desk/me1.jpg", caption: "me, probably", date: "'25 08 02" },
-  { src: "/desk/natore.jpg", caption: "weekend, Natore", date: "'25 01 24", standIn: true },
-  { src: "/desk/dhaka.jpg", caption: "home, Dhaka", date: "'25 03 02", standIn: true },
-  { src: "/desk/rangpur.jpg", caption: "old palace", date: "'25 02 08", standIn: true },
+  { src: "/clicks/1000080447.webp", caption: "ball, beach, me", date: "'26 01 13" },
+  { src: "/clicks/1000017350.webp", caption: "last light", date: "'25 01 16" },
+  { src: "/clicks/1000006684.webp", caption: "village morning", date: "'22 12 16" },
+  { src: "/clicks/1000027701.webp", caption: "green, everywhere", date: "'25 04 03" },
+  { src: "/clicks/1000019501.webp", caption: "dates and spices", date: "'25 02 26" },
+  { src: "/clicks/1000039787.webp", caption: "evening walk", date: "'25 07 02" },
+  { src: "/clicks/1000157515.webp", caption: "new friend", date: "'26 10 09" },
+  { src: "/clicks/1000157525.webp", caption: "old palace", date: "'26 10 09" },
+  { src: "/clicks/1000080439.webp", caption: "big red truck", date: "'26 01 14" },
+  { src: "/clicks/1000080445.webp", caption: "low tide", date: "'26 01 14" },
+  { src: "/clicks/1000026360.webp", caption: "sun nap", date: "'25 04 03" },
+  { src: "/clicks/1000157529.webp", caption: "quiet garden", date: "'26 10 09" },
 ];
 
 export type JobMoment = { src?: string; caption: string; alt?: string };
@@ -350,12 +355,12 @@ export type JobMoment = { src?: string; caption: string; alt?: string };
  * One photo stays still; two or more swap every 1.5 seconds.
  */
 export const jobMoments: Record<string, JobMoment[]> = {
-  "HasTech IT": [{ caption: "first team" }],
-  "Innosoft IT": [{ caption: "remote crew" }],
-  Arraytics: [{ caption: "team day" }, { caption: "prize night" }],
+  "HasTech IT": [{ src: "/clicks/1000176389.webp", caption: "first team", alt: "Group photo of the HasTech IT team in the office" }],
+  "Innosoft IT": [{ src: "/clicks/1000003112.webp", caption: "with the founder", alt: "Selfie of Ashik with the founder of Innosoft IT" }],
+  Arraytics: [{ src: "/clicks/1000076964-prize.webp", caption: "prize from our CEO", alt: "Ashik receiving a prize from the CEO of Arraytics" }],
 };
 
-export type DeskBook ={ title: string; author: string; tone: "dark" | "red" | "cream"; placeholder?: boolean };
+export type DeskBook = { title: string; author: string; tone: "dark" | "red" | "cream"; placeholder?: boolean };
 
 /** Books on the desk. placeholder = not confirmed by Ashik yet. */
 export const deskBooks: DeskBook[] = [
@@ -368,7 +373,7 @@ export type DeskTrack = { title: string; length: string; cover: string; src?: st
 
 /** Phone playlist. Add src (a file in /public/desk/audio/) once a real nasheed file is supplied. */
 export const deskTracks: DeskTrack[] = [
-  { title: "Your nasheed 1", length: "1:36", cover: "/desk/coxsbazar.jpg" },
-  { title: "Your nasheed 2", length: "1:12", cover: "/desk/natore.jpg" },
-  { title: "Rain, no music", length: "2:04", cover: "/desk/saintmartin.jpg" },
+  { title: "Your nasheed 1", length: "1:36", cover: "/clicks/1000017350.webp" },
+  { title: "Your nasheed 2", length: "1:12", cover: "/clicks/1000027701.webp" },
+  { title: "Rain, no music", length: "2:04", cover: "/clicks/1000157529.webp" },
 ];

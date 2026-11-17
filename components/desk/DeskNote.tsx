@@ -1,5 +1,4 @@
 import { aboutNote } from "@/data";
-import { InkWord } from "@/components/site/InkWord";
 import s from "./desk.module.css";
 
 /** The About text, on a taped notebook page. */
@@ -11,10 +10,7 @@ export function DeskNote() {
       {aboutNote.map((line) => (
         <p key={line}>{line}</p>
       ))}
-      <div className={s.sig}>
-        <InkWord text="Ashik" ms={1100} start="view" className={s.sigName} />
-        <span className={s.sigPlace}>Dhaka, Bangladesh</span>
-      </div>
+      <p className={s.sigPlace}>Dhaka, Bangladesh</p>
     </div>
   );
 }

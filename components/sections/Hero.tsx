@@ -72,10 +72,10 @@ export function Hero() {
         <figure className={`${s.pr} ${s.a}`}>
           <span className={s.tape} aria-hidden="true" />
           <span className={s.ph}>
-            <Image src="/desk/me1.jpg" alt="Portrait of Ashikur Rahman" fill sizes="280px" priority />
+            <Image src="/clicks/1000080446.webp" alt="Ashikur Rahman by the water" fill sizes="280px" priority />
           </span>
           <span className={s.date} aria-hidden="true">
-            &apos;25 08 02
+            &apos;26 01 14
           </span>
           <span className={s.slip} aria-hidden="true">
             hi, I&apos;m Ashik

@@ -11,12 +11,10 @@ type Props = {
   /** the row is hovered or focused: several photos swap every 1.5 seconds */
   active: boolean;
   label: string;
-  /** text inside an empty frame */
-  emptyText?: string;
 };
 
 /** A taped print beside a job row. Appears on hover on desktop, sits inline on phones. */
-export function JobPrint({ photos, active, label, emptyText = "photo coming" }: Props) {
+export function JobPrint({ photos, active, label }: Props) {
   const [i, setI] = useState(0);
   const many = photos.length > 1;
   const next = () => setI((n) => (n + 1) % photos.length);
@@ -37,7 +35,7 @@ export function JobPrint({ photos, active, label, emptyText = "photo coming" }: 
               <Image src={p.src} alt={p.alt || ""} fill sizes="240px" />
             ) : (
               <span className={s.empty} aria-hidden="true">
-                {emptyText}
+                photo coming
               </span>
             )}
             <span className={s.cap}>{p.caption}</span>

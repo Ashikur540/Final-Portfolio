@@ -46,3 +46,6 @@ robots*.txt
 /PRODUCT.md
 /docs/superpowers/
 /scripts/never-show.local.txt
+
+# original full-size photos stay local; the site uses the compressed copies in public/clicks/
+/public/my-clicks/
