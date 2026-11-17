@@ -1,29 +1,31 @@
-"use client";
-import { ReactLenis } from "lenis/react";
+import { Banner } from "@/components/site/Banner";
+import { SmoothScroll } from "@/components/site/SmoothScroll";
+import { TopBar } from "@/components/site/TopBar";
+import { Hero } from "@/components/sections/Hero";
+import { Desk } from "@/components/desk/Desk";
+import { Projects } from "@/components/sections/Projects";
+import { Experience } from "@/components/sections/Experience";
+import { Notes } from "@/components/sections/Notes";
+import { Closing } from "@/components/sections/Closing";
+import { getPosts } from "@/lib/rss";
 
-import { AboutMe } from "@/components/Home-page-sections/About";
-import Contact from "@/components/Home-page-sections/Contact";
-import { Hero } from "@/components/Home-page-sections/Hero";
-import Projects from "@/components/Home-page-sections/Projects";
-import { FloatingNav } from "@/components/ui/FloatingNav";
-import { Timeline as WorkHistoryTimeLine } from "@/components/ui/TimeLine";
-import { navItems, workHistories } from "@/data";
-import Banner from "@/components/Home-page-sections/Banner";
+// the blog list is rebuilt at most once an hour
+export const revalidate = 3600;
 
-export default function Home() {
-	return (
-		<ReactLenis root>
-			<Banner />
-			<main className="relative bg-black-100 flex justify-center items-center flex-col overflow-hidden mx-auto sm:px-10 px-5">
-				<div className="max-w-7xl w-full">
-					<FloatingNav navItems={navItems} />
-					<Hero />
-					<AboutMe />
-					<WorkHistoryTimeLine data={workHistories} />
-					<Projects />
-					<Contact />
-				</div>
-			</main>
-		</ReactLenis>
-	);
+export default async function Home() {
+  const posts = await getPosts();
+  return (
+    <SmoothScroll>
+      <Banner />
+      <TopBar />
+      <main>
+        <Hero />
+        <Desk />
+        <Projects />
+        <Experience />
+        <Notes posts={posts} />
+      </main>
+      <Closing />
+    </SmoothScroll>
+  );
 }

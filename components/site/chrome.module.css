@@ -1,0 +1,123 @@
+/* slim banner above the top bar; scrolls away with the page */
+.banner {
+  background: var(--soft);
+  border-bottom: 1px solid var(--line);
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--navy);
+}
+.banner a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 9px 16px;
+  text-decoration: none;
+  text-align: center;
+}
+.banner a:hover .msg {
+  text-decoration: underline;
+}
+.banner img {
+  width: 18px;
+  height: 18px;
+  flex: none;
+}
+.banner strong {
+  font-weight: 700;
+  white-space: nowrap;
+}
+.msg {
+  color: var(--ink-2);
+}
+@media (max-width: 640px) {
+  .msg {
+    display: none;
+  }
+}
+
+/* top bar */
+.top {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: saturate(1.4) blur(10px);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.3s;
+}
+.scrolled {
+  border-color: var(--line);
+}
+.row {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  height: 70px;
+}
+.who {
+  font-weight: 700;
+  text-decoration: none;
+  letter-spacing: -0.01em;
+  color: var(--navy);
+  white-space: nowrap;
+}
+.nav {
+  display: flex;
+  gap: 22px;
+  font-size: 15px;
+  color: var(--ink-2);
+}
+.nav a {
+  text-decoration: none;
+  position: relative;
+}
+.nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -4px;
+  height: 2px;
+  background: var(--blue);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s var(--ease);
+}
+.nav a:hover::after,
+.nav a.on::after {
+  transform: scaleX(1);
+}
+.nav a.on {
+  color: var(--navy);
+}
+.spacer {
+  flex: 1;
+}
+.avail {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  background: #fff6c4;
+  color: var(--ink);
+  padding: 7px 12px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+.avail i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #18a058;
+}
+@media (max-width: 980px) {
+  .nav,
+  .avail {
+    display: none;
+  }
+  .row {
+    height: 62px;
+  }
+}

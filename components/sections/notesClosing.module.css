@@ -1,0 +1,137 @@
+/* ===== notes (blog) ===== */
+.notes {
+  padding: 100px 0 60px;
+}
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.list li {
+  border-bottom: 1px solid var(--line);
+}
+.list li:first-child {
+  border-top: 1px solid var(--line);
+}
+.post {
+  display: grid;
+  grid-template-columns: 150px 1fr auto;
+  gap: 24px;
+  padding: 22px 0;
+  text-decoration: none;
+  align-items: baseline;
+}
+.post time {
+  font: 400 17px/1 var(--font-hand), cursive;
+  color: var(--blue);
+}
+.post h3 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--navy);
+}
+.t {
+  background-image: linear-gradient(var(--mark), var(--mark));
+  background-repeat: no-repeat;
+  background-position: 0 88%;
+  background-size: 0% 50%;
+  transition: background-size 0.6s var(--ease);
+}
+.post:hover .t,
+.post:focus-visible .t {
+  background-size: 100% 50%;
+}
+.post p {
+  margin: 4px 0 0;
+  color: var(--ink-2);
+  font-size: 15.5px;
+}
+.go {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--blue);
+  white-space: nowrap;
+}
+.go svg {
+  transition: transform 0.35s var(--ease);
+}
+.post:hover .go svg {
+  transform: translate(2px, -2px);
+}
+.more {
+  margin-top: 28px;
+}
+@media (max-width: 980px) {
+  .post {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+}
+
+/* ===== closing ===== */
+.cover {
+  background: var(--navy);
+  color: #fff;
+  padding: 110px 0 40px;
+  margin-top: 40px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.cover::before {
+  content: "";
+  position: absolute;
+  inset: auto -10% -40% -10%;
+  height: 70%;
+  background: radial-gradient(closest-side, rgba(37, 70, 216, 0.55), transparent);
+  pointer-events: none;
+}
+.h2 {
+  margin: 0;
+  font-size: clamp(64px, 8vw, 116px);
+  line-height: 1.15;
+  font-weight: 700;
+}
+.lead {
+  color: #c9d3f2;
+  max-width: 46ch;
+  margin: 14px auto 30px;
+  font-size: 18px;
+  position: relative;
+}
+.row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+  position: relative;
+}
+.foot {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 90px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.18);
+  color: #c9d3f2;
+  font-size: 14px;
+  flex-wrap: wrap;
+  gap: 12px;
+  position: relative;
+}
+@media (max-width: 640px) {
+  .cover {
+    padding-top: 80px;
+  }
+  .lead {
+    font-size: 16px;
+  }
+  .foot {
+    justify-content: center;
+    text-align: center;
+  }
+}

@@ -38,3 +38,11 @@ next-env.d.ts
 #sitemap
 sitemap*.xml
 robots*.txt
+
+# local test builds (scripts/smoke.mjs)
+/.next-smoke/
+
+# local notes and private word lists, never pushed
+/PRODUCT.md
+/docs/superpowers/
+/scripts/never-show.local.txt

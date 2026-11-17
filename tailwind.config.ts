@@ -8,7 +8,6 @@ const {
 // import colors from "tailwindcss/colors";
 
 const config = {
-  darkMode: ["class"],
   content: [
     "./pages/**/*.{ts,tsx}",
     "./components/**/*.{ts,tsx}",
@@ -26,7 +25,20 @@ const config = {
       },
     },
     extend: {
+      fontFamily: {
+        sans: ["var(--font-sans)", "system-ui", "sans-serif"],
+        hand: ["var(--font-hand)", "cursive"],
+        stamp: ["var(--font-stamp)", "monospace"],
+      },
       colors: {
+        navy: { DEFAULT: "#0f1b3d", 2: "#1a2a5c" },
+        ink: { DEFAULT: "#121a33", 2: "#454e68", 3: "#5a6380" },
+        line: "#e5e8f0",
+        soft: "#f3f5fa",
+        mark: "#ffe14d",
+        stamp: "#ff7a1f",
+        khata: "#fdfeff",
+        mat: "#0b1330",
         black: {
           DEFAULT: "#000",
           100: "#000319",
@@ -40,6 +52,8 @@ const config = {
         },
         blue: {
           "100": "#E4ECFF",
+          DEFAULT: "#2546d8",
+          soft: "#eaf0ff",
         },
         purple: "#CBACF9",
         border: "hsl(var(--border))",

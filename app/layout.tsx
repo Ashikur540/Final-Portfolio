@@ -1,10 +1,28 @@
-import { Inter } from "next/font/google";
+import { Kalam } from "next/font/google";
+import localFont from "next/font/local";
 import { Metadata } from "next";
 
-import { ThemeProvider } from "@/providers/theme-provider";
 import "./globals.css";
 import { personalInfo } from "@/data";
-const inter = Inter({ subsets: ["latin"] });
+
+const sans = localFont({
+  src: "./fonts/HostGrotesk-Variable.woff2",
+  weight: "300 800",
+  variable: "--font-sans",
+  display: "swap",
+});
+const hand = Kalam({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  variable: "--font-hand",
+  display: "swap",
+});
+const stamp = localFont({
+  src: "./fonts/Doto-Black.woff2",
+  weight: "900",
+  variable: "--font-stamp",
+  display: "swap",
+});
 
 const { name, title, location, websiteDomain, briefInfo } = personalInfo;
 
@@ -42,20 +60,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${sans.variable} ${hand.variable} ${stamp.variable}`} suppressHydrationWarning>
       <head>
+        {/* lets CSS hide the handwriting before the pen writes it; without JS it simply shows */}
+        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
         <link rel="icon" href="/favicon.ico" sizes="any" />
       </head>
-      <body className={`${inter.className} antialiased`}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem
-          disableTransitionOnChange
-        >
-          {children}
-        </ThemeProvider>
-      </body>
+      <body>{children}</body>
     </html>
   );
 }
