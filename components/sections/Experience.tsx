@@ -68,7 +68,7 @@ export function Experience() {
   return (
     <section id="experience" className={s.section}>
       <div className="wrap">
-        <SectionHeading title="Experience" note="Three teams so far. Each time, features from idea to launch." />
+        <SectionHeading title="Experience" note="Three teams in 3+ years. At each one I took features from idea to launch." />
         <div ref={pageRef} className={s.khata}>
           <span className={s.tape} aria-hidden="true" />
           <svg className={s.penline} aria-hidden="true">

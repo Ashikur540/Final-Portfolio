@@ -23,7 +23,8 @@ export function Closing() {
       next = "manual";
     }
     setState(next);
-    timer.current = window.setTimeout(() => setState("idle"), next === "manual" ? 2500 : 1800);
+    // a blocked clipboard shows the address long enough to copy it by hand
+    timer.current = window.setTimeout(() => setState("idle"), next === "manual" ? 6000 : 1800);
   };
 
   return (
@@ -32,13 +33,31 @@ export function Closing() {
         <h2 className={s.h2}>
           <InkWord text="Say hello" ms={1800} start="view" color="white" />
         </h2>
-        <p className={s.lead}>Open to full-time roles from January 2027. Remote first, on-site works too for the right team.</p>
+        <p className={s.lead}>Open to full-time frontend and full-stack roles from January 2027. Remote first, on-site works too for the right team.</p>
         <div className={s.row}>
-          <Button onClick={copy} icon={state === "copied" ? "check" : "copy"} onDark done={state === "copied"}>
-            <span aria-live="polite">
-              {state === "copied" ? "Copied" : state === "manual" ? personalInfo.email : "Copy email"}
+          <span className={s.copyWrap}>
+            <Button
+              onClick={copy}
+              icon={state === "copied" ? "check" : "copy"}
+              onDark
+              done={state === "copied"}
+              ariaLabel={state === "copied" ? "Email copied" : "Copy email"}
+            >
+              {/* both labels share one spot, so the button keeps the width of the longer one */}
+              <span className={s.swap}>
+                <span className={state === "copied" ? s.off : undefined}>Copy email</span>
+                <span className={state === "copied" ? undefined : s.off}>Copied</span>
+              </span>
+            </Button>
+            {state === "manual" && (
+              <span className={s.manual} role="status">
+                {personalInfo.email}
+              </span>
+            )}
+            <span className="sr-only-text" aria-live="polite">
+              {state === "copied" ? "Email copied" : ""}
             </span>
-          </Button>
+          </span>
           <Button href={link("LinkedIn")} variant="line" icon="linkedin" onDark external>
             LinkedIn
           </Button>
@@ -50,8 +69,8 @@ export function Closing() {
           </Button>
         </div>
         <div className={s.foot}>
-          <span>Built by ❤️ Ashikur Rahman</span>
-          <span>© {new Date().getFullYear()} Ashikur Rahman</span>
+          <span>Built with ❤️ by Ashik</span>
+          <span>© {new Date().getFullYear()}</span>
         </div>
       </div>
     </footer>

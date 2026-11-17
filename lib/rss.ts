@@ -37,7 +37,10 @@ function clip(s: string, max = 110): string {
   if (s.length <= max) return s;
   const cut = s.slice(0, max);
   const space = cut.lastIndexOf(" ");
-  return (space > 0 ? cut.slice(0, space) : cut).trim() + "…";
+  const words = (space > 0 ? cut.slice(0, space) : cut).trim();
+  // a cut that lands on a full sentence ends cleanly; otherwise drop a dangling comma and add "…"
+  if (/[.!?]$/.test(words)) return words;
+  return words.replace(/[,;:]+$/, "") + "…";
 }
 
 /** Reads a Hashnode RSS feed. Plain string parsing, no XML package. */

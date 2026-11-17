@@ -134,7 +134,7 @@ const checks = [
       const p = await open(b);
       const h1 = await p.locator("h1").textContent();
       assert(h1.includes("Frontend-focused full") && h1.includes("working products."), "h1: " + h1);
-      assert((await p.locator('a[href="#work"]', { hasText: "See my projects" }).count()) === 1, "See my projects");
+      assert((await p.locator('a[href="#work"]', { hasText: "See my work" }).count()) === 1, "See my work");
       assert(
         (await p.locator('a[href="/Ashikur_Rahman_Resume_2026.pdf"]', { hasText: "Download resume" }).count()) === 1,
         "Download resume",
@@ -543,9 +543,14 @@ const checks = [
     async run(b) {
       const p = await open(b, 1440, { permissions: ["clipboard-read", "clipboard-write"] });
       await scrollTo(p, "#hello", 0);
-      await p.getByRole("button", { name: /Copy email/ }).click();
-      await p.waitForTimeout(200);
-      assert((await p.locator("#hello").textContent()).includes("Copied"), "no Copied state");
+      const btn = p.getByRole("button", { name: /Copy email/ });
+      const w0 = (await btn.boundingBox()).width;
+      await btn.click();
+      await p.waitForTimeout(300);
+      const copied = p.getByRole("button", { name: "Email copied" });
+      assert((await copied.count()) === 1, "no Copied state");
+      const w1 = (await copied.boundingBox()).width;
+      assert(Math.abs(w1 - w0) < 0.5, `button width changed ${w0} -> ${w1}`);
       const clip = await p.evaluate(() => navigator.clipboard.readText());
       assert(clip === "meashik1000@gmail.com", "clipboard: " + clip);
       await p.waitForTimeout(2000);

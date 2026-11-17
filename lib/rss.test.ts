@@ -30,6 +30,15 @@ test("parseRss trims long summaries at a word boundary", () => {
   assert.ok(!s.includes("wor…"));
 });
 
+test("parseRss never puts an ellipsis after a full stop", () => {
+  // one long word after the full stop, so the word-boundary cut lands right after "examples."
+  const long = "Learn how neural networks work through simple analogies and real examples. Nomathorphdrequiredforthisoneatallpromisejustreadit.";
+  const xml = `<rss><channel><item><title>T</title><link>https://x.dev/a</link><pubDate>Mon, 01 Jan 2024 00:00:00 GMT</pubDate><description>${long}</description></item></channel></rss>`;
+  const s = parseRss(xml)[0].summary;
+  assert.ok(!/[.!?]…$/.test(s), s);
+  assert.ok(s.length <= 111, `length ${s.length}`);
+});
+
 test("parseRss respects the limit and survives junk", () => {
   assert.equal(parseRss(sample, 1).length, 1);
   assert.deepEqual(parseRss("not xml"), []);

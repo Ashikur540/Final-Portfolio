@@ -76,7 +76,7 @@ export function Desk() {
   return (
     <section id="about" className={s.section}>
       <div className="wrap">
-        <SectionHeading title="A bit about me" note="This is my desk. Everything on it does something." />
+        <SectionHeading title="A bit about me" note="Type, tap, drag. Everything here works." />
         <div ref={wrapRef} className={s.wrap}>
           <div ref={deskRef} className={s.desk} style={{ "--ds": scale } as React.CSSProperties} data-desk>
             <svg className={s.cable} viewBox="0 0 1180 884" preserveAspectRatio="none" aria-hidden="true">

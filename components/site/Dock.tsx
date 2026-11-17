@@ -27,10 +27,10 @@ const LINKS = [
 // what the sticky note says (once per visit) and how it looks in each part of the page
 const SECTIONS: Record<string, { mood: Mood; line?: string }> = {
   top: { mood: "calm" },
-  about: { mood: "calm", line: "go on, touch things" },
-  work: { mood: "love", line: "these are live. click one!" },
+  about: { mood: "calm", line: "psst, the keyboard works" },
+  work: { mood: "love", line: "these are real. click one" },
   experience: { mood: "happy", line: "8,000+ sites, not bad" },
-  notes: { mood: "calm", line: "I write here too" },
+  notes: { mood: "calm", line: "I write about AI, in plain English" },
   hello: { mood: "happy", line: "say hi, I don't bite" },
 };
 

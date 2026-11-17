@@ -60,7 +60,7 @@ export function Projects() {
   return (
     <section id="work" className={s.section}>
       <div className="wrap">
-        <SectionHeading title="Things I've built" note="Five projects I designed and built, from a SaaS to small tools." />
+        <SectionHeading title="Things I've built" note="Real products people use, from a help desk SaaS to small tools I made for myself." />
         <div ref={listRef} className={s.stack}>
           {projects.map((p, i) => {
             const codeOnly = p.githubLink && p.link === p.githubLink;

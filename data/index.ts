@@ -79,8 +79,8 @@ export const projects = [
     domain: "helpxon.com",
     linkLabel: "Visit live site",
     tint: "#eef2ff",
-    summary: "A live support SaaS with AI replies, built from a blank page to production.",
-    did: ["Designed the product and built most of the React app", "Chat widget any site adds with one script", "Laravel APIs, and edited the launch videos"],
+    summary: "A help desk for small teams, with AI that drafts the replies. Built from a blank page to production.",
+    did: ["Designed the product and built most of the React app", "Made a chat widget any site can add with one script", "Wrote the Laravel APIs and edited the launch videos"],
     des: "A live customer-support SaaS with AI replies, built from scratch to production. I did the product design, most of the React app, the chat widget sites add with one script, Laravel APIs, and the launch videos.",
     img: "/projects/helpxon-hd.jpg",
     iconLists: [
@@ -101,7 +101,7 @@ export const projects = [
     linkLabel: "Try it live",
     tint: "#ecf7f1",
     summary: "Paste a React component, get a matching skeleton loader you can tweak.",
-    did: ["Reads JSX with Babel, right in the browser", "Spots layouts like cards and pricing tables", "Exports React or HTML with Tailwind"],
+    did: ["Parsed JSX with Babel, right in the browser", "Taught it to spot layouts like cards and pricing tables", "Added export to React or HTML with Tailwind"],
     des: "Paste a React component, get a matching skeleton loader you can tweak, then copy React or HTML with Tailwind. Reads JSX with Babel, spots layouts like cards and pricing tables, and runs fully in the browser. Open source.",
     img: "/projects/skeleton-studio-hd.jpg",
     iconLists: [
@@ -122,7 +122,7 @@ export const projects = [
     linkLabel: "Open the app",
     tint: "#fdf4e4",
     summary: "Track daily good deeds, with a heatmap, streaks, reminders and prayer times.",
-    did: ["Works offline, installs like a normal app", "Prayer times from your location"],
+    did: ["Made it work offline and install like a normal app", "Added prayer times from your location"],
     des: "An offline-first app to track daily good deeds, with a heatmap, streaks, reminders and prayer times from your location. Installs on your phone like a normal app.",
     img: "/projects/hasanat-hd.jpg",
     iconLists: [
@@ -143,7 +143,7 @@ export const projects = [
     linkLabel: "View on GitHub",
     tint: "#f4eefc",
     summary: "Turns waiting time into remembrance while Claude Code works.",
-    did: ["Zikr and the 99 names in the spinner", "A short authentic hadith under it"],
+    did: ["Put dhikr and the 99 names in the spinner", "Added a short authentic hadith under it"],
     des: "A Claude Code plugin that turns waiting time into remembrance: zikr and the 99 names of Allah in the spinner while Claude works, with a short authentic hadith under it.",
     img: "/projects/tadhkir-loop.jpg",
     // portrait image: centre it on the terminal (a wider, larger image would be sharper)
@@ -164,7 +164,7 @@ export const projects = [
     linkLabel: "Open the app",
     tint: "#ecf5fb",
     summary: "A task manager with a dashboard that shows how your week is going.",
-    did: ["RTK Query on top of localStorage", "Moving to a real API means changing one file"],
+    did: ["Used RTK Query on top of localStorage", "Set it up so a real API means changing one file"],
     des: "A task manager with a dashboard that shows how your week is going. RTK Query sits on top of localStorage, so moving to a real API means changing one file.",
     img: "/projects/flowmate-hd.jpg",
     iconLists: [
@@ -217,7 +217,7 @@ export const workHistories = [
     name: "Arraytics",
     yearLabel: "since 2024",
     note: "booking + AI",
-    summary: "Booking, restaurant-ordering and AI products on 8,000+ sites. Main developer of two booking plugins with 2,800+ active installs. Fixed double-booking bugs and built an AI chat widget.",
+    summary: "Worked on booking, restaurant-ordering and AI products used on 8,000+ sites. Main developer of two booking plugins with 2,800+ active installs. Fixed double-booking bugs and built an AI chat widget.",
     url: "https://arraytics.com/",
     title: "Frontend Developer",
     date: "Dec 2024 – Present",
@@ -235,7 +235,7 @@ export const workHistories = [
     name: "Innosoft IT",
     yearLabel: "2024",
     note: "fully remote",
-    summary: "Analytics report pages for Shopify and WordPress stores, and an FB Pixel admin panel from Figma to launch.",
+    summary: "Built analytics report pages for Shopify and WordPress stores, and took a Meta Pixel admin panel from Figma to launch.",
     url: "",
     title: "Frontend Developer",
     date: "May 2024 – Sep 2024",
@@ -251,7 +251,7 @@ export const workHistories = [
     name: "HasTech IT",
     yearLabel: "2023",
     note: "first job",
-    summary: "Split one bundle app into two products to sell instead of one, and built a new product end to end in one month.",
+    summary: "Split a bundle app into two standalone Shopify apps, so the company had two products to sell instead of one. Built a new product end to end in one month.",
     url: "https://hasthemes.com/",
     title: "Junior Web Application Developer",
     date: "Jul 2023 – May 2024 (intern until Dec 2023)",
@@ -285,7 +285,7 @@ export const socialMedia = [
 ];
 
 export const personalInfo = {
-  name: "Md Ashikur Rahman",
+  name: "Ashikur Rahman",
   title: "Frontend-focused Full-stack Developer",
   location: "Dhaka, Bangladesh",
   email: "meashik1000@gmail.com",
@@ -324,7 +324,7 @@ export const fallbackPosts: Post[] = [
 
 /** The three lines on the notebook page on the desk. */
 export const aboutNote = [
-  "I like taking something rough and shaping it until it's clear.",
+  "I like taking a messy idea and shaping it until it's simple to use.",
   "Weekends: side projects, friends, family, and too many photos.",
   "This is my desk. Go on, touch things.",
 ];

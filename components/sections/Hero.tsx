@@ -50,7 +50,7 @@ export function Hero() {
         </p>
         <div className={s.row}>
           <Button href="#work" icon="down" iconMove="down">
-            See my projects
+            See my work
           </Button>
           <Button href="/Ashikur_Rahman_Resume_2026.pdf" variant="line" icon="down" iconMove="down" download>
             Download resume
