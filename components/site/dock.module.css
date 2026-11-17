@@ -117,18 +117,34 @@
   width: 56px;
   height: 46px;
   margin-left: -28px;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  transition: translate 0.55s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s;
+}
+/* the paper itself: all the wiggling happens here, so the clickable box stays still */
+.note {
+  position: absolute;
+  inset: 0;
   border-radius: 7px 7px 3px 3px;
   background: var(--mark);
   box-shadow: 0 -2px 10px -4px rgba(15, 27, 61, 0.3);
   rotate: -4deg;
-  transition: translate 0.55s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s, rotate 0.4s var(--ease);
+  transition: rotate 0.4s var(--ease), transform 0.45s var(--ease);
 }
-.buddy[data-mood="love"],
-.buddy[data-mood="happy"] {
+.buddy:focus-visible {
+  outline: 2px solid var(--mark);
+  outline-offset: 3px;
+}
+.buddy[data-mood="love"] .note,
+.buddy[data-mood="happy"] .note {
   rotate: 3deg;
 }
 /* folded corner */
-.buddy::after {
+.note::after {
   content: "";
   position: absolute;
   right: 0;
@@ -189,6 +205,100 @@
 @keyframes beat {
   50% {
     scale: 1.18;
+  }
+}
+
+/* poked: giggle wiggles, laugh bounces, shy sinks half behind the menu */
+.giggle .note {
+  animation: wiggle 0.45s ease-in-out;
+}
+.laugh .note {
+  animation: bounce 0.32s ease-in-out infinite alternate;
+}
+.shy .note {
+  transform: translateY(8px);
+}
+@keyframes wiggle {
+  25% {
+    rotate: -12deg;
+  }
+  75% {
+    rotate: 9deg;
+  }
+}
+@keyframes bounce {
+  to {
+    transform: translateY(-5px);
+  }
+}
+/* laughing: squeezed >< eyes */
+.buddy[data-mood="laugh"] .eyes {
+  gap: 9px;
+  top: 13px;
+}
+.buddy[data-mood="laugh"] .eyes i {
+  width: 8px;
+  height: 8px;
+  border-radius: 1px;
+  background: none;
+  border-top: 2.5px solid var(--navy);
+  border-right: 2.5px solid var(--navy);
+  rotate: 45deg;
+  animation: none;
+}
+.buddy[data-mood="laugh"] .eyes i + i {
+  rotate: -135deg;
+}
+/* shy: small eyes looking down, pink cheeks */
+.buddy[data-mood="shy"] .eyes {
+  top: 12px;
+  translate: 0 0;
+}
+.buddy[data-mood="shy"] .eyes i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  animation: none;
+}
+.cheeks {
+  position: absolute;
+  left: 9px;
+  right: 9px;
+  top: 17px;
+  height: 7px;
+  opacity: 0;
+  background: radial-gradient(closest-side, #ff8fa3, transparent) left / 13px 7px no-repeat,
+    radial-gradient(closest-side, #ff8fa3, transparent) right / 13px 7px no-repeat;
+  transition: opacity 0.3s;
+}
+.buddy[data-mood="shy"] .cheeks {
+  opacity: 0.9;
+}
+/* the little "ha" bits that float up when it laughs */
+.bit {
+  position: absolute;
+  left: 50%;
+  bottom: 70%;
+  font: 700 15px/1 var(--font-hand), cursive;
+  color: var(--navy);
+  pointer-events: none;
+  white-space: nowrap;
+  animation: floatUp 0.95s var(--ease) forwards;
+}
+@keyframes floatUp {
+  from {
+    opacity: 0;
+    translate: -50% 0;
+    scale: 0.6;
+  }
+  20% {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+    translate: calc(-50% + var(--dx)) -56px;
+    rotate: var(--rot);
+    scale: 1.1;
   }
 }
 

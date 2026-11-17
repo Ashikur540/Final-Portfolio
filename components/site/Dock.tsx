@@ -3,9 +3,19 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { personalInfo, socialMedia } from "@/data";
 import { Icon } from "./Icon";
+import { prefersReducedMotion } from "./useInView";
 import s from "./dock.module.css";
 
-type Mood = "calm" | "love" | "happy";
+type Mood = "calm" | "love" | "happy" | "laugh" | "shy";
+type Poke = "giggle" | "laugh" | "shy";
+type Bit = { id: number; text: string; dx: number; rot: number };
+
+// how the note reacts to clicks: it giggles, then laughs, then gets shy if you keep going
+const POKE: Record<Poke, { mood: Mood; bits: number; line?: string; calmAfter: number }> = {
+  giggle: { mood: "happy", bits: 2, calmAfter: 1600 },
+  laugh: { mood: "laugh", bits: 3, line: "hehe, stop it", calmAfter: 1600 },
+  shy: { mood: "shy", bits: 0, line: "ok... that's enough", calmAfter: 3200 },
+};
 
 const LINKS = [
   { id: "about", label: "About" },
@@ -29,7 +39,7 @@ const link = (name: string) => socialMedia.find((m) => m.name === name)?.url || 
 /** Floating menu at the bottom with a sticky-note buddy that peeks over it, watches the cursor and reacts to each section. */
 export function Dock() {
   const dockRef = useRef<HTMLElement>(null);
-  const buddyRef = useRef<HTMLSpanElement>(null);
+  const buddyRef = useRef<HTMLButtonElement>(null);
   const items = useRef<Record<string, HTMLElement | null>>({});
   const said = useRef(new Set<string>());
   const sayTimer = useRef(0);
@@ -37,6 +47,17 @@ export function Dock() {
   const [hover, setHover] = useState<{ key: string; tip?: string; mood?: Mood } | null>(null);
   const [say, setSay] = useState<string | null>(null);
   const [x, setX] = useState<number | null>(null);
+  const [poke, setPoke] = useState<Poke | null>(null);
+  const [bits, setBits] = useState<Bit[]>([]);
+  const pokes = useRef(0);
+  const calmTimer = useRef(0);
+  const bitId = useRef(0);
+
+  const speak = useCallback((line: string) => {
+    setSay(line);
+    window.clearTimeout(sayTimer.current);
+    sayTimer.current = window.setTimeout(() => setSay(null), 2800);
+  }, []);
 
   // scroll-spy: which section sits in the middle of the screen
   useEffect(() => {
@@ -57,11 +78,40 @@ export function Dock() {
     const line = SECTIONS[current]?.line;
     if (!line || said.current.has(current)) return;
     said.current.add(current);
-    setSay(line);
-    window.clearTimeout(sayTimer.current);
-    sayTimer.current = window.setTimeout(() => setSay(null), 2800);
-  }, [current]);
-  useEffect(() => () => window.clearTimeout(sayTimer.current), []);
+    speak(line);
+  }, [current, speak]);
+  useEffect(
+    () => () => {
+      window.clearTimeout(sayTimer.current);
+      window.clearTimeout(calmTimer.current);
+    },
+    [],
+  );
+
+  // each click: 1-2 giggle, 3-6 laugh, 7+ shy; a short pause calms it down again
+  const onPoke = () => {
+    const n = ++pokes.current;
+    const next: Poke = n >= 7 ? "shy" : n >= 3 ? "laugh" : "giggle";
+    const cfg = POKE[next];
+    if (next !== poke && cfg.line) speak(cfg.line);
+    setPoke(next);
+    if (cfg.bits && !prefersReducedMotion()) {
+      const fresh = Array.from({ length: cfg.bits }, () => ({
+        id: ++bitId.current,
+        text: next === "laugh" && Math.random() < 0.35 ? "HA" : "ha",
+        dx: Math.round((Math.random() - 0.5) * 96),
+        rot: Math.round((Math.random() - 0.5) * 40),
+      }));
+      setBits((b) => [...b, ...fresh].slice(-14));
+      const ids = new Set(fresh.map((f) => f.id));
+      window.setTimeout(() => setBits((b) => b.filter((x) => !ids.has(x.id))), 950);
+    }
+    window.clearTimeout(calmTimer.current);
+    calmTimer.current = window.setTimeout(() => {
+      pokes.current = 0;
+      setPoke(null);
+    }, cfg.calmAfter);
+  };
 
   // the note sits over the hovered item, else over the current section, else the middle
   const place = useCallback(() => {
@@ -105,7 +155,7 @@ export function Dock() {
     };
   }, []);
 
-  const mood: Mood = hover?.mood ?? SECTIONS[current]?.mood ?? "calm";
+  const mood: Mood = (poke && POKE[poke].mood) ?? hover?.mood ?? SECTIONS[current]?.mood ?? "calm";
   const bubble = hover?.tip ?? say;
   // keep the last words while the bubble fades out, so it does not shrink while still visible
   const lastWords = useRef("");
@@ -122,23 +172,39 @@ export function Dock() {
 
   return (
     <nav ref={dockRef} className={s.dock} aria-label="Main" data-dock>
-      <span
+      <button
+        type="button"
         ref={buddyRef}
-        className={s.buddy}
+        className={`${s.buddy} ${poke ? s[poke] : ""}`}
         // moved with a transform (not left) so sliding never counts as layout shift
         style={{ translate: x === null ? "0 0" : `${x}px 0`, opacity: x === null ? 0 : 1 }}
+        onClick={onPoke}
+        aria-label="Poke the sticky note"
         data-mood={mood}
-        aria-hidden="true"
         data-buddy
       >
-        <span className={s.eyes}>
-          <i />
-          <i />
+        <span className={s.note} aria-hidden="true">
+          <span className={s.cheeks} />
+          <span className={s.eyes}>
+            <i />
+            <i />
+          </span>
         </span>
-        <span className={`${s.bubble} ${bubble ? s.show : ""}`} data-bubble>
+        <span className={`${s.bubble} ${bubble ? s.show : ""}`} aria-hidden="true" data-bubble>
           {lastWords.current}
         </span>
-      </span>
+        {bits.map((b) => (
+          <span
+            key={b.id}
+            className={s.bit}
+            style={{ "--dx": `${b.dx}px`, "--rot": `${b.rot}deg` } as React.CSSProperties}
+            aria-hidden="true"
+            data-bit
+          >
+            {b.text}
+          </span>
+        ))}
+      </button>
 
       <div className={s.items}>
         {LINKS.map(({ id, label }) => (

@@ -88,6 +88,26 @@ const checks = [
     },
   },
   {
+    name: "menu: poking the note makes it laugh, then shy, then calm",
+    async run(b) {
+      const p = await open(b);
+      await p.waitForTimeout(1300);
+      const note = p.locator("[data-buddy]");
+      const mood = () => note.getAttribute("data-mood");
+      await note.click();
+      assert((await mood()) === "happy", "first click: " + (await mood()));
+      await note.click();
+      await note.click();
+      assert((await mood()) === "laugh", "third click: " + (await mood()));
+      assert((await p.locator("[data-bit]").count()) > 0, "no ha bits");
+      for (let i = 0; i < 4; i++) await note.click();
+      assert((await mood()) === "shy", "seventh click: " + (await mood()));
+      await p.waitForTimeout(3600);
+      assert((await mood()) === "calm", "did not calm down: " + (await mood()));
+      return p;
+    },
+  },
+  {
     name: "menu fits on small phones",
     async run(b) {
       for (const w of [360, 390]) {
