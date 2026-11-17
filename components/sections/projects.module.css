@@ -42,7 +42,14 @@
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: #e1e4ec;
+  background: #ff5f57;
+  box-shadow: inset 0 0 0 0.5px rgba(0, 0, 0, 0.12);
+}
+.dots i:nth-child(2) {
+  background: #febc2e;
+}
+.dots i:nth-child(3) {
+  background: #28c840;
 }
 .url {
   flex: 1;
@@ -77,6 +84,26 @@
   object-fit: cover;
   object-position: top;
   transition: transform 2.4s var(--ease);
+}
+/* one panel in the card's colour covers the screenshot, then slides up once it scrolls in */
+.cover {
+  position: absolute;
+  inset: -1px;
+  z-index: 1;
+  background: var(--tint, #f4f6fb);
+  transition: translate 0.9s var(--ease);
+  pointer-events: none;
+}
+.open {
+  translate: 0 -101%;
+}
+:global(html:not(.js)) .cover {
+  display: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .cover {
+    display: none;
+  }
 }
 @media (hover: hover) {
   .card:hover .browser {

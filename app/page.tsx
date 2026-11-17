@@ -1,6 +1,7 @@
 import { Banner } from "@/components/site/Banner";
 import { SmoothScroll } from "@/components/site/SmoothScroll";
 import { TopBar } from "@/components/site/TopBar";
+import { Dock } from "@/components/site/Dock";
 import { Hero } from "@/components/sections/Hero";
 import { Desk } from "@/components/desk/Desk";
 import { Projects } from "@/components/sections/Projects";
@@ -18,6 +19,7 @@ export default async function Home() {
     <SmoothScroll>
       <Banner />
       <TopBar />
+      <Dock />
       <main>
         <Hero />
         <Desk />

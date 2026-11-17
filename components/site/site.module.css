@@ -55,6 +55,38 @@
 .drawn {
   stroke-dashoffset: 0;
 }
+/* title letters fade in one by one; the underline waits for most of them */
+.word {
+  display: inline-block;
+  white-space: nowrap;
+}
+@media (prefers-reduced-motion: no-preference) {
+  :global(.js) .ch {
+    opacity: 0;
+    transition: opacity 0.45s ease-out;
+    transition-delay: calc(var(--i) * 32ms);
+  }
+  :global(.js) .lettersIn .ch {
+    opacity: 1;
+  }
+  .stroke {
+    transition-delay: calc(var(--n, 0) * 20ms);
+  }
+}
+/* counting number: the hidden final value holds the width so the line never jiggles */
+.count {
+  display: inline-grid;
+  font-variant-numeric: tabular-nums;
+}
+.count > span,
+.count::after {
+  grid-area: 1 / 1;
+  justify-self: end;
+}
+.count::after {
+  content: attr(data-final);
+  visibility: hidden;
+}
 @media (max-width: 980px) {
   .sh {
     flex-direction: column;

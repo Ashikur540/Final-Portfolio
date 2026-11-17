@@ -31,6 +31,12 @@ const scrollTo = (page, sel, offset = 90) =>
     [sel, offset],
   );
 
+// wait until the desk objects have finished their drop-in animation
+const settleDesk = (page) =>
+  page.evaluate(() =>
+    Promise.all([...document.querySelectorAll("[data-desk-object]")].flatMap((e) => e.getAnimations().map((a) => a.finished))),
+  );
+
 const checks = [
   {
     name: "page has one h1",
@@ -55,12 +61,42 @@ const checks = [
     },
   },
   {
-    name: "top bar has About, Work, Experience, Notes in order",
+    name: "menu has About, Work, Experience, Notes in order",
     async run(b) {
       const p = await open(b);
-      const t = await p.locator("header nav a").allTextContents();
+      const t = await p.locator('[data-dock] a[href^="#"]').allTextContents();
       assert(t.join(",") === "About,Work,Experience,Notes", "got " + t.join(","));
       return p;
+    },
+  },
+  {
+    name: "menu: the note follows hover, and Work gets heart eyes and a line",
+    async run(b) {
+      const p = await open(b);
+      await p.waitForTimeout(1300);
+      const left = () => p.locator("[data-buddy]").evaluate((e) => e.getBoundingClientRect().left);
+      const a = await left();
+      await p.locator('[data-dock] a[href="#about"]').hover();
+      await p.waitForTimeout(700);
+      assert((await left()) < a - 80, "note did not move to About");
+      await p.mouse.move(10, 10);
+      await scrollTo(p, "#work", 120);
+      await p.waitForTimeout(700);
+      assert((await p.locator("[data-buddy]").getAttribute("data-mood")) === "love", "no heart eyes on Work");
+      assert(/click one/.test(await p.locator("[data-bubble]").textContent()), "no line on Work");
+      return p;
+    },
+  },
+  {
+    name: "menu fits on small phones",
+    async run(b) {
+      for (const w of [360, 390]) {
+        const p = await open(b, w, { isMobile: true, hasTouch: true });
+        const r = await p.locator("[data-dock] > div").evaluate((e) => e.getBoundingClientRect());
+        assert(r.left >= 4 && r.right <= w - 4, `menu ${Math.round(r.left)}..${Math.round(r.right)} at ${w}`);
+        await p.context().close();
+      }
+      return null;
     },
   },
   {
@@ -131,7 +167,8 @@ const checks = [
     async run(b) {
       const p = await open(b, 1020);
       await scrollTo(p, "#about");
-      await p.waitForTimeout(500);
+      await p.waitForTimeout(300);
+      await settleDesk(p);
       const bad = await p.evaluate(() => {
         const stage = document.querySelector("[data-desk]").parentElement.getBoundingClientRect();
         return [...document.querySelectorAll("[data-desk-object]")]
@@ -160,8 +197,9 @@ const checks = [
     name: "desk pen clicks and the sticky note drags",
     async run(b) {
       const p = await open(b);
-      await scrollTo(p, "#about");
-      await p.waitForTimeout(400);
+      await p.locator("[data-pen-out]").scrollIntoViewIfNeeded();
+      await p.waitForTimeout(300);
+      await settleDesk(p);
       await p.locator("[data-pen-out]").click({ force: true });
       assert((await p.locator("[data-pen-out]").getAttribute("data-pen-out")) === "true", "pen did not click");
       // clicking the pen scrolled down to it; bring the sticky note back into view
@@ -193,7 +231,7 @@ const checks = [
     name: "desk: typing over the desk shows on the laptop",
     async run(b) {
       const p = await open(b);
-      await scrollTo(p, "#about");
+      await scrollTo(p, '[data-k="q"]', 400);
       await p.locator('[data-k="q"]').hover();
       await p.keyboard.type("hello ashik", { delay: 30 });
       const t = await p.locator("[data-typed]").textContent();
@@ -216,7 +254,7 @@ const checks = [
     name: "desk: a held key lights the laptop key",
     async run(b) {
       const p = await open(b);
-      await scrollTo(p, "#about");
+      await scrollTo(p, '[data-k="h"]', 400);
       await p.locator('[data-k="h"]').hover();
       await p.keyboard.down("h");
       await p.waitForTimeout(100);
@@ -320,7 +358,8 @@ const checks = [
     name: "desk: arrow right then left returns to the same photo",
     async run(b) {
       const p = await open(b);
-      await scrollTo(p, "#about");
+      // keep the keyboard in the middle of the screen, clear of the floating menu
+      await scrollTo(p, '[data-k="q"]', 400);
       const first = await p.locator("[data-photo]").getAttribute("data-photo");
       await p.locator('[data-k="q"]').hover();
       await p.keyboard.press("ArrowRight");
@@ -360,6 +399,43 @@ const checks = [
     },
   },
   {
+    name: "desk: every object is placed and fully visible after scrolling past it",
+    async run(b) {
+      for (const w of [1440, 390]) {
+        const p = await open(b, w);
+        const n = await p.locator("[data-desk-object]").count();
+        for (let i = 0; i < n; i++) {
+          await p.locator("[data-desk-object]").nth(i).scrollIntoViewIfNeeded();
+          await p.waitForTimeout(150);
+        }
+        await p.waitForTimeout(1500);
+        const bad = await p.locator("[data-desk-object]").evaluateAll((els) =>
+          els.filter((e) => !("placed" in e.dataset) || getComputedStyle(e).opacity !== "1").length,
+        );
+        assert(bad === 0, `${bad} of ${n} objects not placed at ${w}px`);
+        await p.context().close();
+      }
+      return null;
+    },
+  },
+  {
+    name: "headings: titles read as whole words and the screenshot cover slides away",
+    async run(b) {
+      const p = await open(b);
+      for (const t of ["A bit about me", "Things I've built", "Experience", "Notes"]) {
+        assert((await p.getByRole("heading", { level: 2, name: t, exact: true }).count()) === 1, "heading name: " + t);
+      }
+      await scrollTo(p, "#work", 0);
+      await p.waitForTimeout(2200);
+      const cover = await p.locator("[data-project] [data-cover]").first().evaluate((c) => {
+        const r = c.getBoundingClientRect(), v = c.parentElement.getBoundingClientRect();
+        return r.bottom <= v.top + 1;
+      });
+      assert(cover, "screenshot cover did not slide away");
+      return p;
+    },
+  },
+  {
     name: "projects: links open safely",
     async run(b) {
       const p = await open(b);
@@ -375,8 +451,40 @@ const checks = [
       const p = await open(b);
       const h = await p.locator("#experience h3").allTextContents();
       assert(/^HasTech IT/.test(h[0]) && /^Innosoft IT/.test(h[1]) && /^Arraytics/.test(h[2]) && h[3] === "Your team?", "order: " + h.join(" | "));
+      // the numbers count up once seen, so scroll past and let them finish
+      await scrollTo(p, "#experience [data-marker]", 400);
+      await p.waitForTimeout(1800);
       const marked = await p.locator("#experience [data-marker]").allTextContents();
-      assert(marked.join("|") === "8,000+ sites|2,800+ active installs", "markers: " + marked.join("|"));
+      assert(marked.join("|") === "in one month|from Figma to launch|8,000+ sites|2,800+ active installs|let's talk", "markers: " + marked.join("|"));
+      return p;
+    },
+  },
+  {
+    name: "experience: hovering a job shows its print, and several photos swap",
+    async run(b) {
+      const p = await open(b);
+      const row = p.locator("#experience [data-job]").nth(2);
+      await row.scrollIntoViewIfNeeded();
+      const print = row.locator("[data-print]");
+      assert((await print.evaluate((e) => getComputedStyle(e).opacity)) === "0", "print visible before hover");
+      await row.hover({ position: { x: 40, y: 20 } });
+      await p.waitForTimeout(600);
+      assert((await print.evaluate((e) => getComputedStyle(e).opacity)) === "1", "print hidden on hover");
+      const cap = () => print.locator("[aria-hidden='false']").textContent();
+      const first = await cap();
+      await p.waitForTimeout(1700);
+      assert((await cap()) !== first, "photos did not swap");
+      return p;
+    },
+  },
+  {
+    name: "experience: phones show the prints inline",
+    async run(b) {
+      const p = await open(b, 390, { hasTouch: true, isMobile: true });
+      const ops = await p.locator("#experience [data-print]").evaluateAll((els) => els.map((e) => getComputedStyle(e).opacity + getComputedStyle(e).position));
+      assert(ops.length === 4 && ops.every((o) => o === "1relative"), "prints: " + ops.join(","));
+      const sw = await p.evaluate(() => document.documentElement.scrollWidth);
+      assert(sw <= 390, "scrollWidth " + sw);
       return p;
     },
   },

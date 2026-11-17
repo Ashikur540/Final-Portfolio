@@ -1,14 +1,17 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { workHistories } from "@/data";
+import { jobMoments, workHistories } from "@/data";
 import { Marker } from "@/components/site/Marker";
+import { InkWord } from "@/components/site/InkWord";
 import { SectionHeading } from "@/components/site/SectionHeading";
+import { JobPrint } from "./JobPrint";
 import s from "./experience.module.css";
 
 // oldest job first, so the pen line reads like a story
 const JOBS = [...workHistories].reverse();
-const HIGHLIGHT = /(8,000\+ sites|2,800\+ active installs)/;
+// one highlight per job, so every row has one thing that catches the eye
+const HIGHLIGHT = /(in one month|from Figma to launch|8,000\+ sites|2,800\+ active installs)/;
 
 function withMarkers(text: string) {
   return text.split(HIGHLIGHT).map((part, i) => (HIGHLIGHT.test(part) ? <Marker key={i}>{part}</Marker> : part));
@@ -20,6 +23,16 @@ export function Experience() {
   const lineRef = useRef<SVGLineElement>(null);
   const tickRefs = useRef<(SVGSVGElement | null)[]>([]);
   const [ticked, setTicked] = useState(0);
+  // which row is hovered or focused (its photos swap while it is)
+  const [hot, setHot] = useState(-1);
+  // "let's talk" is highlighted once the pen has written "Your team?"
+  const [wrote, setWrote] = useState(false);
+  const rowEvents = (i: number) => ({
+    onMouseEnter: () => setHot(i),
+    onMouseLeave: () => setHot(-1),
+    onFocus: () => setHot(i),
+    onBlur: () => setHot(-1),
+  });
 
   useEffect(() => {
     const page = pageRef.current;
@@ -63,7 +76,7 @@ export function Experience() {
           </svg>
           <ol className={s.entries}>
             {JOBS.map((job, i) => (
-              <li key={job.company} className={s.entry} data-job>
+              <li key={job.company} className={s.entry} data-job {...rowEvents(i)}>
                 <span className={s.when}>{job.yearLabel}</span>
                 <svg
                   ref={(el) => {
@@ -81,17 +94,24 @@ export function Experience() {
                 </h3>
                 <span className={s.note}>{job.note}</span>
                 <p>{withMarkers(job.summary)}</p>
+                {jobMoments[job.name] && <JobPrint photos={jobMoments[job.name]} active={hot === i} label={job.name} />}
               </li>
             ))}
-            <li className={`${s.entry} ${s.next}`} data-job>
+            <li className={`${s.entry} ${s.next}`} data-job {...rowEvents(JOBS.length)}>
               <span className={s.when}>Jan 2027</span>
-              <h3>Your team?</h3>
+              <h3>
+                <InkWord text="Your team?" start="view" ms={1100} onDone={() => setWrote(true)} />
+              </h3>
               <div className={s.sign}>
                 <i aria-hidden="true" />
                 <span>
-                  your company here &rarr; <a href="#hello">let&apos;s talk</a>
+                  your company here &rarr;{" "}
+                  <Marker on={wrote}>
+                    <a href="#hello">let&apos;s talk</a>
+                  </Marker>
                 </span>
               </div>
+              <JobPrint photos={[{ caption: "your team photo here?" }]} active={false} label="Your team" emptyText="you?" />
             </li>
           </ol>
         </div>

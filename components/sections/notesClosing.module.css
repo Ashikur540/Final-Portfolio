@@ -21,6 +21,22 @@
   text-decoration: none;
   align-items: baseline;
 }
+/* each post is written onto its line as it scrolls in; the ruled lines stay still */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .post {
+      animation: writeIn linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 100%;
+    }
+  }
+}
+@keyframes writeIn {
+  from {
+    opacity: 0;
+    translate: -28px 0;
+  }
+}
 .post time {
   font: 400 17px/1 var(--font-hand), cursive;
   color: var(--blue);
@@ -77,7 +93,8 @@
 .cover {
   background: var(--navy);
   color: #fff;
-  padding: 110px 0 40px;
+  /* extra room at the bottom so the floating menu never covers the footer line */
+  padding: 110px 0 110px;
   margin-top: 40px;
   text-align: center;
   position: relative;
@@ -90,6 +107,30 @@
   height: 70%;
   background: radial-gradient(closest-side, rgba(37, 70, 216, 0.55), transparent);
   pointer-events: none;
+  animation: wander 26s ease-in-out infinite alternate;
+}
+/* the glow drifts slowly along an uneven path, so it never looks like a loop */
+@keyframes wander {
+  0% {
+    translate: 0 0;
+    scale: 1;
+  }
+  22% {
+    translate: -14% -8%;
+    scale: 1.08;
+  }
+  47% {
+    translate: 11% -16%;
+    scale: 0.94;
+  }
+  71% {
+    translate: -6% -4%;
+    scale: 1.12;
+  }
+  100% {
+    translate: 16% -10%;
+    scale: 1;
+  }
 }
 .h2 {
   margin: 0;

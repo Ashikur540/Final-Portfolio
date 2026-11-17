@@ -40,6 +40,8 @@ export function Button({
       <span>{children}</span>
       <span className={`${s.ic} ${iconMove ? s[iconMove] : ""}`}>
         <Icon name={icon} />
+        {/* the diagonal arrow leaves to the top right while a second one slides in from the bottom left */}
+        {iconMove === "ne" && <Icon name={icon} className={s.ic2} />}
       </span>
     </>
   );

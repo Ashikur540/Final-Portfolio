@@ -40,6 +40,31 @@ export function Desk() {
     audio?.setMuted(muted);
   }, [audio, muted]);
 
+  // objects are "placed" on the desk the first time each one scrolls in; CSS runs the drop
+  useEffect(() => {
+    const els = deskRef.current?.querySelectorAll<HTMLElement>("[data-desk-object]");
+    if (!els) return;
+    if (typeof IntersectionObserver === "undefined") {
+      els.forEach((el) => (el.dataset.placed = ""));
+      return;
+    }
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries
+          .filter((e) => e.isIntersecting)
+          .forEach((e, i) => {
+            const el = e.target as HTMLElement;
+            el.style.animationDelay = `${i * 90}ms`;
+            el.dataset.placed = "";
+            io.unobserve(el);
+          });
+      },
+      { threshold: 0.1 },
+    );
+    els.forEach((el) => io.observe(el));
+    return () => io.disconnect();
+  }, []);
+
   const onKey = useCallback((code: string) => {
     if (code === "arrowright") photoNav.current?.next();
     else if (code === "arrowleft") photoNav.current?.prev();

@@ -2,7 +2,7 @@
 // Fails while any placeholder content is still on the page. The site must not go live until this passes.
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { deskBooks, deskPhotos, deskTracks } from "../data/index.ts";
+import { deskBooks, deskPhotos, deskTracks, jobMoments } from "../data/index.ts";
 
 test("no placeholder content is left", () => {
   const standInSrcs = new Set(deskPhotos.filter((p) => p.standIn).map((p) => p.src));
@@ -13,6 +13,9 @@ test("no placeholder content is left", () => {
       .filter((t) => standInSrcs.has(t.cover) || t.cover.includes("saintmartin.jpg"))
       .map((t) => `track cover is a stand-in: ${t.title} (${t.cover})`),
     ...deskTracks.filter((t) => t.title.startsWith("Your nasheed") && !t.src).map((t) => `track without audio: ${t.title}`),
+    ...Object.entries(jobMoments).flatMap(([job, ms]) =>
+      ms.filter((m) => !m.src || !m.alt).map((m) => `job photo missing (src and alt): ${job} ("${m.caption}")`),
+    ),
   ];
   assert.deepEqual(problems, [], "\n" + problems.join("\n"));
 });

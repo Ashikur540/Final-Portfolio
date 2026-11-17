@@ -6,9 +6,16 @@ import { projects } from "@/data";
 import { Button } from "@/components/site/Button";
 import { Icon } from "@/components/site/Icon";
 import { SectionHeading } from "@/components/site/SectionHeading";
+import { useInView } from "@/components/site/useInView";
 import s from "./projects.module.css";
 
 const WIDE = "(min-width: 981px)";
+
+/** A panel in the card's colour covers the screenshot, then slides up once it scrolls in. */
+function Cover() {
+  const [ref, inView] = useInView<HTMLDivElement>({ margin: "0px 0px -10% 0px" });
+  return <div ref={ref} className={`${s.cover} ${inView ? s.open : ""}`} aria-hidden="true" data-cover />;
+}
 
 /** Five project cards that stack as you scroll; the covered card shrinks a little. */
 export function Projects() {
@@ -77,7 +84,15 @@ export function Projects() {
                     </span>
                   </div>
                   <div className={s.vp}>
-                    <Image src={p.img} alt={`${p.title} screenshot`} fill sizes="(max-width: 980px) 92vw, 640px" />
+                    <Image
+                      src={p.img}
+                      alt={`${p.title} screenshot`}
+                      fill
+                      quality={90}
+                      sizes="(max-width: 980px) 92vw, 640px"
+                      style={{ objectPosition: p.imgPosition }}
+                    />
+                    <Cover />
                   </div>
                 </div>
                 <div>

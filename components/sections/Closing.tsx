@@ -36,7 +36,7 @@ export function Closing() {
         <div className={s.row}>
           <Button onClick={copy} icon={state === "copied" ? "check" : "copy"} onDark done={state === "copied"}>
             <span aria-live="polite">
-              {state === "copied" ? "Copied ✓" : state === "manual" ? personalInfo.email : "Copy email"}
+              {state === "copied" ? "Copied" : state === "manual" ? personalInfo.email : "Copy email"}
             </span>
           </Button>
           <Button href={link("LinkedIn")} variant="line" icon="linkedin" onDark external>
@@ -50,7 +50,7 @@ export function Closing() {
           </Button>
         </div>
         <div className={s.foot}>
-          <span>Built by hand in React. Photos on my phone.</span>
+          <span>Built by ❤️ Ashikur Rahman</span>
           <span>© {new Date().getFullYear()} Ashikur Rahman</span>
         </div>
       </div>

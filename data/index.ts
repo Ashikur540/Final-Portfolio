@@ -82,7 +82,7 @@ export const projects = [
     summary: "A live support SaaS with AI replies, built from a blank page to production.",
     did: ["Designed the product and built most of the React app", "Chat widget any site adds with one script", "Laravel APIs, and edited the launch videos"],
     des: "A live customer-support SaaS with AI replies, built from scratch to production. I did the product design, most of the React app, the chat widget sites add with one script, Laravel APIs, and the launch videos.",
-    img: "/projects/helpxon.jpg",
+    img: "/projects/helpxon-hd.jpg",
     iconLists: [
       { name: "React", image: "/logos/brand-react.svg" },
       { name: "TypeScript", image: "/logos/brand-typescript.svg" },
@@ -103,7 +103,7 @@ export const projects = [
     summary: "Paste a React component, get a matching skeleton loader you can tweak.",
     did: ["Reads JSX with Babel, right in the browser", "Spots layouts like cards and pricing tables", "Exports React or HTML with Tailwind"],
     des: "Paste a React component, get a matching skeleton loader you can tweak, then copy React or HTML with Tailwind. Reads JSX with Babel, spots layouts like cards and pricing tables, and runs fully in the browser. Open source.",
-    img: "/projects/skeleton-studio.png",
+    img: "/projects/skeleton-studio-hd.jpg",
     iconLists: [
       { name: "Next.js", image: "/logos/brand-nextjs.svg" },
       { name: "React", image: "/logos/brand-react.svg" },
@@ -124,7 +124,7 @@ export const projects = [
     summary: "Track daily good deeds, with a heatmap, streaks, reminders and prayer times.",
     did: ["Works offline, installs like a normal app", "Prayer times from your location"],
     des: "An offline-first app to track daily good deeds, with a heatmap, streaks, reminders and prayer times from your location. Installs on your phone like a normal app.",
-    img: "/projects/hasanat.jpg",
+    img: "/projects/hasanat-hd.jpg",
     iconLists: [
       { name: "React", image: "/logos/brand-react.svg" },
       { name: "TypeScript", image: "/logos/brand-typescript.svg" },
@@ -146,6 +146,8 @@ export const projects = [
     did: ["Zikr and the 99 names in the spinner", "A short authentic hadith under it"],
     des: "A Claude Code plugin that turns waiting time into remembrance: zikr and the 99 names of Allah in the spinner while Claude works, with a short authentic hadith under it.",
     img: "/projects/tadhkir-loop.jpg",
+    // portrait image: centre it on the terminal (a wider, larger image would be sharper)
+    imgPosition: "50% 50%",
     iconLists: [
       { name: "JavaScript", image: "/logos/brand-javascript.svg" },
       { name: "Node.js", image: "/logos/brand-nodejs.svg" },
@@ -164,7 +166,7 @@ export const projects = [
     summary: "A task manager with a dashboard that shows how your week is going.",
     did: ["RTK Query on top of localStorage", "Moving to a real API means changing one file"],
     des: "A task manager with a dashboard that shows how your week is going. RTK Query sits on top of localStorage, so moving to a real API means changing one file.",
-    img: "/projects/flowmate.jpg",
+    img: "/projects/flowmate-hd.jpg",
     iconLists: [
       { name: "Next.js", image: "/logos/brand-nextjs.svg" },
       { name: "TypeScript", image: "/logos/brand-typescript.svg" },
@@ -340,7 +342,20 @@ export const deskPhotos: DeskPhoto[] = [
   { src: "/desk/rangpur.jpg", caption: "old palace", date: "'25 02 08", standIn: true },
 ];
 
-export type DeskBook = { title: string; author: string; tone: "dark" | "red" | "cream"; placeholder?: boolean };
+export type JobMoment = { src?: string; caption: string; alt?: string };
+
+/**
+ * Photos that appear when a job row in Experience is hovered (keyed by job name).
+ * No src = an empty placeholder frame; yarn check:launch fails until each one has a real photo.
+ * One photo stays still; two or more swap every 1.5 seconds.
+ */
+export const jobMoments: Record<string, JobMoment[]> = {
+  "HasTech IT": [{ caption: "first team" }],
+  "Innosoft IT": [{ caption: "remote crew" }],
+  Arraytics: [{ caption: "team day" }, { caption: "prize night" }],
+};
+
+export type DeskBook ={ title: string; author: string; tone: "dark" | "red" | "cream"; placeholder?: boolean };
 
 /** Books on the desk. placeholder = not confirmed by Ashik yet. */
 export const deskBooks: DeskBook[] = [

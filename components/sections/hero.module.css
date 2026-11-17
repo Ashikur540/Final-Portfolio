@@ -121,6 +121,25 @@
     transform: rotate(-11deg) translate(-26px, 8px);
   }
 }
+/* the prints drift a little slower than the page as it scrolls away, the back one more */
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .a,
+    .b {
+      animation: drift linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0 700px;
+    }
+    .b {
+      --drift: 64px;
+    }
+  }
+}
+@keyframes drift {
+  to {
+    translate: 0 var(--drift, 32px);
+  }
+}
 .tape {
   position: absolute;
   top: -12px;
