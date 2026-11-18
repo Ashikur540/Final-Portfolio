@@ -10,6 +10,16 @@ const nextConfig = {
         // your project has ESLint errors.
         ignoreDuringBuilds: true,
       },
+    // nasheeds download only when someone presses play, then the browser keeps them for a year.
+    // Replacing a track? Give the new file a new name, or old visitors keep hearing the old one.
+    async headers() {
+        return [
+            {
+                source: "/desk/audio/:file*",
+                headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }],
+            },
+        ];
+    },
 };
 
 export default nextConfig;

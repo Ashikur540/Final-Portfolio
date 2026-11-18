@@ -11,7 +11,7 @@ test("no placeholder content is left", () => {
     ...deskTracks
       .filter((t) => !t.cover.startsWith("/clicks/"))
       .map((t) => `track cover is not one of my photos: ${t.title} (${t.cover})`),
-    ...deskTracks.filter((t) => t.title.startsWith("Your nasheed") && !t.src).map((t) => `track without audio: ${t.title}`),
+    ...deskTracks.filter((t) => !t.src && !t.generated).map((t) => `track without audio: ${t.title}`),
     ...Object.entries(jobMoments).flatMap(([job, ms]) =>
       ms.filter((m) => !m.src || !m.alt).map((m) => `job photo missing (src and alt): ${job} ("${m.caption}")`),
     ),

@@ -18,7 +18,6 @@ export type DeskAudio = {
 type Options = { Ctor?: typeof AudioContext; AudioEl?: typeof Audio; tracks?: DeskTrack[] };
 
 const VOLUME = 0.6;
-const note = (n: number) => 440 * Math.pow(2, (n - 69) / 12);
 const seconds = (len: string) => {
   const [m, s] = len.split(":");
   return Number(m) * 60 + Number(s);
@@ -95,38 +94,14 @@ export function createDeskAudio({ Ctor, AudioEl, tracks = deskTracks }: Options 
     src.stop(t + d + 0.02);
   }
 
-  const pad = (notes: number[], t: number, d: number, gain: number) =>
-    notes.forEach((n) => {
-      tone(note(n), t, d, "sine", gain);
-      tone(note(n) * 1.004, t, d, "sine", gain * 0.7);
-    });
-
-  // calm, drum-free placeholder loops, used until a track has a real file
-  const LOOPS: { bpm: number; step(i: number, t: number, s: number): void }[] = [
-    {
-      bpm: 60,
-      step(i, t, s) {
-        if (i % 32 === 0) pad([[50, 57, 62], [48, 55, 60], [46, 53, 58], [45, 52, 57]][Math.floor(i / 32) % 4], t, s * 31, 0.07);
-        const m = [62, null, null, 63, null, 66, null, null, 67, null, 66, null, 63, null, 62, null][i % 16];
-        if (m != null && i % 32 >= 8) tone(note(m + 12), t, s * 3.5, "sine", 0.045);
-      },
+  // the rain track: a soft hiss and a low patter, made here so it needs no file
+  const RAIN = {
+    bpm: 60,
+    step(i: number, t: number, s: number) {
+      noise(t, s * 1.1, 0.04, 5200, 0.4, "highpass");
+      if (i % 3 === 0) noise(t, s * 1.6, 0.02, 900, 0.5, "lowpass");
     },
-    {
-      bpm: 54,
-      step(i, t, s) {
-        if (i % 32 === 0) pad([[45, 52, 57], [43, 50, 55], [41, 48, 53], [43, 50, 55]][Math.floor(i / 32) % 4], t, s * 31, 0.075);
-        const m = [57, null, null, null, 60, null, 62, null, null, 60, null, null, 58, null, 57, null][i % 16];
-        if (m != null) tone(note(m + 12), t, s * 4, "sine", 0.04);
-      },
-    },
-    {
-      bpm: 60,
-      step(i, t, s) {
-        noise(t, s * 1.1, 0.04, 5200, 0.4, "highpass");
-        if (i % 3 === 0) noise(t, s * 1.6, 0.02, 900, 0.5, "lowpass");
-      },
-    },
-  ];
+  };
 
   let timer: ReturnType<typeof setInterval> | undefined;
   let music: GainNode | null = null;
@@ -158,8 +133,10 @@ export function createDeskAudio({ Ctor, AudioEl, tracks = deskTracks }: Options 
       file = el;
       return;
     }
+    // a track with no file plays nothing (yarn check:launch stops that from going live)
+    if (!tr.generated) return;
     const c = ac();
-    const loop = LOOPS[track % LOOPS.length];
+    const loop = RAIN;
     const stepLen = 60 / loop.bpm / 4;
     const length = seconds(tr.length);
     music = c.createGain();

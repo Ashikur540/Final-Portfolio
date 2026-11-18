@@ -64,7 +64,6 @@ export default function RootLayout({
       <head>
         {/* lets CSS hide the handwriting before the pen writes it; without JS it simply shows */}
         <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
-        <link rel="icon" href="/favicon.ico" sizes="any" />
       </head>
       <body>{children}</body>
     </html>

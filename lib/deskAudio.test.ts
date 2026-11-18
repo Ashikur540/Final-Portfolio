@@ -1,3 +1,4 @@
+import { deskTracks } from "../data/index.ts";
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { createDeskAudio } from "./deskAudio.ts";
@@ -75,13 +76,13 @@ test("every sound can play without throwing", () => {
   a.puff();
   a.setMuted(true);
   a.setMuted(false);
-  a.play(0, () => {}, () => {});
+  a.play(deskTracks.findIndex((t) => t.generated), () => {}, () => {}); // the rain track
   a.stop();
 });
 
 test("a track with a file plays that file, and stop pauses it", () => {
   FakeAudio.made = [];
-  const tracks = [{ title: "Real nasheed", length: "1:00", cover: "/c.jpg", src: "/desk/audio/one.mp3" }];
+  const tracks = [{ title: "Real nasheed", artist: "Test", length: "1:00", cover: "/c.jpg", src: "/desk/audio/one.mp3" }];
   const a = createDeskAudio({ Ctor, AudioEl, tracks });
   assert.ok(a);
   a.play(0, () => {}, () => {});
@@ -93,7 +94,7 @@ test("a track with a file plays that file, and stop pauses it", () => {
 
 test("muting also mutes a playing file", () => {
   FakeAudio.made = [];
-  const tracks = [{ title: "Real nasheed", length: "1:00", cover: "/c.jpg", src: "/desk/audio/one.mp3" }];
+  const tracks = [{ title: "Real nasheed", artist: "Test", length: "1:00", cover: "/c.jpg", src: "/desk/audio/one.mp3" }];
   const a = createDeskAudio({ Ctor, AudioEl, tracks });
   assert.ok(a);
   a.play(0, () => {}, () => {});

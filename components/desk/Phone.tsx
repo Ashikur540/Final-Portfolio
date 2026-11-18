@@ -12,7 +12,6 @@ const seconds = (len: string) => {
   return Number(m) * 60 + Number(sec);
 };
 const mmss = (x: number) => `${Math.floor(x / 60)}:${String(Math.floor(x % 60)).padStart(2, "0")}`;
-const placeholders = deskTracks.some((t) => !t.src);
 
 /** Phone with a small nasheed player. Nothing plays until the visitor presses play. */
 export function Phone({ audio }: { audio: DeskAudio | null }) {
@@ -20,6 +19,23 @@ export function Phone({ audio }: { audio: DeskAudio | null }) {
   const [playing, setPlaying] = useState(false);
   const [elapsed, setElapsed] = useState(0);
   const curRef = useRef(0);
+  const list = useRef<HTMLDivElement>(null);
+  const [atEnd, setAtEnd] = useState(false);
+  const checkEnd = () => {
+    const l = list.current;
+    if (l) setAtEnd(l.scrollTop + l.clientHeight >= l.scrollHeight - 2);
+  };
+
+  // keep the current track visible in the list, e.g. when it moves on to a track below the fold
+  useEffect(() => {
+    const l = list.current;
+    const row = l?.children[cur] as HTMLElement | undefined;
+    if (!l || !row) return;
+    if (row.offsetTop < l.scrollTop) l.scrollTo({ top: row.offsetTop - 4, behavior: "smooth" });
+    else if (row.offsetTop + row.offsetHeight > l.scrollTop + l.clientHeight)
+      l.scrollTo({ top: row.offsetTop + row.offsetHeight - l.clientHeight + 4, behavior: "smooth" });
+  }, [cur]);
+  useEffect(checkEnd, []);
 
   const start = (i: number) => {
     const n = (i + deskTracks.length) % deskTracks.length;
@@ -33,6 +49,7 @@ export function Phone({ audio }: { audio: DeskAudio | null }) {
     audio?.stop();
     setPlaying(false);
   };
+
   const pick = (i: number, play: boolean) => {
     if (play) start(i);
     else {
@@ -63,7 +80,7 @@ export function Phone({ audio }: { audio: DeskAudio | null }) {
           <div className={s.tt} data-track-title>
             {track.title}
           </div>
-          <div className={s.ar}>Desk nasheeds{placeholders ? " · placeholders" : ""}</div>
+          <div className={s.ar}>{track.artist}</div>
           <div className={s.bar} aria-hidden="true">
             <i style={{ width: `${Math.min(100, (elapsed / length) * 100)}%` }} />
           </div>
@@ -87,7 +104,7 @@ export function Phone({ audio }: { audio: DeskAudio | null }) {
               <Icon name="next" />
             </button>
           </div>
-          <div className={s.pl}>
+          <div className={`${s.pl} ${atEnd ? s.plEnd : ""}`} ref={list} onScroll={checkEnd}>
             {deskTracks.map((t, i) => (
               <button
                 key={t.title}
@@ -100,12 +117,15 @@ export function Phone({ audio }: { audio: DeskAudio | null }) {
                   <Image src={t.cover} alt="" fill sizes="26px" />
                 </span>
                 <span className={s.nm}>{t.title}</span>
-                <span className={s.eq} aria-hidden="true">
-                  <i />
-                  <i />
-                  <i />
+                {/* length and playing bars share one spot, so the row never changes width */}
+                <span className={s.end}>
+                  <span className={s.eq} aria-hidden="true">
+                    <i />
+                    <i />
+                    <i />
+                  </span>
+                  <span className={s.len}>{t.length}</span>
                 </span>
-                <span className={s.len}>{t.length}</span>
               </button>
             ))}
           </div>

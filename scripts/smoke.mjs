@@ -298,19 +298,64 @@ const checks = [
     },
   },
   {
-    name: "desk: tapping track 2 plays it and time moves",
+    name: "desk: tapping the rain track plays it and time moves",
     async run(b) {
       const p = await open(b);
       await scrollTo(p, "#about");
-      await p.getByRole("button", { name: /^Your nasheed 2/ }).click();
+      await p.getByRole("button", { name: /^Rain, no music/ }).click();
       await p.waitForTimeout(1600);
       const title = await p.locator("[data-track-title]").textContent();
-      assert(title === "Your nasheed 2", "title " + title);
+      assert(title === "Rain, no music", "title " + title);
       assert((await p.getByRole("button", { name: "Pause" }).count()) === 1, "no Pause button");
       const el = await p.locator("[data-elapsed]").textContent();
       assert(el !== "0:00", "time did not move");
       await p.getByRole("button", { name: "Pause" }).click();
       assert((await p.locator("[data-playing]").getAttribute("data-playing")) === "false", "did not stop");
+      return p;
+    },
+  },
+  {
+    name: "desk: nasheeds download only on play, and every row fits the phone",
+    async run(b) {
+      const ctx = await b.newContext({ viewport: { width: 1100, height: 900 } });
+      const p = await ctx.newPage();
+      p.errors = [];
+      p.on("pageerror", (e) => p.errors.push(e.message));
+      const audio = [];
+      p.on("request", (r) => /\/desk\/audio\//.test(r.url()) && audio.push(r.url()));
+      await p.goto(URL, { waitUntil: "networkidle" });
+      await scrollTo(p, "#about");
+      await settleDesk(p);
+      assert(audio.length === 0, "audio loaded before play: " + audio[0]);
+      const out = await p.evaluate(() => {
+        const pl = document.querySelector("[data-playing] button[aria-current]").parentElement;
+        // measured unrotated: offsets ignore the phone's tilt; hidden rows are reachable by scrolling the list
+        return [...pl.children].filter((r) => r.offsetLeft + r.offsetWidth > pl.clientWidth).length;
+      });
+      assert(out === 0, out + " playlist rows stick out");
+      await p.getByRole("button", { name: /^Maula Ya Salli/ }).click();
+      await p.waitForTimeout(800);
+      assert(audio.some((u) => u.endsWith("/desk/audio/maula-ya-salli.m4a")), "track 1 not fetched: " + audio.join(", "));
+      return p;
+    },
+  },
+  {
+    name: "desk: the playing row keeps its layout on play and pause",
+    async run(b) {
+      const p = await open(b);
+      await scrollTo(p, "#about");
+      const row = p.getByRole("button", { name: /^Rain, no music/ });
+      const geo = () => row.evaluate((r) => [...r.querySelectorAll("span")].map((c) => { const x = c.getBoundingClientRect(); return [x.left, x.width]; }));
+      await settleDesk(p);
+      await row.click();
+      await p.waitForTimeout(300);
+      const playing = await geo();
+      await p.getByRole("button", { name: "Pause" }).click();
+      await p.waitForTimeout(300);
+      const paused = await geo();
+      // the phone is tilted, so allow sub-pixel rounding; a real jump is several pixels
+      const moved = playing.some(([x, w], i) => Math.abs(x - paused[i][0]) > 1.5 || Math.abs(w - paused[i][1]) > 1.5);
+      assert(!moved, `row moved: ${JSON.stringify(playing)} -> ${JSON.stringify(paused)}`);
       return p;
     },
   },

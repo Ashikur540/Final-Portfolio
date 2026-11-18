@@ -339,7 +339,7 @@ export const deskPhotos: DeskPhoto[] = [
   { src: "/clicks/1000027701.webp", caption: "green, everywhere", date: "'25 04 03" },
   { src: "/clicks/1000019501.webp", caption: "dates and spices", date: "'25 02 26" },
   { src: "/clicks/1000039787.webp", caption: "evening walk", date: "'25 07 02" },
-  { src: "/clicks/1000157515.webp", caption: "new friend", date: "'26 10 09" },
+  { src: "/clicks/1000060956.webp", caption: "balcony garden", date: "'25 11 06" },
   { src: "/clicks/1000157525.webp", caption: "old palace", date: "'26 10 09" },
   { src: "/clicks/1000080439.webp", caption: "big red truck", date: "'26 01 14" },
   { src: "/clicks/1000080445.webp", caption: "low tide", date: "'26 01 14" },
@@ -364,16 +364,30 @@ export type DeskBook = { title: string; author: string; tone: "dark" | "red" | "
 
 /** Books on the desk. placeholder = not confirmed by Ashik yet. */
 export const deskBooks: DeskBook[] = [
-  { title: "The Pragmatic Programmer", author: "Hunt & Thomas", tone: "dark", placeholder: true },
-  { title: "Don't Make Me Think", author: "Steve Krug", tone: "red", placeholder: true },
-  { title: "This Is Marketing", author: "Seth Godin", tone: "cream", placeholder: true },
+  { title: "The Pragmatic Programmer", author: "Hunt & Thomas", tone: "dark" },
+  { title: "Don't Make Me Think", author: "Steve Krug", tone: "red" },
+  { title: "This Is Marketing", author: "Seth Godin", tone: "cream" },
 ];
 
-export type DeskTrack = { title: string; length: string; cover: string; src?: string };
+/**
+ * A track on the desk phone. src = an audio file I am allowed to host (public/desk/audio/).
+ * generated = made by the desk's own sound engine, no file needed.
+ * A track with neither plays a stand-in tone, and yarn check:launch fails until it has a file.
+ */
+export type DeskTrack = {
+  title: string;
+  artist: string;
+  length: string;
+  cover: string;
+  src?: string;
+  generated?: boolean;
+};
 
 /** Phone playlist. Add src (a file in /public/desk/audio/) once a real nasheed file is supplied. */
 export const deskTracks: DeskTrack[] = [
-  { title: "Your nasheed 1", length: "1:36", cover: "/clicks/1000017350.webp" },
-  { title: "Your nasheed 2", length: "1:12", cover: "/clicks/1000027701.webp" },
-  { title: "Rain, no music", length: "2:04", cover: "/clicks/1000157529.webp" },
+  { title: "Maula Ya Salli Wa Sallim", artist: "Abu Ubayda, slowed + reverb", length: "3:58", cover: "/clicks/1000017350.webp", src: "/desk/audio/maula-ya-salli.m4a" },
+  { title: "Kun Anta", artist: "Humood, slowed + reverb", length: "4:55", cover: "/clicks/1000027701.webp", src: "/desk/audio/kun-anta.m4a" },
+  { title: "Allahu Hu Allah", artist: "CFN release", length: "7:23", cover: "/clicks/1000060956.webp", src: "/desk/audio/allahu-hu-allah.m4a" },
+  { title: "Make Me Strong", artist: "Sami Yusuf, vocals only", length: "4:13", cover: "/clicks/1000080445.webp", src: "/desk/audio/make-me-strong.m4a" },
+  { title: "Rain, no music", artist: "made by the desk", length: "2:04", cover: "/clicks/1000157529.webp", generated: true },
 ];

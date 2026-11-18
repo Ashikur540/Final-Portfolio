@@ -450,8 +450,9 @@
 }
 .cov {
   display: block;
-  width: 132px;
-  height: 132px;
+  flex: none;
+  width: 118px;
+  height: 118px;
   margin: 0 auto 10px;
   border-radius: 16px;
   overflow: hidden;
@@ -547,12 +548,28 @@
 }
 .pl {
   display: grid;
+  /* one column that may shrink: a long title gets "..." instead of pushing the row out */
+  grid-template-columns: minmax(0, 1fr);
   gap: 1px;
+  align-content: start;
   margin-top: auto;
   padding: 4px;
   border-radius: 16px;
   background: rgba(255, 255, 255, 0.12);
   backdrop-filter: blur(10px);
+  /* more tracks than fit: the list scrolls inside the phone, the last row fades as a hint */
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: none;
+  mask-image: linear-gradient(#000 calc(100% - 22px), transparent);
+}
+.pl::-webkit-scrollbar {
+  display: none;
+}
+/* once scrolled to the end, nothing is hidden, so drop the fade */
+.plEnd {
+  mask-image: none;
 }
 .pl button {
   all: unset;
@@ -585,20 +602,31 @@
   object-fit: cover;
 }
 .nm {
+  min-width: 0;
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .len {
-  margin-left: auto;
   color: rgba(255, 255, 255, 0.78);
   font-size: 11px;
   font-variant-numeric: tabular-nums;
 }
+.end {
+  margin-left: auto;
+  display: inline-grid;
+  align-items: center;
+  justify-items: end;
+}
+.end > * {
+  grid-area: 1 / 1;
+}
 .eq {
-  display: none;
+  display: flex;
+  visibility: hidden;
   gap: 2px;
   align-items: end;
   height: 11px;
-  margin-left: auto;
 }
 .eq i {
   width: 3px;
@@ -620,10 +648,10 @@
   }
 }
 .playing .pl button[aria-current="true"] .eq {
-  display: flex;
+  visibility: visible;
 }
 .playing .pl button[aria-current="true"] .len {
-  display: none;
+  visibility: hidden;
 }
 
 /* ===== stack of photos ===== */
