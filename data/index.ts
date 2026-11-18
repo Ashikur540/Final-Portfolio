@@ -155,8 +155,9 @@ export const personalInfo = {
   location: "Dhaka, Bangladesh",
   email: "meashik1000@gmail.com",
   websiteDomain: "https://ashikur-on-web.vercel.app/",
+  // search result snippet: keep it under about 155 characters so Google shows all of it
   briefInfo:
-    "Frontend-focused full-stack developer with 3+ years shipping React and TypeScript products, from a SaaS built from scratch to plugins used on 8,000+ sites. React, Next.js, TypeScript, Node.js, Laravel, AI integration.",
+    "Frontend-focused full-stack developer in Dhaka with 3+ years of React, Next.js and TypeScript, from a SaaS built from scratch to plugins on 8,000+ sites.",
 };
 
 /* ---------- redesign: shared types and desk content ---------- */

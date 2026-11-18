@@ -12,9 +12,8 @@ export function SectionHeading({ title, note }: { title: string; note?: string }
       {w > 0 && " "}
       <span className={s.word}>
         {word.split("").map((c) => (
-          <span key={i} className={s.ch} style={{ "--i": i++ } as React.CSSProperties}>
-            {c}
-          </span>
+          // the letter is drawn by CSS, so the heading's real text appears only once (for search engines too)
+          <span key={i} className={s.ch} data-c={c} style={{ "--i": i++ } as React.CSSProperties} />
         ))}
       </span>
     </span>
