@@ -115,7 +115,7 @@ export const workHistories = [
     name: "Innosoft IT",
     yearLabel: "2024",
     note: "fully remote",
-    summary: "Built analytics report pages for Shopify and WordPress stores, and took a Meta Pixel admin panel from Figma to launch.",
+    summary: "Researched, designed and built the frontend of GA4 and Meta Pixel apps for Shopify and WordPress stores, from Figma to launch: complex dashboards that pull real-time analytics from store owners' sites.",
     title: "Frontend Developer",
   },
   {
