@@ -60,7 +60,7 @@ export function Hero() {
       <div className={s.prints}>
         <figure className={`${s.pr} ${s.b}`}>
           <span className={s.ph}>
-            <Image src="/desk/me3.jpg" alt="Ashik at the sea" fill sizes="220px" />
+            <Image src="/desk/me3.jpg" alt="Ashik at the sea" fill sizes="(max-width: 480px) 170px, 220px" />
           </span>
           <span className={s.date} aria-hidden="true">
             &apos;24 12 17
@@ -72,7 +72,7 @@ export function Hero() {
         <figure className={`${s.pr} ${s.a}`}>
           <span className={s.tape} aria-hidden="true" />
           <span className={s.ph}>
-            <Image src="/clicks/1000080446.webp" alt="Ashikur Rahman by the water" fill sizes="280px" priority />
+            <Image src="/clicks/1000080446.webp" alt="Ashikur Rahman by the water" fill sizes="(max-width: 480px) 220px, 280px" priority />
           </span>
           <span className={s.date} aria-hidden="true">
             &apos;26 01 14
