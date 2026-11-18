@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { jobMoments, workHistories } from "@/data";
+import { dailySkills, jobMoments, skills, workHistories } from "@/data";
 import { Marker } from "@/components/site/Marker";
 import { InkWord } from "@/components/site/InkWord";
 import { SectionHeading } from "@/components/site/SectionHeading";
@@ -98,7 +98,7 @@ export function Experience() {
               </li>
             ))}
             <li className={`${s.entry} ${s.next}`} data-job {...rowEvents(JOBS.length)}>
-              <span className={s.when}>Jan 2027</span>
+              <span className={s.when}>next</span>
               <h3>
                 <InkWord text="Your team?" start="view" ms={1100} onDone={() => setWrote(true)} />
               </h3>
@@ -113,6 +113,27 @@ export function Experience() {
               </div>
             </li>
           </ol>
+        </div>
+        {/* a second notebook page: what I use, group names written in the margin */}
+        <div className={`${s.khata} ${s.tools}`} data-skills>
+          <h3 className={s.toolsTitle}>Tools I use</h3>
+          <dl className={s.stack}>
+            {skills.map((g) => (
+              <div key={g.label}>
+                <dt>{g.label}</dt>
+                <dd>
+                  {g.items.map((t, k) => (
+                    <span key={t}>
+                      <span className={s.skill}>
+                        {dailySkills.includes(t) ? <Marker>{t}</Marker> : t}
+                        {k < g.items.length - 1 && " ·"}
+                      </span>{" "}
+                    </span>
+                  ))}
+                </dd>
+              </div>
+            ))}
+          </dl>
         </div>
       </div>
     </section>

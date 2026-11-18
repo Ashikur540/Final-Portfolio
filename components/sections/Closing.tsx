@@ -32,7 +32,7 @@ export function Closing() {
         <h2 className={s.h2}>
           <InkWord text="Say hello" ms={1800} start="view" color="white" />
         </h2>
-        <p className={s.lead}>Open to full-time frontend and full-stack roles from January 2027. Remote first, on-site works too for the right team.</p>
+        <p className={s.lead}>Looking for a full-time frontend or full-stack role. Remote first, on-site works too for the right team.</p>
         <div className={s.row}>
           <span className={s.copyWrap}>
             <Button

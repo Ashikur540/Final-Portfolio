@@ -414,6 +414,21 @@ const checks = [
     },
   },
   {
+    name: "experience: tools block lists every group and marks the daily ones",
+    async run(b) {
+      const p = await open(b, 390);
+      await scrollTo(p, "[data-skills]", 200);
+      await p.waitForTimeout(600);
+      const groups = await p.locator("[data-skills] dt").allTextContents();
+      assert(groups.join("|") === "frontend|backend|AI|tools", "groups: " + groups.join("|"));
+      const daily = await p.locator("[data-skills] [data-marker]").allTextContents();
+      assert(daily.join("|") === "React|Next.js|TypeScript|Node.js", "daily: " + daily.join("|"));
+      const wide = await p.evaluate(() => document.documentElement.scrollWidth > innerWidth);
+      assert(!wide, "page scrolls sideways");
+      return p;
+    },
+  },
+  {
     name: "numbers never read 0 once they are on screen",
     async run(b) {
       const p = await open(b);
@@ -607,7 +622,7 @@ const checks = [
       // the numbers count up once seen, so scroll past and let them finish
       await scrollTo(p, "#experience [data-marker]", 400);
       await p.waitForTimeout(1800);
-      const marked = await p.locator("#experience [data-marker]").allTextContents();
+      const marked = await p.locator("#experience [data-job] [data-marker]").allTextContents();
       assert(marked.join("|") === "in one month|from Figma to launch|8,000+ sites|2,800+ active installs|let's talk", "markers: " + marked.join("|"));
       return p;
     },

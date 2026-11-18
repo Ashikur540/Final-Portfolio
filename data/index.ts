@@ -189,9 +189,19 @@ export const fallbackPosts: Post[] = [
 ];
 
 /** The three lines on the notebook page on the desk. */
+/** Tools I use, shown under Experience. Only what is on the resume. */
+/** the ones I use every day get the yellow marker */
+export const dailySkills = ["React", "Next.js", "TypeScript", "Node.js"];
+export const skills = [
+  { label: "frontend", items: ["React", "Next.js", "TypeScript", "TanStack Query", "Redux", "Tailwind CSS"] },
+  { label: "backend", items: ["Node.js", "Express", "Laravel", "PHP", "PostgreSQL", "MongoDB"] },
+  { label: "AI", items: ["LLM APIs", "streaming chat", "AI widgets"] },
+  { label: "tools", items: ["Playwright", "Vitest", "Docker", "Figma", "Git"] },
+];
+
 export const aboutNote = [
   "I like taking a messy idea and shaping it until it's simple to use.",
-  "Weekends: side projects, friends, family, and too many photos.",
+  "Weekends: side projects, family, trips, books, and too many photos.",
   "This is my desk. Go on, touch things.",
 ];
 
