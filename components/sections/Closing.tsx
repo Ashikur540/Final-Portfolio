@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { personalInfo, socialUrl } from "@/data";
+import { bookingUrl, personalInfo, socialUrl } from "@/data";
 import { Button } from "@/components/site/Button";
 import { InkWord } from "@/components/site/InkWord";
 import s from "./notesClosing.module.css";
@@ -33,21 +33,23 @@ export function Closing() {
           <InkWord text="Say hello" ms={1800} start="view" color="white" />
         </h2>
         <p className={s.lead}>Looking for a full-time frontend or full-stack role. Remote first, on-site works too for the right team.</p>
+        {/* one clear action; the menu already carries resume, and these small links keep phones covered */}
         <div className={s.row}>
+          <Button href={bookingUrl} icon="ne" iconMove="ne" onDark external>
+            Schedule a call
+          </Button>
+        </div>
+        <p className={s.via}>booking runs on Timetics, a product I work on</p>
+        <p className={s.alt}>
+          or{" "}
           <span className={s.copyWrap}>
-            <Button
-              onClick={copy}
-              icon={state === "copied" ? "check" : "copy"}
-              onDark
-              done={state === "copied"}
-              ariaLabel={state === "copied" ? "Email copied" : "Copy email"}
-            >
-              {/* both labels share one spot, so the button keeps the width of the longer one */}
+            <button type="button" className={s.textBtn} onClick={copy} aria-label={state === "copied" ? "Email copied" : "Copy my email"}>
+              {/* both labels share one spot, so the line never shifts */}
               <span className={s.swap}>
-                <span className={state === "copied" ? s.off : undefined}>Copy email</span>
-                <span className={state === "copied" ? undefined : s.off}>Copied</span>
+                <span className={state === "copied" ? s.off : undefined}>copy my email</span>
+                <span className={state === "copied" ? undefined : s.off}>email copied</span>
               </span>
-            </Button>
+            </button>
             {state === "manual" && (
               <span className={s.manual} role="status">
                 {personalInfo.email}
@@ -57,16 +59,15 @@ export function Closing() {
               {state === "copied" ? "Email copied" : ""}
             </span>
           </span>
-          <Button href={socialUrl("LinkedIn")} variant="line" icon="linkedin" onDark external>
+          <span aria-hidden="true"> · </span>
+          <a href={socialUrl("LinkedIn")} target="_blank" rel="noopener noreferrer">
             LinkedIn
-          </Button>
-          <Button href={socialUrl("GitHub")} variant="line" icon="github" onDark external>
+          </a>
+          <span aria-hidden="true"> · </span>
+          <a href={socialUrl("GitHub")} target="_blank" rel="noopener noreferrer">
             GitHub
-          </Button>
-          <Button href="/Ashikur_Rahman_Resume_2026.pdf" variant="line" icon="down" iconMove="down" onDark download>
-            Resume
-          </Button>
-        </div>
+          </a>
+        </p>
         <div className={s.foot}>
           <span>Built with ❤️ by Ashik</span>
           <span>© {new Date().getFullYear()}</span>

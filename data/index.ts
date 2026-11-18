@@ -149,6 +149,9 @@ export const socialMedia = [
 /** A social profile url by name, e.g. socialUrl("GitHub"). */
 export const socialUrl = (name: string) => socialMedia.find((m) => m.name === name)?.url || "#";
 
+/** My Timetics booking page: a free 20 minute intro call (Mon to Fri, 3 to 10 PM Dhaka time). */
+export const bookingUrl = "https://app.timetics.ai/ashik1000/intro-call";
+
 export const personalInfo = {
   name: "Ashikur Rahman",
   title: "Frontend-focused Full-stack Developer",

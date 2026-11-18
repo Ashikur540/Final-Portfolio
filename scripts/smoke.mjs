@@ -429,6 +429,19 @@ const checks = [
     },
   },
   {
+    name: "closing: Schedule a call is the first button and opens the booking page in a new tab",
+    async run(b) {
+      const p = await open(b, 390);
+      await scrollTo(p, "#hello");
+      const first = p.locator("#hello a, #hello button").first();
+      assert(/Schedule a call/.test(await first.textContent()), "first button: " + (await first.textContent()));
+      assert((await first.getAttribute("href")) === "https://app.timetics.ai/ashik1000/intro-call", "href: " + (await first.getAttribute("href")));
+      assert((await first.getAttribute("target")) === "_blank", "does not open a new tab");
+      assert(/noopener/.test(await first.getAttribute("rel")), "missing rel=noopener");
+      return p;
+    },
+  },
+  {
     name: "numbers never read 0 once they are on screen",
     async run(b) {
       const p = await open(b);
@@ -684,11 +697,11 @@ const checks = [
     },
   },
   {
-    name: "closing: copy email shows Copied, then goes back",
+    name: "closing: copy my email shows email copied, then goes back",
     async run(b) {
       const p = await open(b, 1440, { permissions: ["clipboard-read", "clipboard-write"] });
       await scrollTo(p, "#hello", 0);
-      const btn = p.getByRole("button", { name: /Copy email/ });
+      const btn = p.getByRole("button", { name: /Copy my email/ });
       const w0 = (await btn.boundingBox()).width;
       await btn.click();
       await p.waitForTimeout(300);
@@ -699,17 +712,18 @@ const checks = [
       const clip = await p.evaluate(() => navigator.clipboard.readText());
       assert(clip === "meashik1000@gmail.com", "clipboard: " + clip);
       await p.waitForTimeout(2000);
-      assert((await p.getByRole("button", { name: /Copy email/ }).count()) === 1, "did not return to Copy email");
+      assert((await p.getByRole("button", { name: /Copy my email/ }).count()) === 1, "did not return to copy my email");
       return p;
     },
   },
   {
-    name: "closing: LinkedIn, GitHub and Resume links",
+    name: "closing: LinkedIn, GitHub and email stay reachable on phones",
     async run(b) {
-      const p = await open(b);
-      for (const n of ["LinkedIn", "GitHub", "Resume"]) {
-        assert((await p.locator("#hello a", { hasText: n }).count()) === 1, n + " missing");
+      const p = await open(b, 360);
+      for (const n of ["LinkedIn", "GitHub"]) {
+        assert(await p.locator("#hello a", { hasText: n }).isVisible(), n + " missing");
       }
+      assert(await p.getByRole("button", { name: /Copy my email/ }).isVisible(), "copy my email missing");
       return p;
     },
   },
