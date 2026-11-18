@@ -1,6 +1,7 @@
 {
   "name": "portfolio2.0",
   "version": "0.1.0",
+  "description": "Ashikur Rahman's portfolio: a notebook page with a playful desk, built with Next.js, React and TypeScript.",
   "private": true,
   "engines": {
     "node": "24.x"
