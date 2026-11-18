@@ -10,7 +10,8 @@ export type DeskAudio = {
   thud(): void;
   /** attar bottle */
   puff(): void;
-  play(track: number, onTick: (elapsedSec: number) => void, onEnd: () => void): void;
+  /** onFail runs if the file cannot load or play (offline, missing file) */
+  play(track: number, onTick: (elapsedSec: number) => void, onEnd: () => void, onFail?: () => void): void;
   stop(): void;
   setMuted(muted: boolean): void;
 };
@@ -18,7 +19,8 @@ export type DeskAudio = {
 type Options = { Ctor?: typeof AudioContext; AudioEl?: typeof Audio; tracks?: DeskTrack[] };
 
 const VOLUME = 0.6;
-const seconds = (len: string) => {
+/** "4:13" -> 253 */
+export const seconds = (len: string) => {
   const [m, s] = len.split(":");
   return Number(m) * 60 + Number(s);
 };
@@ -116,21 +118,34 @@ export function createDeskAudio({ Ctor, AudioEl, tracks = deskTracks }: Options 
       setTimeout(() => m.disconnect(), 400);
     }
     music = null;
-    if (file) file.pause();
+    if (file) {
+      file.pause();
+      // drop the source so a half-loaded track stops downloading
+      file.removeAttribute("src");
+      file.load();
+    }
     file = null;
   }
 
-  function play(track: number, onTick: (elapsed: number) => void, onEnd: () => void) {
+  function play(track: number, onTick: (elapsed: number) => void, onEnd: () => void, onFail?: () => void) {
     stop();
     const tr = tracks[track];
     if (!tr) return;
     if (tr.src && AudioFile) {
       const el = new AudioFile(tr.src);
       el.muted = muted;
-      el.addEventListener("timeupdate", () => onTick(el.currentTime));
-      el.addEventListener("ended", onEnd);
-      void el.play().catch(() => {});
+      // a stopped track can still fire one last event; only the current one may update the player
+      const live = () => file === el;
+      const fail = () => {
+        if (!live()) return;
+        stop();
+        onFail?.();
+      };
+      el.addEventListener("timeupdate", () => live() && onTick(el.currentTime));
+      el.addEventListener("ended", () => live() && onEnd());
+      el.addEventListener("error", fail);
       file = el;
+      void el.play().catch(fail);
       return;
     }
     // a track with no file plays nothing (yarn check:launch stops that from going live)
@@ -144,6 +159,7 @@ export function createDeskAudio({ Ctor, AudioEl, tracks = deskTracks }: Options 
     let i = 0;
     let next = c.currentTime + 0.06;
     const started = c.currentTime;
+    let lastSec = -1;
     const tick = () => {
       out = music || master;
       while (next < c.currentTime + 0.12) {
@@ -152,7 +168,9 @@ export function createDeskAudio({ Ctor, AudioEl, tracks = deskTracks }: Options 
       }
       out = master;
       const elapsed = c.currentTime - started;
-      onTick(Math.min(elapsed, length));
+      // the clock shows whole seconds, so only tell the player when the second changes
+      const sec = Math.floor(Math.min(elapsed, length));
+      if (sec !== lastSec) onTick((lastSec = sec));
       if (elapsed >= length) {
         stop();
         onEnd();

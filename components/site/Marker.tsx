@@ -10,7 +10,8 @@ const fmt = (n: number) => Math.round(n).toLocaleString("en-US");
 /** A yellow highlighter sweep that draws when the text scrolls into view.
  *  If the text starts with a number ("8,000+ sites"), the number counts up as it draws. */
 export function Marker({ children, on }: { children: React.ReactNode; /** draw on this signal instead of on scroll */ on?: boolean }) {
-  const [ref, seen] = useInView<HTMLSpanElement>();
+  // no bottom margin: the number resets to 0 only while it is off screen
+  const [ref, seen] = useInView<HTMLSpanElement>({ margin: "0px" });
   const inView = on ?? seen;
   const match = typeof children === "string" ? LEADING_NUMBER.exec(children) : null;
   const final = match ? match[1] : "";

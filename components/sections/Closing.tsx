@@ -1,12 +1,11 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { personalInfo, socialMedia } from "@/data";
+import { personalInfo, socialUrl } from "@/data";
 import { Button } from "@/components/site/Button";
 import { InkWord } from "@/components/site/InkWord";
 import s from "./notesClosing.module.css";
 
-const link = (name: string) => socialMedia.find((m) => m.name === name)?.url || "#";
 
 /** Navy closing section: "Say hello" written by the pen, and ways to reach Ashik. */
 export function Closing() {
@@ -58,10 +57,10 @@ export function Closing() {
               {state === "copied" ? "Email copied" : ""}
             </span>
           </span>
-          <Button href={link("LinkedIn")} variant="line" icon="linkedin" onDark external>
+          <Button href={socialUrl("LinkedIn")} variant="line" icon="linkedin" onDark external>
             LinkedIn
           </Button>
-          <Button href={link("GitHub")} variant="line" icon="github" onDark external>
+          <Button href={socialUrl("GitHub")} variant="line" icon="github" onDark external>
             GitHub
           </Button>
           <Button href="/Ashikur_Rahman_Resume_2026.pdf" variant="line" icon="down" iconMove="down" onDark download>

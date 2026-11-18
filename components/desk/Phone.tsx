@@ -3,14 +3,10 @@
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { deskTracks } from "@/data";
-import type { DeskAudio } from "@/lib/deskAudio";
+import { seconds, type DeskAudio } from "@/lib/deskAudio";
 import { Icon } from "@/components/site/Icon";
 import s from "./desk.module.css";
 
-const seconds = (len: string) => {
-  const [m, sec] = len.split(":");
-  return Number(m) * 60 + Number(sec);
-};
 const mmss = (x: number) => `${Math.floor(x / 60)}:${String(Math.floor(x % 60)).padStart(2, "0")}`;
 
 /** Phone with a small nasheed player. Nothing plays until the visitor presses play. */
@@ -43,7 +39,7 @@ export function Phone({ audio }: { audio: DeskAudio | null }) {
     setCur(n);
     setElapsed(0);
     setPlaying(true);
-    audio?.play(n, setElapsed, () => start(curRef.current + 1));
+    audio?.play(n, setElapsed, () => start(curRef.current + 1), () => setPlaying(false));
   };
   const stop = () => {
     audio?.stop();

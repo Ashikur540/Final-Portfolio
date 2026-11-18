@@ -340,6 +340,92 @@ const checks = [
     },
   },
   {
+    name: "desk: after typing on the desk and scrolling away, Space scrolls the page",
+    async run(b) {
+      const p = await open(b);
+      await scrollTo(p, '[data-k="h"]', 400);
+      await p.locator('[data-k="h"]').click();
+      const typed = await p.locator("[data-typed]").textContent();
+      await scrollTo(p, "#work");
+      await p.mouse.move(5, 5);
+      await p.waitForTimeout(700);
+      const y0 = await p.evaluate(() => window.scrollY);
+      await p.keyboard.press("Space");
+      await p.waitForTimeout(900);
+      const y1 = await p.evaluate(() => window.scrollY);
+      assert(y1 > y0 + 100, `Space did not scroll: ${y0} -> ${y1}`);
+      assert((await p.locator("[data-typed]").textContent()) === typed, "Space was typed into the laptop");
+      return p;
+    },
+  },
+  {
+    name: "desk: a nasheed that cannot load stops showing as playing",
+    async run(b) {
+      const p = await open(b);
+      await p.route(/\/desk\/audio\//, (r) => r.abort());
+      await scrollTo(p, "#about");
+      await p.getByRole("button", { name: /^Maula Ya Salli/ }).click();
+      await p.waitForTimeout(1500);
+      assert((await p.locator("[data-playing]").getAttribute("data-playing")) === "false", "still says playing");
+      assert((await p.getByRole("button", { name: "Play" }).count()) === 1, "no Play button");
+      return p;
+    },
+  },
+  {
+    name: "phone: a scroll starting on the photos does not flip them; pen and sticky let you scroll",
+    async run(b) {
+      const p = await open(b, 390, { hasTouch: true, isMobile: true });
+      await scrollTo(p, "[data-photo]", 300);
+      await settleDesk(p);
+      const before = await p.locator("[data-photo]").getAttribute("data-photo");
+      const box = await p.locator("[data-photo]").boundingBox();
+      const cdp = await p.context().newCDPSession(p);
+      const x = box.x + box.width / 2;
+      let y = box.y + box.height / 2;
+      await cdp.send("Input.dispatchTouchEvent", { type: "touchStart", touchPoints: [{ x, y }] });
+      for (let i = 0; i < 8; i++) {
+        y -= 12;
+        await cdp.send("Input.dispatchTouchEvent", { type: "touchMove", touchPoints: [{ x, y }] });
+      }
+      await cdp.send("Input.dispatchTouchEvent", { type: "touchEnd", touchPoints: [] });
+      await p.waitForTimeout(600);
+      const after = await p.locator("[data-photo]").getAttribute("data-photo");
+      assert(before === after, `photo flipped on a scroll: ${before} -> ${after}`);
+      const ta = await p.evaluate(() =>
+        [document.querySelector("[data-pen-out]"), [...document.querySelectorAll("[data-desk-object]")].find((e) => e.textContent.includes("ship small"))].map(
+          (el) => getComputedStyle(el).touchAction,
+        ),
+      );
+      assert(!ta.includes("none"), "pen or sticky blocks scrolling: " + ta.join(", "));
+      return p;
+    },
+  },
+  {
+    name: "tablet: tapping LinkedIn in the menu does not leave its tip stuck on screen",
+    async run(b) {
+      const p = await open(b, 820, { hasTouch: true, isMobile: true });
+      const tab = p.context().waitForEvent("page");
+      await p.locator("[data-dock]").getByRole("link", { name: "LinkedIn" }).tap();
+      await (await tab).close();
+      await p.waitForTimeout(500);
+      const tip = await p.locator("[data-bubble]").evaluate((el) => (el.className.includes("show") ? el.textContent : ""));
+      assert(tip !== "LinkedIn", "LinkedIn tip stuck after a tap");
+      return p;
+    },
+  },
+  {
+    name: "numbers never read 0 once they are on screen",
+    async run(b) {
+      const p = await open(b);
+      const m = p.locator("[data-marker]", { hasText: "sites" }).first();
+      await m.evaluate((el) => window.scrollTo(0, el.getBoundingClientRect().top + window.scrollY - window.innerHeight * 0.93));
+      await p.waitForTimeout(500);
+      const t = await m.textContent();
+      assert(!/^0\D/.test(t), "shows: " + t);
+      return p;
+    },
+  },
+  {
     name: "desk: the playing row keeps its layout on play and pause",
     async run(b) {
       const p = await open(b);

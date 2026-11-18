@@ -58,14 +58,17 @@ export function Keyboard({ deskRef, audio, onKey, onLit }: Props) {
     const active = () => {
       const desk = deskRef.current;
       if (!desk || !desk.offsetParent) return false;
-      return desk.matches(":hover") || desk.contains(document.activeElement);
+      if (desk.matches(":hover")) return true;
+      // focus left on the desk only counts while the desk is still on screen
+      const r = desk.getBoundingClientRect();
+      return desk.contains(document.activeElement) && r.bottom > 0 && r.top < window.innerHeight;
     };
     const onDown = (e: KeyboardEvent) => {
       if (!active() || e.metaKey || e.ctrlKey || e.altKey || e.key === "Tab") return;
       const t = e.target as HTMLElement | null;
-      // Space / Enter on a button or link inside the desk should press that button
+      // Space / Enter on any button or link (desk or menu) should press that button
       const isControl = !!t?.closest?.("button, a, input, textarea, [role=button]") && t !== ownRef.current;
-      if (isControl && deskRef.current?.contains(t) && (e.key === " " || e.key === "Enter")) return;
+      if (isControl && (e.key === " " || e.key === "Enter")) return;
       const code = e.key.toLowerCase();
       const matches = KEYS.filter((k) => k.code === code);
       if (!matches.length) return;
@@ -90,13 +93,17 @@ export function Keyboard({ deskRef, audio, onKey, onLit }: Props) {
     window.addEventListener("keyup", onUp);
     window.addEventListener("pointerup", releaseAllPointer);
     window.addEventListener("pointercancel", releaseAllPointer);
-    window.addEventListener("blur", releaseAllPointer);
+    const releaseAll = () => {
+      physical.current.clear();
+      downRef.current.forEach((id) => release(id));
+    };
+    window.addEventListener("blur", releaseAll);
     return () => {
       window.removeEventListener("keydown", onDown);
       window.removeEventListener("keyup", onUp);
       window.removeEventListener("pointerup", releaseAllPointer);
       window.removeEventListener("pointercancel", releaseAllPointer);
-      window.removeEventListener("blur", releaseAllPointer);
+      window.removeEventListener("blur", releaseAll);
     };
   }, [deskRef, press, release]);
 

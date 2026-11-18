@@ -79,6 +79,12 @@ export function PhotoStack({ scale, audio, navRef }: Props) {
     else setTop(null);
   };
 
+  // the browser took the gesture over (a scroll): not a tap, put the photo back
+  const onPointerCancel = () => {
+    drag.current = null;
+    setTop(null);
+  };
+
   const current = deskPhotos[order[0]];
 
   return (
@@ -93,7 +99,7 @@ export function PhotoStack({ scale, audio, navRef }: Props) {
         onPointerDown={onPointerDown}
         onPointerMove={onPointerMove}
         onPointerUp={onPointerUp}
-        onPointerCancel={onPointerUp}
+        onPointerCancel={onPointerCancel}
         onKeyDown={(e) => {
           if (e.key === "Enter" || e.key === " ") {
             e.preventDefault();

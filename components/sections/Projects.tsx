@@ -7,9 +7,9 @@ import { Button } from "@/components/site/Button";
 import { Icon } from "@/components/site/Icon";
 import { SectionHeading } from "@/components/site/SectionHeading";
 import { useInView } from "@/components/site/useInView";
+import { WIDE } from "@/components/desk/useDeskScale";
 import s from "./projects.module.css";
 
-const WIDE = "(min-width: 981px)";
 
 /** A panel in the card's colour covers the screenshot, then slides up once it scrolls in. */
 function Cover() {
@@ -30,15 +30,16 @@ export function Projects() {
     const cards = Array.from(list.children) as HTMLElement[];
     const update = () => {
       raf = 0;
+      const on = !reduce.matches && wide.matches;
+      const rects = on ? cards.map((c) => c.getBoundingClientRect()) : [];
       cards.forEach((c, i) => {
-        const next = cards[i + 1];
-        if (!next || reduce.matches || !wide.matches) {
+        const cr = rects[i];
+        const nr = rects[i + 1];
+        if (!nr) {
           c.style.transform = "";
           c.style.filter = "";
           return;
         }
-        const cr = c.getBoundingClientRect();
-        const nr = next.getBoundingClientRect();
         const o = Math.max(0, Math.min(1, (cr.bottom - nr.top) / cr.height));
         c.style.transform = o ? `scale(${1 - o * 0.05})` : "";
         c.style.filter = o ? `brightness(${1 - o * 0.05})` : "";

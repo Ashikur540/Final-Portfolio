@@ -1,7 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { parseRss, getPosts } from "./rss.ts";
-import { fallbackPosts } from "../data/index.ts";
+import { parseRss, getPosts, safeLink } from "./rss.ts";
+import { fallbackPosts, hashnodeUrl } from "../data/index.ts";
 
 const sample = `<?xml version="1.0"?><rss><channel><title>Blog</title>
 <item><title><![CDATA[How ChatGPT works]]></title><link>https://ashik1000.hashnode.dev/a</link>
@@ -64,4 +64,12 @@ test("getPosts falls back on an empty feed", async () => {
 test("getPosts returns parsed posts when the feed works", async () => {
   const posts = await getPosts((async () => ({ ok: true, text: async () => sample })) as unknown as typeof fetch);
   assert.equal(posts[0].title, "How ChatGPT works");
+});
+
+test("a post link is kept only when it is a normal https link", () => {
+  assert.equal(safeLink("https://ashik1000.hashnode.dev/post"), "https://ashik1000.hashnode.dev/post");
+  assert.equal(safeLink("javascript:alert(1)"), hashnodeUrl);
+  assert.equal(safeLink("JavaScript:alert(1)"), hashnodeUrl);
+  assert.equal(safeLink("data:text/html,hi"), hashnodeUrl);
+  assert.equal(safeLink(""), hashnodeUrl);
 });

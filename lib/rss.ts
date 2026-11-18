@@ -43,13 +43,16 @@ function clip(s: string, max = 110): string {
   return words.replace(/[,;:]+$/, "") + "…";
 }
 
+/** Only plain https links reach the page; anything else (like javascript:) becomes the blog's home. */
+export const safeLink = (u: string) => (/^https:\/\//i.test(u) ? u : hashnodeUrl);
+
 /** Reads a Hashnode RSS feed. Plain string parsing, no XML package. */
 export function parseRss(xml: string, limit = 3): Post[] {
   const items = xml.match(/<item>[\s\S]*?<\/item>/g) || [];
   return items.slice(0, limit).map((item) => ({
     // drop a leading emoji or symbol some titles start with
     title: text(tag(item, "title")).replace(LEADING_SYMBOLS, ""),
-    url: text(tag(item, "link")),
+    url: safeLink(text(tag(item, "link"))),
     date: shortDate(text(tag(item, "pubDate"))),
     summary: clip(text(tag(item, "description"))),
   }));

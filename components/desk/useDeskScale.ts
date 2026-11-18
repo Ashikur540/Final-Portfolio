@@ -4,7 +4,8 @@ import { useEffect, useRef, useState } from "react";
 
 export const STAGE_W = 1180;
 export const STAGE_H = 884;
-const WIDE = "(min-width: 981px)";
+/** desk and project cards switch to their full layout at this width */
+export const WIDE = "(min-width: 981px)";
 
 /**
  * The desk is laid out on a fixed 1180 x 884 stage. On wide screens it is scaled

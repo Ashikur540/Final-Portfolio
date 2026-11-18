@@ -20,7 +20,7 @@ export function Pen({ scale, draggable, onClick }: Common) {
   return (
     <div
       {...d}
-      className={`${s.ob} ${s.grab} ${s.pen} ${out ? s.penIn : ""}`}
+      className={`${s.ob} ${draggable ? s.grab : ""} ${s.pen} ${out ? s.penIn : ""}`}
       aria-hidden="true"
       data-desk-object
       data-pen-out={out}
@@ -38,7 +38,7 @@ export function Pen({ scale, draggable, onClick }: Common) {
 export function Sticky({ scale, draggable }: Common) {
   const d = useDraggable<HTMLParagraphElement>({ scale, enabled: draggable });
   return (
-    <p {...d} className={`${s.ob} ${s.grab} ${s.sticky}`} data-desk-object>
+    <p {...d} className={`${s.ob} ${draggable ? s.grab : ""} ${s.sticky}`} data-desk-object>
       ship small, ship often
     </p>
   );

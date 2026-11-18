@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
-import { personalInfo, socialMedia } from "@/data";
+import { personalInfo, socialUrl } from "@/data";
 import { Icon } from "./Icon";
 import { prefersReducedMotion } from "./useInView";
 import s from "./dock.module.css";
@@ -34,7 +34,6 @@ const SECTIONS: Record<string, { mood: Mood; line?: string }> = {
   hello: { mood: "happy", line: "say hi, I don't bite" },
 };
 
-const link = (name: string) => socialMedia.find((m) => m.name === name)?.url || "#";
 
 /** Floating menu at the bottom with a sticky-note buddy that peeks over it, watches the cursor and reacts to each section. */
 export function Dock() {
@@ -164,9 +163,10 @@ export function Dock() {
     ref: (el: HTMLElement | null) => {
       items.current[key] = el;
     },
-    onMouseEnter: () => setHover({ key, tip, mood: m }),
-    onMouseLeave: () => setHover(null),
-    onFocus: () => setHover({ key, tip, mood: m }),
+    // a tap fires hover and focus too and never takes them back, so only a mouse or the Tab key count
+    onPointerEnter: (e: React.PointerEvent) => e.pointerType === "mouse" && setHover({ key, tip, mood: m }),
+    onPointerLeave: () => setHover(null),
+    onFocus: (e: React.FocusEvent<HTMLElement>) => e.currentTarget.matches(":focus-visible") && setHover({ key, tip, mood: m }),
     onBlur: () => setHover(null),
   });
 
@@ -219,10 +219,10 @@ export function Dock() {
           </a>
         ))}
         <span className={s.sep} aria-hidden="true" />
-        <a className={`${s.icon} ${s.social}`} href={link("LinkedIn")} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" {...bind("li", "LinkedIn")}>
+        <a className={`${s.icon} ${s.social}`} href={socialUrl("LinkedIn")} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" {...bind("li", "LinkedIn")}>
           <Icon name="linkedin" />
         </a>
-        <a className={`${s.icon} ${s.social}`} href={link("GitHub")} target="_blank" rel="noopener noreferrer" aria-label="GitHub" {...bind("gh", "GitHub")}>
+        <a className={`${s.icon} ${s.social}`} href={socialUrl("GitHub")} target="_blank" rel="noopener noreferrer" aria-label="GitHub" {...bind("gh", "GitHub")}>
           <Icon name="github" />
         </a>
         <a className={s.icon} href={`mailto:${personalInfo.email}`} aria-label="Email me" {...bind("mail", "write to me", "happy")}>

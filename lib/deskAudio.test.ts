@@ -42,17 +42,28 @@ class FakeAudio {
   paused = false;
   muted = false;
   currentTime = 0;
+  failPlay = false;
+  on: Record<string, () => void> = {};
   constructor(src: string) {
     this.src = src;
     FakeAudio.made.push(this);
   }
   play() {
-    return Promise.resolve();
+    return this.failPlay ? Promise.reject(new Error("blocked")) : Promise.resolve();
   }
   pause() {
     this.paused = true;
   }
-  addEventListener() {}
+  removeAttribute(name: string) {
+    if (name === "src") this.src = "";
+  }
+  load() {}
+  addEventListener(type: string, fn: () => void) {
+    this.on[type] = fn;
+  }
+  fire(type: string) {
+    this.on[type]?.();
+  }
 }
 
 const Ctor = FakeContext as unknown as typeof AudioContext;
@@ -100,4 +111,55 @@ test("muting also mutes a playing file", () => {
   a.play(0, () => {}, () => {});
   a.setMuted(true);
   assert.equal(FakeAudio.made[0].muted, true);
+});
+
+const two = [
+  { title: "One", artist: "Test", length: "1:00", cover: "/c.jpg", src: "/desk/audio/one.m4a" },
+  { title: "Two", artist: "Test", length: "1:00", cover: "/c.jpg", src: "/desk/audio/two.m4a" },
+];
+
+test("a stopped track's last time update does not reach the new track", () => {
+  FakeAudio.made = [];
+  const a = createDeskAudio({ Ctor, AudioEl, tracks: two });
+  assert.ok(a);
+  const seen: string[] = [];
+  a.play(0, () => seen.push("old"), () => seen.push("old ended"));
+  const old = FakeAudio.made[0];
+  a.play(1, () => seen.push("new"), () => {});
+  old.currentTime = 190;
+  old.fire("timeupdate"); // a browser fires this when pausing
+  old.fire("ended");
+  FakeAudio.made[1].fire("timeupdate");
+  assert.deepEqual(seen, ["new"]);
+  assert.equal(old.src, "", "old track should stop downloading");
+});
+
+test("a file that fails to load tells the player once, and only for the current track", () => {
+  FakeAudio.made = [];
+  const a = createDeskAudio({ Ctor, AudioEl, tracks: two });
+  assert.ok(a);
+  let fails = 0;
+  a.play(0, () => {}, () => {}, () => fails++);
+  FakeAudio.made[0].fire("error");
+  FakeAudio.made[0].fire("error");
+  assert.equal(fails, 1);
+  a.play(1, () => {}, () => {}, () => fails++);
+  FakeAudio.made[0].fire("error"); // the old one, ignored
+  assert.equal(fails, 1);
+});
+
+test("a play the browser refuses tells the player", async () => {
+  FakeAudio.made = [];
+  const Refusing = class extends FakeAudio {
+    constructor(src: string) {
+      super(src);
+      this.failPlay = true;
+    }
+  } as unknown as typeof Audio;
+  const a = createDeskAudio({ Ctor, AudioEl: Refusing, tracks: two });
+  assert.ok(a);
+  let failed = false;
+  a.play(0, () => {}, () => {}, () => (failed = true));
+  await new Promise((r) => setTimeout(r, 0));
+  assert.equal(failed, true);
 });
