@@ -414,6 +414,34 @@ const checks = [
     },
   },
   {
+    name: "experience: tools block lists every group and marks the daily ones",
+    async run(b) {
+      const p = await open(b, 390);
+      await scrollTo(p, "[data-skills]", 200);
+      await p.waitForTimeout(600);
+      const groups = await p.locator("[data-skills] dt").allTextContents();
+      assert(groups.join("|") === "frontend|backend|AI|tools", "groups: " + groups.join("|"));
+      const daily = await p.locator("[data-skills] [data-marker]").allTextContents();
+      assert(daily.join("|") === "React|Next.js|TypeScript|Node.js", "daily: " + daily.join("|"));
+      const wide = await p.evaluate(() => document.documentElement.scrollWidth > innerWidth);
+      assert(!wide, "page scrolls sideways");
+      return p;
+    },
+  },
+  {
+    name: "closing: Schedule a call is the first button and opens the booking page in a new tab",
+    async run(b) {
+      const p = await open(b, 390);
+      await scrollTo(p, "#hello");
+      const first = p.locator("#hello a, #hello button").first();
+      assert(/Schedule a call/.test(await first.textContent()), "first button: " + (await first.textContent()));
+      assert((await first.getAttribute("href")) === "https://app.timetics.ai/ashik1000/intro-call", "href: " + (await first.getAttribute("href")));
+      assert((await first.getAttribute("target")) === "_blank", "does not open a new tab");
+      assert(/noopener/.test(await first.getAttribute("rel")), "missing rel=noopener");
+      return p;
+    },
+  },
+  {
     name: "numbers never read 0 once they are on screen",
     async run(b) {
       const p = await open(b);
@@ -607,7 +635,7 @@ const checks = [
       // the numbers count up once seen, so scroll past and let them finish
       await scrollTo(p, "#experience [data-marker]", 400);
       await p.waitForTimeout(1800);
-      const marked = await p.locator("#experience [data-marker]").allTextContents();
+      const marked = await p.locator("#experience [data-job] [data-marker]").allTextContents();
       assert(marked.join("|") === "in one month|from Figma to launch|8,000+ sites|2,800+ active installs|let's talk", "markers: " + marked.join("|"));
       return p;
     },
@@ -669,11 +697,11 @@ const checks = [
     },
   },
   {
-    name: "closing: copy email shows Copied, then goes back",
+    name: "closing: copy my email shows email copied, then goes back",
     async run(b) {
       const p = await open(b, 1440, { permissions: ["clipboard-read", "clipboard-write"] });
       await scrollTo(p, "#hello", 0);
-      const btn = p.getByRole("button", { name: /Copy email/ });
+      const btn = p.getByRole("button", { name: /Copy my email/ });
       const w0 = (await btn.boundingBox()).width;
       await btn.click();
       await p.waitForTimeout(300);
@@ -684,17 +712,18 @@ const checks = [
       const clip = await p.evaluate(() => navigator.clipboard.readText());
       assert(clip === "meashik1000@gmail.com", "clipboard: " + clip);
       await p.waitForTimeout(2000);
-      assert((await p.getByRole("button", { name: /Copy email/ }).count()) === 1, "did not return to Copy email");
+      assert((await p.getByRole("button", { name: /Copy my email/ }).count()) === 1, "did not return to copy my email");
       return p;
     },
   },
   {
-    name: "closing: LinkedIn, GitHub and Resume links",
+    name: "closing: LinkedIn, GitHub and email stay reachable on phones",
     async run(b) {
-      const p = await open(b);
-      for (const n of ["LinkedIn", "GitHub", "Resume"]) {
-        assert((await p.locator("#hello a", { hasText: n }).count()) === 1, n + " missing");
+      const p = await open(b, 360);
+      for (const n of ["LinkedIn", "GitHub"]) {
+        assert(await p.locator("#hello a", { hasText: n }).isVisible(), n + " missing");
       }
+      assert(await p.getByRole("button", { name: /Copy my email/ }).isVisible(), "copy my email missing");
       return p;
     },
   },

@@ -115,7 +115,7 @@ export const workHistories = [
     name: "Innosoft IT",
     yearLabel: "2024",
     note: "fully remote",
-    summary: "Built analytics report pages for Shopify and WordPress stores, and took a Meta Pixel admin panel from Figma to launch.",
+    summary: "Researched, designed and built the frontend of GA4 and Meta Pixel apps for Shopify and WordPress stores, from Figma to launch: complex dashboards that pull real-time analytics from store owners' sites.",
     title: "Frontend Developer",
   },
   {
@@ -148,6 +148,9 @@ export const socialMedia = [
 
 /** A social profile url by name, e.g. socialUrl("GitHub"). */
 export const socialUrl = (name: string) => socialMedia.find((m) => m.name === name)?.url || "#";
+
+/** My Timetics booking page: a free 20 minute intro call (Mon to Fri, 3 to 10 PM Dhaka time). */
+export const bookingUrl = "https://app.timetics.ai/ashik1000/intro-call";
 
 export const personalInfo = {
   name: "Ashikur Rahman",
@@ -188,10 +191,21 @@ export const fallbackPosts: Post[] = [
   },
 ];
 
+/** The ones I use every day; they get the yellow marker. */
+export const dailySkills = ["React", "Next.js", "TypeScript", "Node.js"];
+
+/** Tools I use, shown under Experience. Only what is on the resume. */
+export const skills = [
+  { label: "frontend", items: ["React", "Next.js", "TypeScript", "TanStack Query", "Redux", "Tailwind CSS"] },
+  { label: "backend", items: ["Node.js", "Express", "Laravel", "PHP", "PostgreSQL", "MongoDB"] },
+  { label: "AI", items: ["LLM APIs", "streaming chat", "AI widgets"] },
+  { label: "tools", items: ["Playwright", "Vitest", "Docker", "Figma", "Git"] },
+];
+
 /** The three lines on the notebook page on the desk. */
 export const aboutNote = [
   "I like taking a messy idea and shaping it until it's simple to use.",
-  "Weekends: side projects, friends, family, and too many photos.",
+  "Weekends: side projects, family, trips, books, and too many photos.",
   "This is my desk. Go on, touch things.",
 ];
 

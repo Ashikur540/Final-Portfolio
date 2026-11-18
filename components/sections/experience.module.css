@@ -131,6 +131,40 @@
   color: var(--blue);
 }
 
+/* "Tools I use": a second page under the jobs, group names in the margin like the years */
+.tools {
+  margin-top: 44px;
+}
+.toolsTitle {
+  margin: 0;
+  font: 700 22px/40px var(--font-hand), cursive;
+  color: var(--blue);
+}
+.stack {
+  margin: 0;
+}
+.stack > div {
+  position: relative;
+  line-height: 40px;
+}
+.stack dt {
+  position: absolute;
+  left: -156px;
+  top: 0;
+  width: 88px;
+  text-align: right;
+  font: 400 18px/40px var(--font-hand), cursive;
+  color: var(--ink-3);
+}
+.stack dd {
+  margin: 0;
+  color: var(--ink-2);
+}
+/* a name like "Tailwind CSS" never breaks across lines */
+.skill {
+  white-space: nowrap;
+}
+
 /* taped print with a job photo: appears beside the row on hover (desktop), inline on phones */
 .print {
   position: absolute;
@@ -271,6 +305,18 @@ button.print {
   }
   .sign i {
     max-width: 120px;
+  }
+  .stack > div {
+    padding-bottom: 10px;
+  }
+  .stack dt {
+    position: static;
+    width: auto;
+    text-align: left;
+    line-height: 30px;
+  }
+  .stack dd {
+    line-height: 1.75;
   }
 }
 @media (prefers-reduced-motion: reduce) {
