@@ -1,6 +1,7 @@
 import { Kalam } from "next/font/google";
 import localFont from "next/font/local";
 import { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/next";
 
 import "./globals.css";
 import { personalInfo, socialUrl } from "@/data";
@@ -79,7 +80,11 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(person).replace(/</g, "\\u003c") }}
         />
       </head>
-      <body>{children}</body>
+      <body>
+        {children}
+        {/* Vercel Web Analytics: page views, no cookies */}
+        <Analytics />
+      </body>
     </html>
   );
 }
