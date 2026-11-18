@@ -1,0 +1,1005 @@
+/* ===== the desk: a fixed 1180 x 884 stage, scaled down to fit ===== */
+.section {
+  padding: 24px 0 100px;
+}
+.wrap {
+  position: relative;
+  aspect-ratio: 1180 / 884;
+  max-height: 884px;
+  overflow: hidden;
+  border-radius: 28px;
+}
+.desk {
+  position: relative;
+  width: 1180px;
+  height: 884px;
+  transform-origin: 0 0;
+  transform: scale(var(--ds, 1));
+  border-radius: 28px;
+  overflow: hidden;
+  color: #fff;
+  background: radial-gradient(120% 90% at 50% 40%, rgba(64, 96, 220, 0.24), transparent 62%),
+    linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px) 0 0 / 40px 40px,
+    linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px) 0 0 / 40px 40px, var(--mat);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.07), inset 0 0 120px rgba(0, 0, 0, 0.45);
+}
+.ob {
+  position: absolute;
+}
+/* each object drops onto the desk the first time it scrolls in (Desk.tsx sets data-placed).
+   translate and scale are separate from the rotate in transform, so they do not fight. */
+@media (prefers-reduced-motion: no-preference) {
+  :global(.js) .desk [data-desk-object]:not([data-placed]) {
+    opacity: 0;
+  }
+  .desk [data-placed] {
+    animation: place 0.7s var(--ease) backwards;
+  }
+}
+@keyframes place {
+  from {
+    opacity: 0;
+    translate: 0 -44px;
+    scale: 1.05;
+  }
+  45% {
+    opacity: 1;
+  }
+  75% {
+    translate: 0 3px;
+    scale: 0.995;
+  }
+  to {
+    translate: 0 0;
+    scale: 1;
+  }
+}
+.grab {
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+}
+.grab[data-dragging] {
+  cursor: grabbing;
+}
+.hint {
+  position: absolute;
+  font: 400 19px/1 var(--font-hand), cursive;
+  color: #c9d3f2;
+  white-space: nowrap;
+  pointer-events: none;
+}
+.cable {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.snd {
+  position: absolute;
+  right: 18px;
+  bottom: 16px;
+  z-index: 90;
+}
+.snd :global(button) {
+  background: #fff;
+}
+
+/* ===== notebook page with the About text ===== */
+.note {
+  left: 44px;
+  top: 42px;
+  width: 316px;
+  transform: rotate(-2.5deg);
+  color: #2c3340;
+  padding: 32px 20px 16px 46px;
+  border-radius: 3px;
+  background: linear-gradient(90deg, transparent 33px, var(--margin) 33px 34.5px, transparent 34.5px),
+    repeating-linear-gradient(180deg, transparent 0 25px, #d6e3f3 25px 26px) 0 6px, var(--khata);
+  box-shadow: 0 26px 30px -14px rgba(0, 0, 0, 0.7), 0 4px 8px rgba(0, 0, 0, 0.35);
+}
+.tape {
+  position: absolute;
+  top: -11px;
+  left: 50%;
+  width: 96px;
+  height: 24px;
+  transform: translateX(-50%) rotate(-3deg);
+  background: var(--tape);
+}
+.note .hi {
+  margin: 0;
+  padding: 0;
+  font: 700 25px/26px var(--font-hand), cursive;
+  color: var(--blue);
+}
+.note p {
+  margin: 0;
+  padding-top: 26px;
+  font-size: 15px;
+  line-height: 26px;
+  color: #2c3340;
+}
+.note .sigPlace {
+  margin-top: 14px;
+  text-align: right;
+  font-size: 13px;
+  color: var(--ink-3);
+  line-height: 26px;
+}
+
+/* ===== laptop ===== */
+.lap {
+  left: 410px;
+  top: 34px;
+  width: 376px;
+  transform: rotate(-3deg);
+  filter: drop-shadow(0 30px 26px rgba(0, 0, 0, 0.55));
+}
+.lid {
+  position: relative;
+  height: 236px;
+  padding: 8px 8px 11px;
+  border-radius: 15px 15px 3px 3px;
+  background: #08090c;
+  box-shadow: inset 0 0 0 1.5px #d2d5db, inset 0 0 0 3px #84888f;
+}
+.lid::before {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  top: 8px;
+  left: 50%;
+  width: 54px;
+  height: 9px;
+  margin-left: -27px;
+  border-radius: 0 0 6px 6px;
+  background: #08090c;
+}
+.lid::after {
+  content: "";
+  position: absolute;
+  z-index: 3;
+  top: 10px;
+  left: 50%;
+  width: 4px;
+  height: 4px;
+  margin-left: -2px;
+  border-radius: 50%;
+  background: #1d2740;
+  box-shadow: 0 0 0 1px #11141c;
+}
+.scr {
+  position: relative;
+  height: 100%;
+  border-radius: 7px;
+  overflow: hidden;
+  background: #101a3a;
+  font: 500 11px/1.6 ui-monospace, Menlo, monospace;
+  color: #cfd8ff;
+}
+.scr::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg, rgba(255, 255, 255, 0.1), transparent 38%);
+  pointer-events: none;
+}
+.tb {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 9px 9px 5px;
+  background: #0b1330;
+  color: #aebcf0;
+}
+.tb i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #35406b;
+}
+.code {
+  margin: 0;
+  padding: 6px 12px;
+  white-space: pre;
+  font: inherit;
+}
+.c1 {
+  color: #9db0ff;
+}
+.c2 {
+  color: #ffe14d;
+}
+.c3 {
+  color: #7fe0b0;
+}
+.c4 {
+  color: #93a0cf;
+}
+.caret {
+  display: inline-block;
+  width: 6px;
+  height: 12px;
+  background: #ffe14d;
+  vertical-align: -2px;
+  animation: caret 1s steps(1) infinite;
+}
+@keyframes caret {
+  50% {
+    opacity: 0;
+  }
+}
+.hinge {
+  height: 8px;
+  background: linear-gradient(#4d5158, #c3c7ce 45%, #8c9098);
+  border-radius: 0 0 2px 2px;
+  margin: 0 5px;
+}
+.base {
+  position: relative;
+  height: 240px;
+  border-radius: 5px 5px 18px 18px;
+  background: linear-gradient(178deg, #eceef1, #d3d6db 65%, #bfc2c9);
+  box-shadow: inset 0 1px 0 #fff, inset 0 -2px 0 rgba(0, 0, 0, 0.16), inset 1px 0 0 rgba(255, 255, 255, 0.6),
+    inset -1px 0 0 rgba(0, 0, 0, 0.08);
+  padding: 12px 12px 14px;
+}
+.base::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 62px;
+  height: 5px;
+  margin-left: -31px;
+  border-radius: 5px 5px 0 0;
+  background: linear-gradient(#aeb1b8, #c9ccd2);
+}
+.deck {
+  display: grid;
+  grid-template-columns: 13px 1fr 13px;
+  gap: 6px;
+}
+.grill {
+  border-radius: 3px;
+  background: radial-gradient(circle, #8a8e96 0.7px, transparent 1.1px) 0 0 / 3.6px 3.6px;
+  opacity: 0.75;
+  margin: 14px 0;
+}
+.well {
+  display: grid;
+  gap: 2.5px;
+  padding: 3px;
+  background: #0d0f13;
+  border-radius: 6px;
+  box-shadow: inset 0 1px 3px #000, 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+.lr {
+  display: flex;
+  gap: 2.5px;
+  height: 17px;
+}
+.lrFn {
+  height: 10px;
+}
+.lk {
+  position: relative;
+  flex: var(--u, 1) 1 0;
+  min-width: 0;
+  border-radius: 3px;
+  background: linear-gradient(#30333a, #1c1e23);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 0 #000;
+  transition: background 0.08s;
+}
+.lk::after {
+  content: attr(data-l);
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font: 500 7px/1 var(--font-sans), sans-serif;
+  color: #c5c9d2;
+  text-transform: uppercase;
+}
+.lit {
+  background: linear-gradient(#6f86ee, #3d57cf);
+  box-shadow: 0 0 6px rgba(111, 134, 238, 0.9);
+}
+.pad {
+  width: 156px;
+  height: 90px;
+  margin: 10px auto 0;
+  border-radius: 9px;
+  background: linear-gradient(#e2e4e8, #d6d9de);
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.13), inset 0 1px 2px rgba(0, 0, 0, 0.12), 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+/* ===== mechanical keyboard ===== */
+.kb {
+  left: 316px;
+  top: 596px;
+  width: 606px;
+  transform: rotate(-2.5deg);
+  padding: 13px 13px 16px;
+  border-radius: 20px;
+  background: linear-gradient(175deg, #f6f4ee, #dcd9cf 60%, #c9c5ba);
+  box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.9), inset 0 -3px 0 rgba(0, 0, 0, 0.12), 0 2px 0 #a9a59a,
+    0 30px 40px -12px rgba(0, 0, 0, 0.65), 0 8px 14px rgba(0, 0, 0, 0.4);
+}
+.kb:focus-visible {
+  outline: 2px solid var(--mark);
+  outline-offset: 5px;
+}
+.plate {
+  background: #14161b;
+  border-radius: 9px;
+  padding: 6px;
+  display: grid;
+  gap: 4px;
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.8);
+}
+.r {
+  display: flex;
+  gap: 4px;
+  height: 36px;
+}
+.k {
+  position: relative;
+  flex: var(--u, 1) 1 0;
+  min-width: 0;
+  border-radius: 6px;
+  cursor: pointer;
+  background: linear-gradient(var(--s1, #d3cfc4), var(--s2, #b3afa3));
+  box-shadow: 0 2px 0 var(--sd, #85817a), 0 3px 3px rgba(0, 0, 0, 0.55);
+  transition: transform 0.06s, box-shadow 0.06s;
+}
+.k::before {
+  content: "";
+  position: absolute;
+  inset: 1px 4px 6px;
+  border-radius: 4px;
+  background: linear-gradient(165deg, var(--f1, #fdfcf8), var(--f2, #e8e5db));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7), 0 1px 1px rgba(0, 0, 0, 0.18);
+}
+.k span {
+  position: absolute;
+  left: 8px;
+  top: 5px;
+  font: 600 11px/1 var(--font-sans), sans-serif;
+  color: var(--lg, #3d414c);
+  text-transform: uppercase;
+}
+.down {
+  transform: translateY(2px);
+  box-shadow: 0 0 0 var(--sd, #85817a), 0 1px 2px rgba(0, 0, 0, 0.6);
+}
+.kMod {
+  --s1: #3c4252;
+  --s2: #2f3442;
+  --sd: #1c1f29;
+  --f1: #5d6577;
+  --f2: #4a5163;
+  --lg: #fff;
+}
+.kAccent {
+  --s1: #f0c532;
+  --s2: #d3a91b;
+  --sd: #9c7c0d;
+  --f1: #ffe46a;
+  --f2: #ffd43a;
+  --lg: #3a2f00;
+}
+.kEnter {
+  --s1: #1f3cc0;
+  --s2: #182f9a;
+  --sd: #0f1f6b;
+  --f1: #3f61f2;
+  --f2: #2a4be0;
+  --lg: #fff;
+}
+
+/* ===== phone with the nasheed player ===== */
+.ph {
+  left: 832px;
+  top: 34px;
+  width: 224px;
+  height: 448px;
+  transform: rotate(4deg);
+  padding: 4px;
+  border-radius: 40px;
+  background: linear-gradient(145deg, #9a9ea6, #3a3d44 30%, #6d7179 60%, #2b2d33);
+  box-shadow: 0 34px 36px -14px rgba(0, 0, 0, 0.7), 0 6px 12px rgba(0, 0, 0, 0.45);
+}
+.phIn {
+  height: 100%;
+  border-radius: 36px;
+  background: #05070d;
+  padding: 5px;
+}
+.ui {
+  position: relative;
+  height: 100%;
+  border-radius: 32px;
+  overflow: hidden;
+  background: #0b1230;
+  padding: 34px 13px 10px;
+  display: flex;
+  flex-direction: column;
+  font-size: 12px;
+}
+.ui > * {
+  position: relative;
+}
+.ui > .bg {
+  position: absolute;
+  inset: -30px;
+  background: center / cover;
+  filter: blur(22px) brightness(0.5) saturate(1.4);
+}
+.ui > .isl {
+  position: absolute;
+  top: 9px;
+  left: 50%;
+  width: 62px;
+  height: 18px;
+  margin-left: -31px;
+  border-radius: 10px;
+  background: #000;
+}
+.cov {
+  display: block;
+  flex: none;
+  width: 118px;
+  height: 118px;
+  margin: 0 auto 10px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 14px 24px -6px rgba(0, 0, 0, 0.7);
+  transform: scale(0.9);
+  transition: transform 0.5s cubic-bezier(0.34, 1.4, 0.64, 1);
+}
+.cov img {
+  object-fit: cover;
+}
+.playing .cov {
+  transform: none;
+}
+.tt {
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+}
+.ar {
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 12px;
+  margin-bottom: 9px;
+}
+.bar {
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.25);
+}
+.bar i {
+  position: relative;
+  display: block;
+  height: 100%;
+  width: 0;
+  border-radius: 2px;
+  background: #fff;
+}
+.bar i::after {
+  content: "";
+  position: absolute;
+  right: -5px;
+  top: -3px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+.tm {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.78);
+  margin-top: 5px;
+  font-variant-numeric: tabular-nums;
+}
+.ctl {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+  margin: 2px 0 9px;
+}
+.ctl button {
+  all: unset;
+  cursor: pointer;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  transition: background 0.2s, transform 0.2s;
+}
+.ctl button:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+.ctl button:active {
+  transform: scale(0.9);
+}
+.ctl .pp {
+  width: 46px;
+  height: 46px;
+  background: #fff;
+  color: var(--navy);
+}
+.ctl .pp:hover {
+  background: var(--mark);
+}
+.ph button:focus-visible {
+  outline: 2px solid var(--mark);
+  outline-offset: 2px;
+}
+.pl {
+  display: grid;
+  /* one column that may shrink: a long title gets "..." instead of pushing the row out */
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1px;
+  align-content: start;
+  margin-top: auto;
+  padding: 4px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(10px);
+  /* more tracks than fit: the list scrolls inside the phone, the last row fades as a hint */
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: none;
+  mask-image: linear-gradient(#000 calc(100% - 22px), transparent);
+}
+.pl::-webkit-scrollbar {
+  display: none;
+}
+/* once scrolled to the end, nothing is hidden, so drop the fade */
+.plEnd {
+  mask-image: none;
+}
+.pl button {
+  all: unset;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 7px 4px 4px;
+  border-radius: 12px;
+  font-size: 12px;
+  color: #fff;
+  transition: background 0.2s;
+}
+.pl button:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+.pl button[aria-current="true"] {
+  background: rgba(255, 255, 255, 0.18);
+  font-weight: 600;
+}
+.th {
+  position: relative;
+  width: 26px;
+  height: 26px;
+  border-radius: 7px;
+  overflow: hidden;
+  flex: none;
+}
+.th img {
+  object-fit: cover;
+}
+.nm {
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.len {
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+}
+.end {
+  margin-left: auto;
+  display: inline-grid;
+  align-items: center;
+  justify-items: end;
+}
+.end > * {
+  grid-area: 1 / 1;
+}
+.eq {
+  display: flex;
+  visibility: hidden;
+  gap: 2px;
+  align-items: flex-end;
+  height: 11px;
+}
+.eq i {
+  width: 3px;
+  background: var(--mark);
+  animation: eq 0.7s ease-in-out infinite alternate;
+}
+.eq i:nth-child(2) {
+  animation-delay: -0.3s;
+}
+.eq i:nth-child(3) {
+  animation-delay: -0.5s;
+}
+@keyframes eq {
+  from {
+    height: 3px;
+  }
+  to {
+    height: 11px;
+  }
+}
+.playing .pl button[aria-current="true"] .eq {
+  visibility: visible;
+}
+.playing .pl button[aria-current="true"] .len {
+  visibility: hidden;
+}
+
+/* ===== stack of photos ===== */
+.stack {
+  left: 70px;
+  top: 536px;
+  width: 176px;
+  height: 226px;
+  cursor: grab;
+  touch-action: pan-y;
+  user-select: none;
+}
+.stack:active {
+  cursor: grabbing;
+}
+.stack:focus-visible {
+  outline: 2px solid var(--mark);
+  outline-offset: 6px;
+  border-radius: 8px;
+}
+.ps {
+  position: absolute;
+  left: 6px;
+  top: 6px;
+  width: 158px;
+  height: 206px;
+  border-radius: 5px;
+  overflow: hidden;
+  background: #fff;
+  padding: 5px;
+  box-shadow: 0 14px 20px -8px rgba(0, 0, 0, 0.7), 0 2px 4px rgba(0, 0, 0, 0.4);
+  transition: transform 0.4s cubic-bezier(0.34, 1.3, 0.64, 1), opacity 0.22s;
+}
+.psDragging {
+  transition: none;
+}
+.psImg {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 2px;
+  overflow: hidden;
+  pointer-events: none;
+}
+.psImg img {
+  object-fit: cover;
+}
+.date {
+  position: absolute;
+  right: 14px;
+  bottom: 14px;
+  font: 900 11px/1 var(--font-stamp), monospace;
+  letter-spacing: 0.06em;
+  color: var(--stamp);
+}
+.standIn {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 2;
+  font: 600 11px/1 var(--font-sans), sans-serif;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  padding: 4px 7px;
+  border-radius: 4px;
+}
+
+/* ===== books ===== */
+.books {
+  left: 952px;
+  top: 588px;
+  width: 190px;
+  height: 240px;
+  border: 0;
+  padding: 0;
+  background: none;
+  cursor: pointer;
+  text-align: left;
+  font: inherit;
+}
+.books:focus-visible {
+  outline: 2px solid var(--mark);
+  outline-offset: 6px;
+  border-radius: 6px;
+}
+.book {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 166px;
+  height: 222px;
+  border-radius: 3px 6px 6px 3px;
+  padding: 20px 16px 16px 24px;
+  color: var(--bc, #fff);
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.28) 0, rgba(0, 0, 0, 0.05) 5px, rgba(255, 255, 255, 0.14) 8px, transparent 13px),
+    linear-gradient(140deg, rgba(255, 255, 255, 0.14), transparent 45%), var(--bg, #1c1f26);
+  box-shadow: 2px 2px 0 #f4f0e6, 3px 3px 0 #d8d3c6, 5px 5px 0 #f4f0e6, 6px 6px 0 #cfc9bb, 10px 14px 18px rgba(0, 0, 0, 0.55);
+  transition: transform 0.5s var(--ease);
+}
+.book b {
+  font: 700 20px/1.1 Georgia, "Times New Roman", serif;
+}
+.rule {
+  width: 34px;
+  height: 3px;
+  background: var(--ba, #ff7a1f);
+  margin: 12px 0;
+}
+.book small {
+  font: 600 11px/1.3 var(--font-sans), sans-serif;
+  margin-top: auto;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.under > * {
+  visibility: hidden;
+}
+.bookDark {
+  --bg: #1c1f26;
+}
+.bookRed {
+  --bg: #b93227;
+  --ba: #fff;
+}
+.bookRed b {
+  font-family: var(--font-sans), sans-serif;
+  font-size: 26px;
+  letter-spacing: -0.03em;
+}
+.bookCream {
+  --bg: #efe6d2;
+  --bc: #14213f;
+  --ba: #2546d8;
+}
+
+/* ===== attar bottle (drawn upright, then turned to lie on its side) ===== */
+.attar {
+  left: 1066px;
+  top: 440px;
+  width: 58px;
+  height: 164px;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  background: none;
+  transform: rotate(74deg);
+  filter: drop-shadow(-8px 9px 7px rgba(0, 0, 0, 0.6));
+}
+.attar:focus-visible {
+  outline: 2px solid var(--mark);
+  outline-offset: 6px;
+  border-radius: 10px;
+}
+.attar svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.sc {
+  position: absolute;
+  left: 18px;
+  top: -6px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: rgba(255, 226, 150, 0.55);
+  filter: blur(8px);
+  opacity: 0;
+  pointer-events: none;
+}
+.puff .sc {
+  animation: scent 1.7s ease-out;
+}
+.puff .sc:nth-of-type(2) {
+  animation-delay: 0.18s;
+}
+.puff .sc:nth-of-type(3) {
+  animation-delay: 0.36s;
+}
+@keyframes scent {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  25% {
+    opacity: 0.85;
+  }
+  100% {
+    transform: translate(-80px, -30px) scale(2.6);
+    opacity: 0;
+  }
+}
+
+/* ===== ballpoint pen ===== */
+.pen {
+  left: 40px;
+  top: 840px;
+  width: 250px;
+  height: 16px;
+  transform: rotate(-5deg);
+  filter: drop-shadow(0 10px 6px rgba(0, 0, 0, 0.55));
+}
+.pen span {
+  position: absolute;
+}
+.penBody {
+  left: 34px;
+  right: 14px;
+  top: 0;
+  bottom: 0;
+  border-radius: 3px 7px 7px 3px;
+  background: linear-gradient(180deg, #7d97ff 0, #3558ea 24%, #2546d8 52%, #132682 100%);
+}
+.penBody::after {
+  content: "";
+  position: absolute;
+  left: 58px;
+  right: 6px;
+  top: 3px;
+  height: 1.5px;
+  background: rgba(255, 255, 255, 0.55);
+  border-radius: 2px;
+}
+.penGrip {
+  left: 34px;
+  width: 52px;
+  top: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(90deg, #0f1b3d 0 3px, #1b2a5c 3px 5px);
+  border-radius: 3px 0 0 3px;
+}
+.penTip {
+  left: 8px;
+  width: 27px;
+  top: 1px;
+  bottom: 1px;
+  background: linear-gradient(180deg, #f3f4f6, #aeb2ba 50%, #70747c);
+  clip-path: polygon(0 50%, 100% 0, 100% 100%);
+}
+.penNib {
+  left: 0;
+  width: 10px;
+  top: 6.5px;
+  height: 3px;
+  background: #2b2d33;
+  border-radius: 2px;
+  transition: transform 0.12s;
+}
+.penIn .penNib {
+  transform: translateX(9px);
+}
+.penClip {
+  right: 26px;
+  width: 64px;
+  top: -3px;
+  height: 5px;
+  border-radius: 3px;
+  background: linear-gradient(#f5f6f8, #9da1a9);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);
+}
+.penButton {
+  right: 0;
+  width: 15px;
+  top: 3px;
+  bottom: 3px;
+  border-radius: 0 4px 4px 0;
+  background: linear-gradient(#e9eaee, #8d9199);
+  transition: transform 0.12s;
+}
+.penIn .penButton {
+  transform: translateX(-5px);
+}
+
+/* ===== sticky note ===== */
+.sticky {
+  left: 1066px;
+  top: 300px;
+  width: 104px;
+  height: 104px;
+  margin: 0;
+  transform: rotate(5deg);
+  background: linear-gradient(170deg, #ffe866, #ffd93a);
+  box-shadow: 0 12px 14px -8px rgba(0, 0, 0, 0.6), inset 0 -14px 14px -14px rgba(0, 0, 0, 0.25);
+  font: 700 20px/1.15 var(--font-hand), cursive;
+  color: #3a2f00;
+  padding: 16px 12px;
+  border-radius: 1px 1px 10px 2px;
+}
+
+/* ===== small screens: objects stack in one column, no dragging ===== */
+@media (max-width: 980px) {
+  .wrap {
+    aspect-ratio: auto;
+    max-height: none;
+    overflow: visible;
+  }
+  .desk {
+    width: auto;
+    height: auto;
+    transform: none;
+    padding: 30px 14px 24px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+  }
+  .ob {
+    position: relative;
+    left: auto !important;
+    top: auto !important;
+  }
+  .note {
+    width: min(316px, 100%);
+  }
+  .lap {
+    zoom: 0.86;
+  }
+  .kb {
+    zoom: 0.5;
+  }
+  .stack {
+    margin-right: 10px;
+  }
+  /* the bottle is drawn upright and turned 74deg; reserve the space it really takes */
+  .attar {
+    margin: -48px 52px;
+  }
+  .hint,
+  .cable {
+    display: none;
+  }
+  .snd {
+    position: static;
+    width: 100%;
+    text-align: center;
+  }
+}
+@media (max-width: 380px) {
+  .lap {
+    zoom: 0.78;
+  }
+  .kb {
+    zoom: 0.46;
+  }
+}

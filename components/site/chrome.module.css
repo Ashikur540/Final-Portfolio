@@ -1,0 +1,88 @@
+/* slim banner above the top bar; scrolls away with the page */
+.banner {
+  background: var(--soft);
+  border-bottom: 1px solid var(--line);
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--navy);
+}
+.banner a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 9px 16px;
+  text-decoration: none;
+  text-align: center;
+}
+.banner a:hover .msg {
+  text-decoration: underline;
+}
+.banner img {
+  width: 18px;
+  height: 18px;
+  flex: none;
+}
+.banner strong {
+  font-weight: 700;
+  white-space: nowrap;
+}
+.msg {
+  color: var(--ink-2);
+}
+@media (max-width: 640px) {
+  .msg {
+    display: none;
+  }
+}
+
+/* plain header above the hero (scrolls away; the dock at the bottom does the navigation) */
+.top {
+  position: relative;
+  z-index: 2;
+}
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  height: 70px;
+}
+.who {
+  font-weight: 700;
+  text-decoration: none;
+  letter-spacing: -0.01em;
+  color: var(--navy);
+  white-space: nowrap;
+}
+.avail {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  background: #fff6c4;
+  color: var(--ink);
+  padding: 7px 12px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+.avail i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #18a058;
+}
+@media (max-width: 480px) {
+  .row {
+    height: auto;
+    min-height: 60px;
+    padding: 10px 0;
+    flex-wrap: wrap;
+    row-gap: 6px;
+  }
+  .avail {
+    font-size: 12.5px;
+    padding: 6px 10px;
+  }
+}

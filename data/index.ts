@@ -1,81 +1,15 @@
-export const navItems = [
-  { name: "Home", link: "#hero" },
-  { name: "About", link: "#about" },
-  { name: "Experience", link: "#experience" },
-  { name: "Projects", link: "#projects" },
-  { name: "Contact", link: "#contact" },
-];
-
-export const gridItems = [
-  {
-    id: 1,
-    title: "I prioritize client collaboration, fostering open communication ",
-    description: "",
-    className: "lg:col-span-3 md:col-span-6 md:row-span-2 ",
-    imgClassName: "w-full h-full",
-    titleClassName: "justify-end",
-    img: "/b1.svg",
-    spareImg: "",
-  },
-  {
-    id: 2,
-    title: "I'm very flexible with time zone communications",
-    description: "",
-    className: "lg:col-span-2 md:col-span-3 md:row-span-2",
-    imgClassName: "",
-    titleClassName: "justify-start",
-    img: "",
-    spareImg: "",
-  },
-  {
-    id: 3,
-    title: "My tech stack",
-    description: "I constantly try to improve",
-    className: "lg:col-span-2 md:col-span-3 md:row-span-2",
-    imgClassName: "",
-    titleClassName: "justify-center",
-    img: "",
-    spareImg: "",
-  },
-  {
-    id: 4,
-    title: "Tech enthusiast with a passion for development.",
-    description: "",
-    className: "lg:col-span-2 md:col-span-3 md:row-span-1",
-    imgClassName: "",
-    titleClassName: "justify-start",
-    img: "/grid.svg",
-    spareImg: "/b4.svg",
-  },
-
-  {
-    id: 5,
-    title: "Currently building a JS Animation library",
-    description: "The Inside Scoop",
-    className: "md:col-span-3 md:row-span-2",
-    imgClassName: "absolute right-0 bottom-0 md:w-96 w-60",
-    titleClassName: "justify-center md:justify-start lg:justify-center",
-    img: "/b5.svg",
-    spareImg: "/grid.svg",
-  },
-  {
-    id: 6,
-    title: "Do you want to start a project together?",
-    description: "",
-    className: "lg:col-span-2 md:col-span-3 md:row-span-1",
-    imgClassName: "",
-    titleClassName: "justify-center md:max-w-full max-w-60 text-center",
-    img: "",
-    spareImg: "",
-  },
-];
-
 export const projects = [
   {
     id: 1,
     title: "Helpxon",
-    des: "A live customer-support SaaS with AI replies, built from scratch to production. I did the product design, most of the React app, the chat widget sites add with one script, Laravel APIs, and the launch videos.",
-    img: "/projects/helpxon.jpg",
+    type: "SaaS",
+    year: "Since 2025",
+    domain: "helpxon.com",
+    linkLabel: "Visit live site",
+    tint: "#eef2ff",
+    summary: "A help desk for small teams, with AI that drafts the replies. Built from a blank page to production.",
+    did: ["Designed the product and built most of the React app", "Made a chat widget any site can add with one script", "Wrote the Laravel APIs and edited the launch videos"],
+    img: "/projects/helpxon-hd.jpg",
     iconLists: [
       { name: "React", image: "/logos/brand-react.svg" },
       { name: "TypeScript", image: "/logos/brand-typescript.svg" },
@@ -88,8 +22,14 @@ export const projects = [
   {
     id: 2,
     title: "Skeleton Studio",
-    des: "Paste a React component, get a matching skeleton loader you can tweak, then copy React or HTML with Tailwind. Reads JSX with Babel, spots layouts like cards and pricing tables, and runs fully in the browser. Open source.",
-    img: "/projects/skeleton-studio.png",
+    type: "Open source",
+    year: "2026",
+    domain: "skeletons-studio.vercel.app",
+    linkLabel: "Try it live",
+    tint: "#ecf7f1",
+    summary: "Paste a React component, get a matching skeleton loader you can tweak.",
+    did: ["Parsed JSX with Babel, right in the browser", "Taught it to spot layouts like cards and pricing tables", "Added export to React or HTML with Tailwind"],
+    img: "/projects/skeleton-studio-hd.jpg",
     iconLists: [
       { name: "Next.js", image: "/logos/brand-nextjs.svg" },
       { name: "React", image: "/logos/brand-react.svg" },
@@ -102,8 +42,14 @@ export const projects = [
   {
     id: 3,
     title: "Hasanat",
-    des: "An offline-first app to track daily good deeds, with a heatmap, streaks, reminders and prayer times from your location. Installs on your phone like a normal app.",
-    img: "/projects/hasanat.jpg",
+    type: "PWA",
+    year: "2026",
+    domain: "hasanat-3375b.web.app",
+    linkLabel: "Open the app",
+    tint: "#fdf4e4",
+    summary: "Track daily good deeds, with a heatmap, streaks, reminders and prayer times.",
+    did: ["Made it work offline and install like a normal app", "Added prayer times from your location"],
+    img: "/projects/hasanat-hd.jpg",
     iconLists: [
       { name: "React", image: "/logos/brand-react.svg" },
       { name: "TypeScript", image: "/logos/brand-typescript.svg" },
@@ -116,8 +62,16 @@ export const projects = [
   {
     id: 4,
     title: "Tadhkir Loop",
-    des: "A Claude Code plugin that turns waiting time into remembrance: zikr and the 99 names of Allah in the spinner while Claude works, with a short authentic hadith under it.",
+    type: "Plugin",
+    year: "2026",
+    domain: "github.com/Ashikur540/tadhkir-loop",
+    linkLabel: "View on GitHub",
+    tint: "#f4eefc",
+    summary: "Turns waiting time into remembrance while Claude Code works.",
+    did: ["Put dhikr and the 99 names in the spinner", "Added a short authentic hadith under it"],
     img: "/projects/tadhkir-loop.jpg",
+    // portrait image: centre it on the terminal (a wider, larger image would be sharper)
+    imgPosition: "50% 50%",
     iconLists: [
       { name: "JavaScript", image: "/logos/brand-javascript.svg" },
       { name: "Node.js", image: "/logos/brand-nodejs.svg" },
@@ -128,8 +82,14 @@ export const projects = [
   {
     id: 5,
     title: "FlowMate",
-    des: "A task manager with a dashboard that shows how your week is going. RTK Query sits on top of localStorage, so moving to a real API means changing one file.",
-    img: "/projects/flowmate.jpg",
+    type: "Web app",
+    year: "2024",
+    domain: "flowmate-task-manager.vercel.app",
+    linkLabel: "Open the app",
+    tint: "#ecf5fb",
+    summary: "A task manager with a dashboard that shows how your week is going.",
+    did: ["Used RTK Query on top of localStorage", "Set it up so a real API means changing one file"],
+    img: "/projects/flowmate-hd.jpg",
     iconLists: [
       { name: "Next.js", image: "/logos/brand-nextjs.svg" },
       { name: "TypeScript", image: "/logos/brand-typescript.svg" },
@@ -141,76 +101,30 @@ export const projects = [
   },
 ];
 
-export const companies = [
-  {
-    id: 1,
-    name: "cloudinary",
-    img: "/cloud.svg",
-    nameImg: "/cloudName.svg",
-  },
-  {
-    id: 2,
-    name: "appwrite",
-    img: "/app.svg",
-    nameImg: "/appName.svg",
-  },
-  {
-    id: 3,
-    name: "HOSTINGER",
-    img: "/host.svg",
-    nameImg: "/hostName.svg",
-  },
-  {
-    id: 4,
-    name: "stream",
-    img: "/s.svg",
-    nameImg: "/streamName.svg",
-  },
-  {
-    id: 5,
-    name: "docker.",
-    img: "/dock.svg",
-    nameImg: "/dockerName.svg",
-  },
-];
-
 export const workHistories = [
   {
     company: "Arraytics",
-    url: "https://arraytics.com/",
+    name: "Arraytics",
+    yearLabel: "since 2024",
+    note: "booking + AI",
+    summary: "Worked on booking, restaurant-ordering and AI products used on 8,000+ sites. Main developer of two booking plugins with 2,800+ active installs. Fixed double-booking bugs and built an AI chat widget.",
     title: "Frontend Developer",
-    date: "Dec 2024 – Present",
-    description:
-      "Full-stack work on booking, restaurant-ordering and AI products used on 8,000+ sites (React, TypeScript, PHP).",
-    responsibilities: [
-      "Main developer of the Booktics and Timetics booking plugins since Sep 2026 (2,800+ active installs): recurring bookings, coupons, round-robin staff assignment, WooCommerce payments and WhatsApp reminders.",
-      "Made bookings and payments safe: fixed race conditions that let two customers take the same slot, and moved pricing to the server so it cannot be changed in the browser.",
-      "WP Cafe v3 (5,000+ installs): one-page checkout, deposit payments, daily order limits and WPML support.",
-      "Built the Aisentic AI chat widget (streaming replies, Shadow DOM) and shared SDKs used in 5 products, including a React Flow automation builder.",
-    ],
   },
   {
     company: "Innosoft IT (Remote)",
-    url: "",
+    name: "Innosoft IT",
+    yearLabel: "2024",
+    note: "fully remote",
+    summary: "Built analytics report pages for Shopify and WordPress stores, and took a Meta Pixel admin panel from Figma to launch.",
     title: "Frontend Developer",
-    date: "May 2024 – Sep 2024",
-    description:
-      "Shopify and WordPress analytics apps for e-commerce stores.",
-    responsibilities: [
-      "Researched Shopify and WordPress GA4 plugins, then built a set of analytics report pages in React and TypeScript.",
-      "Designed the Figma UI and built the admin panel for an FB Pixel app with the backend team, to launch (TypeScript, tRPC).",
-    ],
   },
   {
     company: "HasTech IT",
-    url: "https://hasthemes.com/",
+    name: "HasTech IT",
+    yearLabel: "2023",
+    note: "first job",
+    summary: "Split a bundle app into two standalone Shopify apps, so the company had two products to sell instead of one. Built a new product end to end in one month.",
     title: "Junior Web Application Developer",
-    date: "Jul 2023 – May 2024 (intern until Dec 2023)",
-    description: "Shopify apps for online stores.",
-    responsibilities: [
-      "Split a third-party bundle app into two standalone Shopify apps, GP Wishlist & Upsell Suite and SalesPulse Sales Pop Up, giving the company two products to sell instead of one.",
-      "Researched, designed and built a new product end to end in one month, to launch (Next.js, Node.js, Koa.js, MongoDB).",
-    ],
   },
 ];
 
@@ -218,29 +132,128 @@ export const socialMedia = [
   {
     id: 1,
     name: "GitHub",
-    img: "/git.svg",
     url: "https://github.com/Ashikur540",
   },
   {
     id: 2,
     name: "LinkedIn",
-    img: "/link.svg",
     url: "https://www.linkedin.com/in/md-ashikurrahman/",
   },
   {
     id: 3,
     name: "Email",
-    img: "/mail.svg",
     url: "mailto:meashik1000@gmail.com",
   },
 ];
 
+/** A social profile url by name, e.g. socialUrl("GitHub"). */
+export const socialUrl = (name: string) => socialMedia.find((m) => m.name === name)?.url || "#";
+
 export const personalInfo = {
-  name: "Md Ashikur Rahman",
+  name: "Ashikur Rahman",
   title: "Frontend-focused Full-stack Developer",
   location: "Dhaka, Bangladesh",
   email: "meashik1000@gmail.com",
   websiteDomain: "https://ashikur-on-web.vercel.app/",
+  // search result snippet: keep it under about 155 characters so Google shows all of it
   briefInfo:
-    "Frontend-focused full-stack developer with 3+ years shipping React and TypeScript products, from a SaaS built from scratch to plugins used on 8,000+ sites. React, Next.js, TypeScript, Node.js, Laravel, AI integration.",
+    "Frontend-focused full-stack developer in Dhaka with 3+ years of React, Next.js and TypeScript, from a SaaS built from scratch to plugins on 8,000+ sites.",
 };
+
+/* ---------- redesign: shared types and desk content ---------- */
+
+export type Post = { title: string; url: string; date: string; summary: string };
+
+export const hashnodeUrl = "https://ashik1000.hashnode.dev";
+
+/** Shown when the Hashnode feed cannot be reached. */
+export const fallbackPosts: Post[] = [
+  {
+    title: "How ChatGPT and Claude Actually Work",
+    url: "https://ashik1000.hashnode.dev/how-chatgpt-and-claude-actually-work",
+    date: "3 Apr 2026",
+    summary: "How attention and transformers let ChatGPT and Claude keep track of context.",
+  },
+  {
+    title: "How AI Trains Itself, and What It Actually Produces",
+    url: "https://ashik1000.hashnode.dev/how-ai-trains-itself-and-what-it-actually-produces",
+    date: "3 Apr 2026",
+    summary: "Neural network training step by step: loss, backpropagation and weight updates.",
+  },
+  {
+    title: "What Is a Neural Network, and How Does It Actually Think?",
+    url: "https://ashik1000.hashnode.dev/what-is-a-neural-network-and-how-does-it-actually-think",
+    date: "3 Apr 2026",
+    summary: "How neural networks work, through simple analogies and real examples.",
+  },
+];
+
+/** The three lines on the notebook page on the desk. */
+export const aboutNote = [
+  "I like taking a messy idea and shaping it until it's simple to use.",
+  "Weekends: side projects, friends, family, and too many photos.",
+  "This is my desk. Go on, touch things.",
+];
+
+export type DeskPhoto = { src: string; caption: string; date?: string; position?: string; standIn?: boolean };
+
+/** Photos in the stack on the desk. standIn = placeholder, must be replaced before launch. */
+export const deskPhotos: DeskPhoto[] = [
+  { src: "/clicks/1000080447.webp", caption: "ball, beach, me", date: "'26 01 13" },
+  { src: "/clicks/1000017350.webp", caption: "last light", date: "'25 01 16" },
+  { src: "/clicks/1000006684.webp", caption: "village morning", date: "'22 12 16" },
+  { src: "/clicks/1000027701.webp", caption: "green, everywhere", date: "'25 04 03" },
+  { src: "/clicks/1000019501.webp", caption: "dates and spices", date: "'25 02 26" },
+  { src: "/clicks/1000039787.webp", caption: "evening walk", date: "'25 07 02" },
+  { src: "/clicks/1000060956.webp", caption: "balcony garden", date: "'25 11 06" },
+  { src: "/clicks/1000157525.webp", caption: "old palace", date: "'26 10 09" },
+  { src: "/clicks/1000080439.webp", caption: "big red truck", date: "'26 01 14" },
+  { src: "/clicks/1000080445.webp", caption: "low tide", date: "'26 01 14" },
+  { src: "/clicks/1000026360.webp", caption: "sun nap", date: "'25 04 03" },
+  { src: "/clicks/1000157529.webp", caption: "quiet garden", date: "'26 10 09" },
+];
+
+export type JobMoment = { src?: string; caption: string; alt?: string };
+
+/**
+ * Photos that appear when a job row in Experience is hovered (keyed by job name).
+ * No src = an empty placeholder frame; yarn check:launch fails until each one has a real photo.
+ * One photo stays still; two or more swap every 1.5 seconds.
+ */
+export const jobMoments: Record<string, JobMoment[]> = {
+  "HasTech IT": [{ src: "/clicks/1000176389.webp", caption: "first team", alt: "Group photo of the HasTech IT team in the office" }],
+  "Innosoft IT": [{ src: "/clicks/1000003112.webp", caption: "with the founder", alt: "Selfie of Ashik with the founder of Innosoft IT" }],
+  Arraytics: [{ src: "/clicks/1000076964-prize.webp", caption: "prize from our CEO", alt: "Ashik receiving a prize from the CEO of Arraytics" }],
+};
+
+export type DeskBook = { title: string; author: string; tone: "dark" | "red" | "cream"; placeholder?: boolean };
+
+/** Books on the desk. placeholder = not confirmed by Ashik yet. */
+export const deskBooks: DeskBook[] = [
+  { title: "The Pragmatic Programmer", author: "Hunt & Thomas", tone: "dark" },
+  { title: "Don't Make Me Think", author: "Steve Krug", tone: "red" },
+  { title: "This Is Marketing", author: "Seth Godin", tone: "cream" },
+];
+
+/**
+ * A track on the desk phone. src = an audio file I am allowed to host (public/desk/audio/).
+ * generated = made by the desk's own sound engine, no file needed.
+ * A track with neither plays a stand-in tone, and yarn check:launch fails until it has a file.
+ */
+export type DeskTrack = {
+  title: string;
+  artist: string;
+  length: string;
+  cover: string;
+  src?: string;
+  generated?: boolean;
+};
+
+/** Phone playlist. Add src (a file in /public/desk/audio/) once a real nasheed file is supplied. */
+export const deskTracks: DeskTrack[] = [
+  { title: "Maula Ya Salli Wa Sallim", artist: "Abu Ubayda, slowed + reverb", length: "3:58", cover: "/clicks/1000017350.webp", src: "/desk/audio/maula-ya-salli.m4a" },
+  { title: "Kun Anta", artist: "Humood, slowed + reverb", length: "4:55", cover: "/clicks/1000027701.webp", src: "/desk/audio/kun-anta.m4a" },
+  { title: "Allahu Hu Allah", artist: "CFN release", length: "7:23", cover: "/clicks/1000060956.webp", src: "/desk/audio/allahu-hu-allah.m4a" },
+  { title: "Make Me Strong", artist: "Sami Yusuf, vocals only", length: "4:13", cover: "/clicks/1000080445.webp", src: "/desk/audio/make-me-strong.m4a" },
+  { title: "Rain, no music", artist: "made by the desk", length: "2:04", cover: "/clicks/1000157529.webp", generated: true },
+];
